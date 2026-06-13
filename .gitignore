@@ -58,6 +58,7 @@ test-results/
 Thumbs.db
 ehthumbs.db
 Desktop.ini
+docs/*.html
 
 # editor folders
 .idea/
@@ -69,3 +70,4 @@ Desktop.ini
 #AI
 .codex/
 .claude/
+.agents/
