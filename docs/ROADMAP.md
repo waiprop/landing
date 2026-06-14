@@ -111,6 +111,17 @@ Criterio de diseño de toda la fase:
 | Fondo secciones | `#F6F7F6` |
 | Fondo / tarjetas | `#FFFFFF` |
 
+#### Colores funcionales (para formularios y estados)
+
+No son de diseño visible — no afectan la estética general — pero hacen falta apenas haya un formulario que validar o estados que mostrar. Definirlos como variables CSS desde el inicio para que nadie improvise un rojo cualquiera.
+
+| Rol | Hex | Uso |
+| --- | --- | --- |
+| Error / peligro | `#D92D20` | Mensajes de error y validaciones de formulario |
+| Éxito | `#259A72` (o `#16A34A` para diferenciar del acento) | Confirmaciones, "guardado con éxito" |
+| Advertencia (opcional) | `#D97706` | Avisos tipo "tu prueba vence en 2 días" |
+| Foco (accesibilidad) | `rgba(37, 154, 114, 0.4)` | Anillo de foco al navegar con teclado (suma accesibilidad y SEO) |
+
 ---
 
 ## Fase 3 — Mostrar el sistema (confianza)
