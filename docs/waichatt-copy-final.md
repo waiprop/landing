@@ -20,11 +20,25 @@ Textos definitivos de la home, sección por sección, en español rioplatense. C
 
 ---
 
+## Nav (header)
+
+Corto y directo, sin menúes desplegables (referencia: Tokko).
+
+**Logo Waichatt** · Funciones · Precios · Blog · Ingresar · **[Empezá gratis]** (botón verde)
+
+- "Ingresar" → `https://waichatt.app`
+- "Empezá gratis" → `https://waichatt.app/register`
+
+---
+
 ## 1. Hero  `<h1>`
+
+**Layout (referencia Tokko):** dos columnas. Texto a la izquierda (badge + título + subtítulo + CTA), video del sistema a la derecha dentro de un mockup de navegador. Fondo blanco, mucho espacio en blanco. En mobile, el texto va arriba y el video debajo.
 
 **Badge:** Para inmobiliarias y desarrolladoras
 
-**H1:** Tu WhatsApp atiende solo
+**H1:** Tu WhatsApp **atiende solo**
+> Resaltar "atiende solo" en verde `#259A72`; el resto en `#14201B`. (Mismo recurso que Tokko con "más simple" en su rojo.)
 
 **Subtítulo:** Waichatt centraliza tus consultas, las responde con IA y las convierte en leads organizados. Tu equipo atiende, hace seguimiento y vende desde un solo lugar.
 
@@ -33,7 +47,15 @@ Textos definitivos de la home, sección por sección, en español rioplatense. C
 
 *Debajo del botón:* Sin tarjeta. Sin instalación.
 
-`[VIDEO: principal de 60–90s — flujo completo "entra consulta → IA responde → se crea lead → se agenda visita". Si no está listo, va una captura del dashboard o de la bandeja de conversaciones.]`
+`[VIDEO a la derecha — corto (15–30s) en loop mostrando "entra consulta → IA responde → se crea lead". Va dentro de un mockup de navegador. Reemplaza la ilustración: mostramos el producto real, no un dibujo decorativo.]`
+
+**Especificaciones técnicas del video del hero (clave para velocidad y SEO):**
+
+- Alojado en Mux / Cloudflare Stream o MP4 optimizado desde CDN — **nunca** en el propio servidor.
+- Atributos: `autoplay`, `muted`, `loop`, `playsinline` (arranca solo, sin sonido, sin controles).
+- **`poster` obligatorio:** una captura estática linda (bandeja de conversaciones) que se muestra mientras el video carga, para que el hero se vea completo desde el primer instante.
+- Reservar el espacio del video con dimensiones fijas para evitar el salto de layout (CLS, que Google penaliza).
+- El `<h1>`, subtítulo y botón siempre en HTML visible — el video es apoyo, nunca reemplaza al texto.
 
 ---
 
