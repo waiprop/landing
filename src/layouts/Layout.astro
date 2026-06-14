@@ -1,23 +1,36 @@
 ---
+import Header from '../components/Header.astro';
+import SEO from '../components/SEO.astro';
+import '../styles/global.css';
+
 interface Props {
 	title?: string;
 	description?: string;
+	ogTitle?: string;
+	ogDescription?: string;
+	ogImage?: string;
+	canonical?: string;
+	noindex?: boolean;
 }
 
-const { title = 'Landing', description = '' } = Astro.props;
+const { title, description, ogTitle, ogDescription, ogImage, canonical, noindex } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="es">
 	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		{description && <meta name="description" content={description} />}
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
+		<SEO
+			title={title}
+			description={description}
+			ogTitle={ogTitle}
+			ogDescription={ogDescription}
+			ogImage={ogImage}
+			canonical={canonical}
+			noindex={noindex}
+		/>
 	</head>
 	<body>
+		<Header />
 		<slot />
 	</body>
 </html>
-

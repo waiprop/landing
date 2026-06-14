@@ -1,0 +1,628 @@
+---
+import { site } from '../../config/site';
+import Button from '../ui/Button.astro';
+
+const markSrc = '/favicon.svg';
+---
+
+<section class="hero" aria-labelledby="hero-title">
+	<div class="hero-stage">
+		<!-- Tarjetas flotantes: piezas reales del producto -->
+		<article class="float float--reminder" aria-hidden="true">
+			<span class="float-label">
+				<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+					<circle cx="12" cy="12" r="9" />
+					<path d="M12 7v5l3 2" />
+				</svg>
+				Próxima visita
+			</span>
+			<strong>Depto Palermo · 2 amb</strong>
+			<small>Hoy 17:30 · con Julián López</small>
+		</article>
+
+		<article class="float float--leads" aria-hidden="true">
+			<header class="leads-head">
+				<strong>Leads de hoy</strong>
+				<span class="leads-count">+12</span>
+			</header>
+			<ul class="leads-list">
+				<li><span class="dot dot--green"></span> Julián López <em>Comprar</em></li>
+				<li><span class="dot dot--amber"></span> María Gómez <em>Alquilar</em></li>
+				<li><span class="dot dot--blue"></span> Lucas Pérez <em>Tasación</em></li>
+			</ul>
+		</article>
+
+		<article class="float float--apps" aria-hidden="true">
+			<span class="float-label">Se conecta con</span>
+			<div class="apps-row">
+				<span class="app-chip app-chip--wa" title="WhatsApp">
+					<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a9.9 9.9 0 0 0-8.5 15l-1.4 5 5.1-1.3A9.9 9.9 0 1 0 12 2zm0 18a8 8 0 0 1-4.1-1.1l-.3-.2-3 .8.8-2.9-.2-.3A8 8 0 1 1 12 20zm4.5-5.9c-.2-.1-1.4-.7-1.6-.8s-.4-.1-.5.1-.6.8-.8 1-.3.2-.5.1a6.6 6.6 0 0 1-1.9-1.2 7.2 7.2 0 0 1-1.4-1.7c-.1-.2 0-.4.1-.5l.4-.4.2-.4v-.4c0-.1-.5-1.3-.7-1.7s-.4-.4-.5-.4h-.5a.9.9 0 0 0-.7.3 2.8 2.8 0 0 0-.9 2.1A4.9 4.9 0 0 0 8 13a11 11 0 0 0 4.2 3.7c.6.3 1 .4 1.4.5a3.3 3.3 0 0 0 1.5.1 2.5 2.5 0 0 0 1.6-1.2 2 2 0 0 0 .2-1.1c-.1-.1-.2-.2-.4-.3z"/></svg>
+				</span>
+				<span class="app-chip app-chip--meta" title="Meta">
+					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3.5 14.2c1.5-4.4 3.1-6.5 5-6.5 1.4 0 2.5 1 3.8 3.1 1.4-2.1 2.5-3.1 3.9-3.1 1.9 0 3.6 2.1 5 6.5.8 2.6.1 4.1-1.5 4.1-1.5 0-2.7-1.3-5.1-5.1-2.2 3.5-3.5 5.1-5.1 5.1-1.7 0-2.4-1.5-1.5-4.1z" /></svg>
+				</span>
+				<span class="app-chip app-chip--cal" title="Google Calendar">
+					<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="3" y="4.5" width="18" height="16.5" rx="3" /><path d="M3 9.5h18M8 2.5v4M16 2.5v4" /></svg>
+				</span>
+				<span class="app-chip app-chip--more" title="Más conexiones">Más</span>
+			</div>
+		</article>
+
+		<!-- Contenido central -->
+		<div class="hero-center">
+			<span class="hero-mark"><img src={markSrc} alt="" width="32" height="52" /></span>
+			<p class="hero-badge">Para inmobiliarias y desarrolladoras</p>
+			<h1 id="hero-title">Tu WhatsApp <span>atiende solo</span></h1>
+			<p class="hero-subtitle">
+				Centralizá tus consultas, respondelas con IA y convertilas en leads organizados. Tu equipo
+				atiende, hace seguimiento y vende desde un solo lugar.
+			</p>
+			<div class="hero-actions">
+				<Button href={site.links.register}>Empezá gratis</Button>
+				<Button href="#como-funciona" variant="ghost">Ver cómo funciona</Button>
+			</div>
+			<p class="hero-note">Sin tarjeta. Sin instalación.</p>
+		</div>
+
+		<article class="float float--chat" aria-hidden="true">
+			<header class="chat-head">
+				<span class="chat-avatar">JL</span>
+				<span class="chat-id">
+					<strong>Julián López</strong>
+					<small>en línea</small>
+				</span>
+				<span class="chat-ai">Agente IA</span>
+			</header>
+			<div class="chat-body">
+				<p class="bubble bubble--in">Hola, busco un 2 ambientes en Palermo 🙌</p>
+				<p class="bubble bubble--out">¡Hola Julián! Tengo 3 opciones dentro de tu presupuesto. ¿Te paso fotos?</p>
+			</div>
+		</article>
+	</div>
+</section>
+
+<style>
+	.hero {
+		--hero-page-padding: clamp(10px, 1.4vw, 22px);
+		display: grid;
+		min-height: calc(100vh - var(--header-height));
+		min-height: calc(100svh - var(--header-height));
+		padding: var(--hero-page-padding);
+	}
+
+	.hero-stage {
+		position: relative;
+		isolation: isolate;
+		display: grid;
+		place-items: center;
+		overflow: hidden;
+		width: 100%;
+		min-height: 0;
+		height: 100%;
+		padding: clamp(36px, 6svh, 78px) clamp(20px, 4vw, 40px);
+		border: 1px solid var(--color-border);
+		border-radius: clamp(20px, 2vw, 30px);
+		background:
+			radial-gradient(120% 70% at 50% -12%, rgba(37, 154, 114, 0.13), transparent 55%),
+			linear-gradient(180deg, #f2f9f5 0%, #f6f8f7 60%);
+	}
+
+	.hero-stage::before {
+		content: '';
+		position: absolute;
+		inset: 0;
+		z-index: -1;
+		background-image: radial-gradient(rgba(20, 32, 27, 0.06) 1.3px, transparent 1.3px);
+		background-size: 22px 22px;
+		-webkit-mask: radial-gradient(115% 95% at 50% 10%, #000 35%, transparent 78%);
+		mask: radial-gradient(115% 95% at 50% 10%, #000 35%, transparent 78%);
+		pointer-events: none;
+	}
+
+	/* Contenido central */
+	.hero-center {
+		position: relative;
+		z-index: 3;
+		max-width: 580px;
+		text-align: center;
+	}
+
+	.hero-mark {
+		display: grid;
+		place-items: center;
+		width: 60px;
+		height: 60px;
+		margin: 0 auto 20px;
+		border-radius: 18px;
+		background: var(--color-surface);
+		border: 1px solid var(--color-border);
+		box-shadow: 0 10px 24px rgba(20, 32, 27, 0.1);
+	}
+
+	.hero-mark img {
+		width: auto;
+		height: 30px;
+	}
+
+	.hero-badge {
+		display: inline-flex;
+		align-items: center;
+		margin: 0 0 20px;
+		padding: 7px 14px;
+		border-radius: 999px;
+		background: var(--color-surface);
+		border: 1px solid #cfe8de;
+		color: var(--color-brand-strong);
+		font-size: 0.86rem;
+		font-weight: 700;
+		letter-spacing: 0.01em;
+		box-shadow: 0 1px 2px rgba(20, 32, 27, 0.04);
+	}
+
+	h1 {
+		margin: 0;
+		color: var(--color-text);
+		font-size: clamp(3rem, 5vw, 4.8rem);
+		line-height: 1.04;
+		letter-spacing: -0.025em;
+		font-weight: 800;
+	}
+
+	h1 span {
+		color: var(--color-brand);
+	}
+
+	.hero-subtitle {
+		max-width: 50ch;
+		margin: 22px auto 0;
+		color: var(--color-muted);
+		font-size: 1.14rem;
+		line-height: 1.66;
+	}
+
+	.hero-actions {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 12px;
+		margin-top: 32px;
+	}
+
+	.hero-note {
+		margin: 18px 0 0;
+		color: #74807b;
+		font-size: 0.95rem;
+	}
+
+	/* Tarjetas flotantes */
+	.float {
+		position: absolute;
+		z-index: 2;
+		padding: 14px;
+		border: 1px solid var(--color-border);
+		border-radius: 16px;
+		background: var(--color-surface);
+		box-shadow: 0 20px 44px rgba(20, 32, 27, 0.13);
+		animation: float-bob 7s ease-in-out infinite;
+	}
+
+	/* Punto conector hacia el centro */
+	.float::after {
+		content: '';
+		position: absolute;
+		width: 13px;
+		height: 13px;
+		border-radius: 50%;
+		background: var(--color-brand);
+		border: 3px solid var(--color-surface);
+		box-shadow: 0 2px 6px rgba(20, 32, 27, 0.22);
+	}
+
+	.float--chat {
+		top: 8%;
+		left: 4%;
+		width: 286px;
+		rotate: -3deg;
+	}
+
+	.float--chat::after {
+		right: -6px;
+		bottom: -6px;
+	}
+
+	.float--reminder {
+		top: 8%;
+		right: 4%;
+		width: 250px;
+		rotate: 3deg;
+		animation-delay: -1.6s;
+	}
+
+	.float--reminder::after {
+		bottom: -6px;
+		left: -6px;
+	}
+
+	.float--leads {
+		bottom: 9%;
+		left: 4%;
+		width: 258px;
+		rotate: 2.5deg;
+		animation-delay: -3.4s;
+	}
+
+	.float--leads::after {
+		top: -6px;
+		right: -6px;
+	}
+
+	.float--apps {
+		right: 4%;
+		bottom: 9%;
+		width: 250px;
+		rotate: -2.5deg;
+		animation-delay: -5s;
+	}
+
+	.float--apps::after {
+		top: -6px;
+		left: -6px;
+	}
+
+	/* Chat card */
+	.chat-head {
+		display: flex;
+		align-items: center;
+		gap: 9px;
+		padding-bottom: 10px;
+		border-bottom: 1px solid var(--color-border);
+	}
+
+	.chat-avatar {
+		display: grid;
+		place-items: center;
+		flex: 0 0 auto;
+		width: 32px;
+		height: 32px;
+		border-radius: 50%;
+		background: var(--color-brand-soft);
+		color: var(--color-brand-strong);
+		font-size: 0.72rem;
+		font-weight: 800;
+	}
+
+	.chat-id {
+		display: flex;
+		flex-direction: column;
+		line-height: 1.2;
+		margin-right: auto;
+	}
+
+	.chat-id strong {
+		font-size: 0.86rem;
+		font-weight: 700;
+	}
+
+	.chat-id small {
+		color: var(--color-brand);
+		font-size: 0.72rem;
+	}
+
+	.chat-ai {
+		padding: 3px 8px;
+		border-radius: 999px;
+		background: var(--color-brand-soft);
+		color: var(--color-brand-strong);
+		font-size: 0.66rem;
+		font-weight: 800;
+	}
+
+	.chat-body {
+		display: flex;
+		flex-direction: column;
+		gap: 7px;
+		padding-top: 11px;
+	}
+
+	.bubble {
+		max-width: 88%;
+		margin: 0;
+		padding: 8px 11px;
+		border-radius: 13px;
+		font-size: 0.8rem;
+		line-height: 1.4;
+	}
+
+	.bubble--in {
+		align-self: flex-start;
+		border-bottom-left-radius: 4px;
+		background: #f0f2f1;
+		color: var(--color-text);
+	}
+
+	.bubble--out {
+		align-self: flex-end;
+		border-bottom-right-radius: 4px;
+		background: var(--color-brand);
+		color: #fff;
+	}
+
+	/* Reminder + apps shared label */
+	.float-label {
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+		color: var(--color-muted);
+		font-size: 0.74rem;
+		font-weight: 700;
+		text-transform: uppercase;
+		letter-spacing: 0.04em;
+	}
+
+	.float-label svg {
+		width: 15px;
+		height: 15px;
+		color: var(--color-brand);
+	}
+
+	.float--reminder strong {
+		display: block;
+		margin: 8px 0 3px;
+		font-size: 0.92rem;
+	}
+
+	.float--reminder small {
+		color: var(--color-muted);
+		font-size: 0.78rem;
+	}
+
+	/* Leads card */
+	.leads-head {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		margin-bottom: 10px;
+	}
+
+	.leads-head strong {
+		font-size: 0.92rem;
+	}
+
+	.leads-count {
+		padding: 2px 9px;
+		border-radius: 999px;
+		background: var(--color-brand-soft);
+		color: var(--color-brand-strong);
+		font-size: 0.72rem;
+		font-weight: 800;
+	}
+
+	.leads-list {
+		display: flex;
+		flex-direction: column;
+		gap: 9px;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.leads-list li {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		font-size: 0.82rem;
+		font-weight: 600;
+	}
+
+	.leads-list em {
+		margin-left: auto;
+		padding: 2px 8px;
+		border-radius: 999px;
+		background: #f0f2f1;
+		color: var(--color-muted);
+		font-size: 0.68rem;
+		font-style: normal;
+		font-weight: 700;
+	}
+
+	.dot {
+		width: 8px;
+		height: 8px;
+		border-radius: 50%;
+		flex: 0 0 auto;
+	}
+
+	.dot--green {
+		background: #259a72;
+	}
+	.dot--amber {
+		background: #e0a32e;
+	}
+	.dot--blue {
+		background: #3b82f6;
+	}
+
+	/* Apps card */
+	.apps-row {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		margin-top: 11px;
+	}
+
+	.app-chip {
+		display: grid;
+		place-items: center;
+		width: 38px;
+		height: 38px;
+		border-radius: 11px;
+		background: #f4f6f5;
+		border: 1px solid var(--color-border);
+	}
+
+	.app-chip svg {
+		width: 21px;
+		height: 21px;
+	}
+
+	.app-chip--wa {
+		color: #1fae5a;
+	}
+	.app-chip--meta {
+		color: #0866ff;
+	}
+	.app-chip--cal {
+		color: #4285f4;
+	}
+	.app-chip--more {
+		width: auto;
+		min-width: 38px;
+		padding-inline: 10px;
+		color: var(--color-muted);
+		font-size: 0.72rem;
+		font-weight: 800;
+	}
+
+	@keyframes float-bob {
+		0%,
+		100% {
+			translate: 0 0;
+		}
+		50% {
+			translate: 0 -9px;
+		}
+	}
+
+	/* Oculta los accesorios más chicos antes de que aprieten */
+	@media (max-width: 1320px) {
+		.float--reminder,
+		.float--apps {
+			display: none;
+		}
+	}
+
+	@media (max-width: 1140px) {
+		.float {
+			display: none;
+		}
+
+		.float::after {
+			display: none;
+		}
+
+		.hero-stage {
+			min-height: 0;
+		}
+	}
+
+	@media (max-width: 680px) {
+		.hero {
+			padding: 10px;
+		}
+
+		.hero-stage {
+			padding: clamp(28px, 5svh, 52px) 18px clamp(34px, 6svh, 60px);
+		}
+
+		h1 {
+			font-size: clamp(2.2rem, 10vw, 3.4rem);
+		}
+
+		.hero-subtitle {
+			font-size: 1rem;
+			line-height: 1.54;
+		}
+
+		.hero-actions,
+		.hero-actions :global(.button) {
+			width: 100%;
+		}
+	}
+
+	@media (max-height: 760px) and (min-width: 1141px) {
+		.hero-stage {
+			padding-block: clamp(26px, 4.8svh, 42px);
+		}
+
+		.hero-center {
+			max-width: 540px;
+		}
+
+		.hero-mark {
+			width: 50px;
+			height: 50px;
+			margin-bottom: 14px;
+			border-radius: 16px;
+		}
+
+		.hero-mark img {
+			height: 26px;
+		}
+
+		.hero-badge {
+			margin-bottom: 14px;
+			padding: 5px 12px;
+			font-size: 0.8rem;
+		}
+
+		h1 {
+			font-size: clamp(2.7rem, 4.7vw, 4rem);
+		}
+
+		.hero-subtitle {
+			margin-top: 14px;
+			font-size: 1rem;
+			line-height: 1.5;
+		}
+
+		.hero-actions {
+			margin-top: 22px;
+		}
+
+		.hero-note {
+			margin-top: 10px;
+		}
+
+		.float {
+			scale: 0.9;
+		}
+
+		.float--chat,
+		.float--leads {
+			left: 3%;
+		}
+
+		.float--reminder,
+		.float--apps {
+			right: 3%;
+		}
+	}
+
+	@media (max-height: 700px) and (max-width: 680px) {
+		.hero-mark {
+			width: 48px;
+			height: 48px;
+			margin-bottom: 12px;
+		}
+
+		.hero-mark img {
+			height: 24px;
+		}
+
+		.hero-badge {
+			margin-bottom: 12px;
+		}
+
+		.hero-subtitle {
+			margin-top: 14px;
+		}
+
+		.hero-actions {
+			margin-top: 20px;
+		}
+
+		.hero-note {
+			display: none;
+		}
+	}
+</style>

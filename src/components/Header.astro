@@ -1,0 +1,253 @@
+---
+import logo from '../assets/logo_waichatt.svg';
+import { mainNavItems, site } from '../config/site';
+import Button from './ui/Button.astro';
+
+const logoSrc = typeof logo === 'string' ? logo : logo.src;
+---
+
+<header class="site-header" data-header>
+	<a class="brand" href={site.links.home} aria-label={`${site.name} inicio`}>
+		<img src={logoSrc} alt={site.name} width="299" height="90" />
+	</a>
+
+	<nav class="desktop-nav" aria-label="Navegación principal">
+		{mainNavItems.map((item) => <a href={item.href}>{item.label}</a>)}
+	</nav>
+
+	<div class="header-actions">
+		<Button class="login-button" href={site.links.app} variant="ghost" size="sm">Ingresar</Button>
+		<Button href={site.links.register} size="sm">Empezá gratis</Button>
+	</div>
+
+	<details class="mobile-menu" data-mobile-menu>
+		<summary aria-label="Abrir menú" aria-controls="mobile-navigation">
+			<span></span>
+			<span></span>
+			<span></span>
+		</summary>
+		<nav id="mobile-navigation" aria-label="Navegación móvil">
+			{mainNavItems.map((item) => <a href={item.href}>{item.label}</a>)}
+			<Button class="mobile-login" href={site.links.app} variant="ghost" size="sm">Ingresar</Button>
+			<Button class="mobile-cta" href={site.links.register} size="sm">Empezá gratis</Button>
+		</nav>
+	</details>
+</header>
+
+<script>
+	const header = document.querySelector('[data-header]');
+	const mobileMenu = document.querySelector('[data-mobile-menu]');
+	const mobileSummary = mobileMenu?.querySelector('summary');
+
+	const syncScrolledState = () => {
+		header?.toggleAttribute('data-scrolled', window.scrollY > 8);
+	};
+
+	const syncMenuState = () => {
+		if (mobileMenu instanceof HTMLDetailsElement) {
+			mobileSummary?.setAttribute('aria-expanded', String(mobileMenu.open));
+		}
+	};
+
+	syncScrolledState();
+	syncMenuState();
+	window.addEventListener('scroll', syncScrolledState, { passive: true });
+	mobileMenu?.addEventListener('toggle', syncMenuState);
+	mobileMenu?.querySelectorAll('a').forEach((link) => {
+		link.addEventListener('click', () => {
+			if (mobileMenu instanceof HTMLDetailsElement) mobileMenu.open = false;
+		});
+	});
+	document.addEventListener('keydown', (event) => {
+		if (event.key === 'Escape' && mobileMenu instanceof HTMLDetailsElement) {
+			mobileMenu.open = false;
+		}
+	});
+</script>
+
+<style>
+	.site-header {
+		position: sticky;
+		top: 0;
+		z-index: 20;
+		display: flex;
+		align-items: center;
+		gap: 32px;
+		width: min(var(--container), calc(100% - 40px));
+		min-height: var(--header-height);
+		margin-inline: auto;
+		background: rgba(255, 255, 255, 0.94);
+		backdrop-filter: blur(14px);
+		border-bottom: 1px solid rgba(228, 231, 229, 0.72);
+		transition:
+			border-color 200ms ease,
+			box-shadow 200ms ease;
+	}
+
+	.site-header[data-scrolled] {
+		border-bottom-color: var(--color-border);
+		box-shadow: 0 10px 30px rgba(20, 32, 27, 0.06);
+	}
+
+	.brand {
+		display: inline-flex;
+		align-items: center;
+		flex: 0 0 auto;
+	}
+
+	.brand img {
+		width: 162px;
+		height: auto;
+		filter: saturate(1.14) contrast(1.12);
+	}
+
+	.desktop-nav {
+		display: flex;
+		align-items: center;
+		gap: 32px;
+		margin-left: auto;
+		color: var(--color-muted);
+		font-size: 0.96rem;
+		font-weight: 700;
+	}
+
+	.desktop-nav a {
+		position: relative;
+		display: inline-flex;
+		align-items: center;
+		min-height: 40px;
+		color: inherit;
+		transition:
+			color 200ms ease,
+			transform 200ms ease;
+	}
+
+	.desktop-nav a::after {
+		content: '';
+		position: absolute;
+		right: 0;
+		bottom: 5px;
+		left: 0;
+		height: 2px;
+		border-radius: 999px;
+		background: var(--color-brand);
+		opacity: 0;
+		transform: scaleX(0.35);
+		transform-origin: center;
+		transition:
+			opacity 200ms ease,
+			transform 200ms ease;
+	}
+
+	.desktop-nav a:hover,
+	.desktop-nav a:focus-visible {
+		color: var(--color-brand);
+		transform: translateY(-1px);
+	}
+
+	.desktop-nav a:hover::after,
+	.desktop-nav a:focus-visible::after {
+		opacity: 1;
+		transform: scaleX(1);
+	}
+
+	.header-actions {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+	}
+
+	.mobile-menu {
+		display: none;
+		position: relative;
+		margin-left: auto;
+	}
+
+	.mobile-menu summary {
+		display: grid;
+		place-items: center;
+		width: 42px;
+		height: 42px;
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius-md);
+		background: var(--color-surface);
+		cursor: pointer;
+		list-style: none;
+	}
+
+	.mobile-menu summary::-webkit-details-marker {
+		display: none;
+	}
+
+	.mobile-menu summary span {
+		width: 18px;
+		height: 2px;
+		margin: 2px 0;
+		border-radius: 999px;
+		background: var(--color-text);
+	}
+
+	.mobile-menu nav {
+		position: absolute;
+		top: calc(100% + 10px);
+		right: 0;
+		display: grid;
+		gap: 4px;
+		width: min(280px, calc(100vw - 28px));
+		padding: 10px;
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius-md);
+		background: var(--color-surface);
+		box-shadow: var(--shadow-menu);
+	}
+
+	.mobile-menu nav a {
+		display: flex;
+		align-items: center;
+		min-height: 44px;
+		padding: 0 12px;
+		border-radius: var(--radius-sm);
+		color: var(--color-text);
+		font-weight: 700;
+		transition:
+			background 200ms ease,
+			color 200ms ease,
+			transform 200ms ease;
+	}
+
+	.mobile-menu nav a:not(.button):hover,
+	.mobile-menu nav a:not(.button):focus-visible {
+		background: var(--color-brand-soft);
+		color: var(--color-brand-strong);
+		transform: translateX(2px);
+	}
+
+	.mobile-menu nav :global(.mobile-login) {
+		margin-top: 6px;
+	}
+
+	.mobile-menu nav :global(.mobile-cta) {
+		margin-top: 4px;
+	}
+
+	@media (max-width: 760px) {
+		.site-header {
+			width: min(100% - 28px, var(--container));
+			min-height: 68px;
+			gap: 16px;
+		}
+
+		.brand img {
+			width: 136px;
+		}
+
+		.desktop-nav,
+		.header-actions {
+			display: none;
+		}
+
+		.mobile-menu {
+			display: block;
+		}
+	}
+</style>

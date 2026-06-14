@@ -1,0 +1,40 @@
+---
+import { site } from '../config/site';
+
+interface Props {
+	title?: string;
+	description?: string;
+	ogTitle?: string;
+	ogDescription?: string;
+	ogImage?: string;
+	canonical?: string;
+	noindex?: boolean;
+}
+
+const {
+	title = site.defaultTitle,
+	description = site.defaultDescription,
+	ogTitle = title,
+	ogDescription = description,
+	ogImage = '/og-waichatt.png',
+	canonical,
+	noindex = false,
+} = Astro.props;
+---
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content={description} />
+{canonical && <link rel="canonical" href={canonical} />}
+{noindex && <meta name="robots" content="noindex,nofollow" />}
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content={ogTitle} />
+<meta property="og:description" content={ogDescription} />
+<meta property="og:image" content={ogImage} />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={ogTitle} />
+<meta name="twitter:description" content={ogDescription} />
+<meta name="theme-color" content={site.themeColor} />
+<meta name="generator" content={Astro.generator} />
+<title>{title}</title>
