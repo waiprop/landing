@@ -1,0 +1,71 @@
+---
+import { getCollection, render } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+
+export async function getStaticPaths() {
+	const posts = (await getCollection('blog')).filter((post) => !post.data.draft);
+	return posts.map((post) => ({
+		params: { slug: post.id },
+		props: { post },
+	}));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<Layout title={`${post.data.title} - Waichatt`} description={post.data.description} canonical={`/blog/${post.id}/`}>
+	<main class="article-page">
+		<article>
+			<a class="back" href="/blog">Blog</a>
+			<h1>{post.data.title}</h1>
+			<p class="description">{post.data.description}</p>
+			<time datetime={post.data.publishDate.toISOString()}>{post.data.publishDate.toLocaleDateString('es-AR')}</time>
+			<div class="content">
+				<Content />
+			</div>
+		</article>
+	</main>
+</Layout>
+
+<style>
+	.article-page {
+		padding: clamp(56px, 8vw, 104px) 20px;
+	}
+
+	article {
+		width: min(760px, 100%);
+		margin-inline: auto;
+	}
+
+	.back,
+	time {
+		color: var(--color-brand);
+		font-weight: 900;
+	}
+
+	h1 {
+		margin: 18px 0;
+		color: var(--color-text);
+		font-size: clamp(2.2rem, 5vw, 3.8rem);
+		line-height: 1.05;
+	}
+
+	.description,
+	.content :global(p) {
+		color: var(--color-muted);
+		line-height: 1.72;
+	}
+
+	.description {
+		font-size: 1.16rem;
+	}
+
+	.content {
+		margin-top: 40px;
+	}
+
+	.content :global(p) {
+		font-size: 1.06rem;
+	}
+</style>

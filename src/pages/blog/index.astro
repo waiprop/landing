@@ -1,0 +1,121 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '../../layouts/Layout.astro';
+import { site } from '../../config/site';
+
+const posts = (await getCollection('blog')).filter((post) => !post.data.draft);
+posts.sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime());
+---
+
+<Layout
+	title="Blog de Waichatt - WhatsApp, IA y ventas inmobiliarias"
+	description="Guías, tutoriales y mejores prácticas para ordenar consultas de WhatsApp, IA y CRM en negocios inmobiliarios."
+	canonical="/blog"
+>
+	<main class="page">
+		<section class="hero-lite">
+			<p>Recursos</p>
+			<h1>Blog de Waichatt</h1>
+			<span>Aprendé sobre WhatsApp, IA y ventas para tu negocio inmobiliario.</span>
+		</section>
+		<section class="post-list" aria-label="Artículos del blog">
+			{posts.map((post) => (
+				<article>
+					<a href={`/blog/${post.id}/`}>
+						<h2>{post.data.title}</h2>
+						<p>{post.data.description}</p>
+						<time datetime={post.data.publishDate.toISOString()}>{post.data.publishDate.toLocaleDateString('es-AR')}</time>
+					</a>
+				</article>
+			))}
+			{posts.length === 0 && <p>No hay artículos publicados todavía.</p>}
+		</section>
+		<section class="cta">
+			<h2>Ordená tus consultas desde hoy</h2>
+			<a href={site.links.register} data-track="Blog register" data-preserve-utm="true">Empezá gratis</a>
+		</section>
+	</main>
+</Layout>
+
+<style>
+	.page {
+		padding: clamp(56px, 8vw, 104px) 20px;
+	}
+
+	.hero-lite,
+	.post-list,
+	.cta {
+		width: min(980px, 100%);
+		margin-inline: auto;
+	}
+
+	.hero-lite p {
+		margin: 0 0 12px;
+		color: var(--color-brand);
+		font-weight: 900;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+	}
+
+	h1 {
+		margin: 0;
+		color: var(--color-text);
+		font-size: clamp(2.4rem, 5vw, 4rem);
+		line-height: 1.04;
+	}
+
+	.hero-lite span,
+	.post-list p {
+		color: var(--color-muted);
+		line-height: 1.65;
+	}
+
+	.hero-lite span {
+		display: block;
+		max-width: 620px;
+		margin-top: 18px;
+		font-size: 1.12rem;
+	}
+
+	.post-list {
+		display: grid;
+		gap: 16px;
+		margin-top: 48px;
+	}
+
+	.post-list article {
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius-md);
+		background: var(--color-surface);
+	}
+
+	.post-list a {
+		display: block;
+		padding: 26px;
+	}
+
+	h2 {
+		margin: 0;
+		color: var(--color-text);
+		font-size: clamp(1.4rem, 3vw, 2rem);
+	}
+
+	time {
+		color: var(--color-brand);
+		font-weight: 900;
+	}
+
+	.cta {
+		margin-top: 48px;
+		padding: 30px;
+		border-radius: var(--radius-md);
+		background: var(--color-brand-soft);
+	}
+
+	.cta a {
+		display: inline-flex;
+		margin-top: 14px;
+		color: var(--color-brand-strong);
+		font-weight: 900;
+	}
+</style>

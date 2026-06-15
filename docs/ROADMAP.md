@@ -44,9 +44,9 @@ Definiciones de negocio (ya resueltas, las dejo como referencia):
 
 En Astro:
 
-- [ ] Proyecto nuevo y separado del sistema.
-- [ ] Instalar `@astrojs/sitemap`.
-- [ ] Conectar deploy a Cloudflare Pages / Vercel / Netlify desde el día uno (preview en vivo de cada cambio).
+- [x] Proyecto nuevo y separado del sistema.
+- [x] Instalar `@astrojs/sitemap`.
+- [x] Conectar deploy a Cloudflare Pages / Vercel / Netlify desde el día uno (preview en vivo de cada cambio).
 
 ---
 
