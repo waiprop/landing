@@ -1,6 +1,8 @@
 ---
 import Header from '../components/Header.astro';
 import SEO from '../components/SEO.astro';
+import Footer from '../components/Footer.astro';
+import Tracking from '../components/Tracking.astro';
 import '../styles/global.css';
 
 interface Props {
@@ -11,9 +13,10 @@ interface Props {
 	ogImage?: string;
 	canonical?: string;
 	noindex?: boolean;
+	jsonLd?: Record<string, unknown> | Array<Record<string, unknown>>;
 }
 
-const { title, description, ogTitle, ogDescription, ogImage, canonical, noindex } = Astro.props;
+const { title, description, ogTitle, ogDescription, ogImage, canonical, noindex, jsonLd } = Astro.props;
 ---
 
 <!doctype html>
@@ -27,10 +30,13 @@ const { title, description, ogTitle, ogDescription, ogImage, canonical, noindex 
 			ogImage={ogImage}
 			canonical={canonical}
 			noindex={noindex}
+			jsonLd={jsonLd}
 		/>
+		<Tracking />
 	</head>
 	<body>
 		<Header />
 		<slot />
+		<Footer />
 	</body>
 </html>

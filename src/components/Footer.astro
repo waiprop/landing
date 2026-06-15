@@ -1,0 +1,115 @@
+---
+import { site } from '../config/site';
+---
+
+<footer class="site-footer">
+	<div class="footer-inner">
+		<div class="footer-brand">
+			<strong>{site.name}</strong>
+			<p>WhatsApp, IA y CRM para inmobiliarias y desarrolladoras.</p>
+		</div>
+		<nav aria-label="Footer producto">
+			<h2>Producto</h2>
+			<a href="/#funciones">Funciones</a>
+			<a href={site.links.pricing}>Precios</a>
+			<a href={site.links.app} data-preserve-utm="true">Ingresar</a>
+		</nav>
+		<nav aria-label="Footer recursos">
+			<h2>Recursos</h2>
+			<a href={site.links.blog}>Blog</a>
+			<a href={site.links.realEstate}>Para inmobiliarias</a>
+			<a href={site.links.developers}>Para desarrolladoras</a>
+		</nav>
+		<nav aria-label="Footer legales">
+			<h2>Legales</h2>
+			<a href={site.links.terms}>Términos y Condiciones</a>
+			<a href={site.links.privacy}>Política de Privacidad</a>
+		</nav>
+		<div class="footer-contact">
+			<h2>Contacto</h2>
+			<a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>
+			<a href={site.contact.whatsapp}>{site.contact.phone}</a>
+		</div>
+	</div>
+	<p class="footer-note">
+		Waichatt es una plataforma independiente. No está afiliada ni es distribuidora oficial de WhatsApp ni Meta.
+	</p>
+</footer>
+
+<style>
+	.site-footer {
+		padding: 56px 20px 28px;
+		border-top: 1px solid var(--color-border);
+		background: #f6f7f6;
+	}
+
+	.footer-inner {
+		display: grid;
+		grid-template-columns: minmax(220px, 1.3fr) repeat(4, minmax(150px, 1fr));
+		gap: 28px;
+		width: min(var(--container), 100%);
+		margin-inline: auto;
+	}
+
+	.footer-brand strong {
+		color: var(--color-text);
+		font-size: 1.25rem;
+	}
+
+	.footer-brand p,
+	.footer-note {
+		color: var(--color-muted);
+		line-height: 1.6;
+	}
+
+	.footer-brand p {
+		max-width: 28ch;
+		margin: 12px 0 0;
+	}
+
+	h2 {
+		margin: 0 0 12px;
+		color: var(--color-text);
+		font-size: 0.82rem;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+	}
+
+	nav,
+	.footer-contact {
+		display: grid;
+		align-content: start;
+		gap: 9px;
+	}
+
+	a {
+		color: var(--color-muted);
+		font-weight: 700;
+		transition: color 180ms ease;
+	}
+
+	a:hover,
+	a:focus-visible {
+		color: var(--color-brand);
+	}
+
+	.footer-note {
+		width: min(var(--container), 100%);
+		margin: 34px auto 0;
+		padding-top: 20px;
+		border-top: 1px solid var(--color-border);
+		font-size: 0.92rem;
+	}
+
+	@media (max-width: 900px) {
+		.footer-inner {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+
+	@media (max-width: 560px) {
+		.footer-inner {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

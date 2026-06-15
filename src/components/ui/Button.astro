@@ -5,6 +5,8 @@ interface Props {
 	size?: 'sm' | 'md';
 	class?: string;
 	ariaLabel?: string;
+	track?: string;
+	preserveUtm?: boolean;
 }
 
 const {
@@ -13,6 +15,8 @@ const {
 	size = 'md',
 	class: className,
 	ariaLabel,
+	track,
+	preserveUtm = href.includes('waichatt.app'),
 	...attrs
 } = Astro.props;
 ---
@@ -20,6 +24,8 @@ const {
 <a
 	href={href}
 	aria-label={ariaLabel}
+	data-track={track}
+	data-preserve-utm={preserveUtm ? 'true' : undefined}
 	class:list={['button', `button-${variant}`, `button-${size}`, className]}
 	{...attrs}
 >

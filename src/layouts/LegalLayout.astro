@@ -1,0 +1,62 @@
+---
+import Layout from './Layout.astro';
+
+interface Props {
+	title: string;
+	description: string;
+	canonical: string;
+	heading: string;
+	lastUpdated: string;
+}
+
+const { title, description, canonical, heading, lastUpdated } = Astro.props;
+---
+
+<Layout title={title} description={description} canonical={canonical}>
+	<main class="legal-page">
+		<article>
+			<h1>{heading}</h1>
+			<p class="lead">Última actualización: {lastUpdated}.</p>
+			<slot />
+		</article>
+	</main>
+</Layout>
+
+<style>
+	.legal-page {
+		padding: clamp(56px, 8vw, 104px) 20px;
+	}
+
+	article {
+		width: min(820px, 100%);
+		margin-inline: auto;
+	}
+
+	h1 {
+		margin: 0;
+		color: var(--color-text);
+		font-size: clamp(2.4rem, 5vw, 4rem);
+		line-height: 1.05;
+	}
+
+	.lead {
+		color: var(--color-brand);
+		font-weight: 900;
+	}
+
+	/* El contenido llega vía <slot>, así que necesita estilos globales. */
+	article :global(h2) {
+		margin-top: 34px;
+		color: var(--color-text);
+	}
+
+	article :global(p) {
+		color: var(--color-muted);
+		line-height: 1.72;
+	}
+
+	article :global(a) {
+		color: var(--color-brand);
+		font-weight: 900;
+	}
+</style>

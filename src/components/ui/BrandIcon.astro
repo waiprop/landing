@@ -1,0 +1,73 @@
+---
+import { Icon } from 'astro-icon/components';
+import type { HTMLAttributes } from 'astro/types';
+
+type Brand = 'whatsapp' | 'meta' | 'google-calendar';
+type Variant = 'color' | 'mono';
+
+interface Props extends HTMLAttributes<'svg'> {
+	brand: Brand;
+	variant?: Variant;
+	label?: string;
+	size?: number | string;
+	decorative?: boolean;
+}
+
+const brandIcons: Record<Brand, { label: string; color: string; mono: string }> = {
+	whatsapp: {
+		label: 'WhatsApp',
+		color: 'logos:whatsapp-icon',
+		mono: 'simple-icons:whatsapp',
+	},
+	meta: {
+		label: 'Meta',
+		color: 'logos:meta-icon',
+		mono: 'simple-icons:meta',
+	},
+	'google-calendar': {
+		label: 'Google Calendar',
+		color: 'logos:google-calendar',
+		mono: 'logos:google-calendar',
+	},
+};
+
+const {
+	brand,
+	variant = 'color',
+	label,
+	size = 24,
+	width,
+	height,
+	class: className,
+	decorative = false,
+	role,
+	title,
+	'aria-label': ariaLabel,
+	'aria-hidden': ariaHidden,
+	...attrs
+} = Astro.props;
+
+const iconConfig = brandIcons[brand];
+const accessibleLabel = ariaLabel ?? label ?? iconConfig.label;
+const iconName = iconConfig[variant];
+const classes = ['brand-icon', className].filter(Boolean).join(' ');
+const hasCustomDimensions = width !== undefined || height !== undefined;
+const dimensionAttrs = {
+	...(hasCustomDimensions ? {} : { size }),
+	...(width !== undefined ? { width } : {}),
+	...(height !== undefined ? { height } : {}),
+};
+const accessibilityAttrs = decorative
+	? { 'aria-hidden': ariaHidden ?? 'true' }
+	: { role: role ?? 'img', 'aria-label': accessibleLabel };
+const iconTitle = decorative ? undefined : title ?? accessibleLabel;
+---
+
+<Icon
+	name={iconName}
+	class={classes}
+	title={iconTitle}
+	{...dimensionAttrs}
+	{...accessibilityAttrs}
+	{...attrs}
+/>

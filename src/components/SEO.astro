@@ -9,6 +9,7 @@ interface Props {
 	ogImage?: string;
 	canonical?: string;
 	noindex?: boolean;
+	jsonLd?: Record<string, unknown> | Array<Record<string, unknown>>;
 }
 
 const {
@@ -16,25 +17,35 @@ const {
 	description = site.defaultDescription,
 	ogTitle = title,
 	ogDescription = description,
-	ogImage = '/og-waichatt.png',
+	ogImage = site.ogImage,
 	canonical,
 	noindex = false,
+	jsonLd,
 } = Astro.props;
+
+const canonicalUrl = canonical ? new URL(canonical, site.url).toString() : undefined;
+const ogImageUrl = new URL(ogImage, site.url).toString();
+const schemas = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
 ---
 
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta name="description" content={description} />
-{canonical && <link rel="canonical" href={canonical} />}
+{canonicalUrl && <link rel="canonical" href={canonicalUrl} />}
 {noindex && <meta name="robots" content="noindex,nofollow" />}
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 <meta property="og:type" content="website" />
 <meta property="og:title" content={ogTitle} />
 <meta property="og:description" content={ogDescription} />
-<meta property="og:image" content={ogImage} />
+<meta property="og:image" content={ogImageUrl} />
 <meta name="twitter:card" content="summary_large_image" />
 <meta name="twitter:title" content={ogTitle} />
 <meta name="twitter:description" content={ogDescription} />
 <meta name="theme-color" content={site.themeColor} />
 <meta name="generator" content={Astro.generator} />
 <title>{title}</title>
+{
+	schemas.map((schema) => (
+		<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+	))
+}

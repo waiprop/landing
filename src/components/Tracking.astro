@@ -1,0 +1,76 @@
+---
+const gaId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
+const metaPixelId = import.meta.env.PUBLIC_META_PIXEL_ID;
+const hasGa = Boolean(gaId);
+const hasMeta = Boolean(metaPixelId);
+---
+
+{hasGa && (
+	<script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
+)}
+{hasGa && (
+	<script is:inline define:vars={{ gaId }}>
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		gtag('config', gaId);
+	</script>
+)}
+{hasMeta && (
+	<script is:inline define:vars={{ metaPixelId }}>
+		!function(f,b,e,v,n,t,s)
+		{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+		n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+		if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+		n.queue=[];t=b.createElement(e);t.async=!0;
+		t.src=v;s=b.getElementsByTagName(e)[0];
+		s.parentNode.insertBefore(t,s)}(window, document,'script',
+		'https://connect.facebook.net/en_US/fbevents.js');
+		fbq('init', metaPixelId);
+		fbq('track', 'PageView');
+	</script>
+)}
+{hasMeta && <noscript><img height="1" width="1" style="display:none" src={`https://www.facebook.com/tr?id=${metaPixelId}&ev=PageView&noscript=1`} alt="" /></noscript>}
+
+<script>
+	const passthroughParams = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'gclid', 'fbclid'];
+
+	const preserveAttribution = () => {
+		const currentParams = new URLSearchParams(window.location.search);
+		const attributionEntries = passthroughParams
+			.map((key) => [key, currentParams.get(key)])
+			.filter((entry) => entry[1]);
+
+		if (attributionEntries.length === 0) return;
+
+		document.querySelectorAll('a[data-preserve-utm="true"]').forEach((link) => {
+			if (!(link instanceof HTMLAnchorElement)) return;
+			const url = new URL(link.href);
+			attributionEntries.forEach(([key, value]) => {
+				if (value && !url.searchParams.has(key)) url.searchParams.set(key, value);
+			});
+			link.href = url.toString();
+		});
+	};
+
+	const trackClicks = () => {
+		document.querySelectorAll('a[data-track]').forEach((link) => {
+			link.addEventListener('click', () => {
+				if (!(link instanceof HTMLAnchorElement)) return;
+				const label = link.dataset.track ?? link.textContent?.trim() ?? 'CTA';
+				window.gtag?.('event', 'click_cta', {
+					event_category: 'engagement',
+					event_label: label,
+					link_url: link.href,
+				});
+				window.fbq?.('trackCustom', 'ClickCTA', {
+					label,
+					link_url: link.href,
+				});
+			});
+		});
+	};
+
+	preserveAttribution();
+	trackClicks();
+</script>

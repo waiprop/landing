@@ -16,8 +16,8 @@ const logoSrc = typeof logo === 'string' ? logo : logo.src;
 	</nav>
 
 	<div class="header-actions">
-		<Button class="login-button" href={site.links.app} variant="ghost" size="sm">Ingresar</Button>
-		<Button href={site.links.register} size="sm">Empezá gratis</Button>
+		<Button class="login-button" href={site.links.app} variant="ghost" size="sm" track="Header login">Ingresar</Button>
+		<Button href={site.links.register} size="sm" track="Header register">Empezá gratis</Button>
 	</div>
 
 	<details class="mobile-menu" data-mobile-menu>
@@ -28,8 +28,8 @@ const logoSrc = typeof logo === 'string' ? logo : logo.src;
 		</summary>
 		<nav id="mobile-navigation" aria-label="Navegación móvil">
 			{mainNavItems.map((item) => <a href={item.href}>{item.label}</a>)}
-			<Button class="mobile-login" href={site.links.app} variant="ghost" size="sm">Ingresar</Button>
-			<Button class="mobile-cta" href={site.links.register} size="sm">Empezá gratis</Button>
+			<Button class="mobile-login" href={site.links.app} variant="ghost" size="sm" track="Mobile login">Ingresar</Button>
+			<Button class="mobile-cta" href={site.links.register} size="sm" track="Mobile register">Empezá gratis</Button>
 		</nav>
 	</details>
 </header>
@@ -73,10 +73,11 @@ const logoSrc = typeof logo === 'string' ? logo : logo.src;
 		display: flex;
 		align-items: center;
 		gap: 32px;
-		width: min(var(--container), calc(100% - 40px));
+		width: 100%;
 		min-height: var(--header-height);
 		margin-inline: auto;
-		background: rgba(255, 255, 255, 0.94);
+		padding-inline: max(20px, calc((100% - var(--container)) / 2));
+		background: var(--color-surface);
 		backdrop-filter: blur(14px);
 		border-bottom: 1px solid rgba(228, 231, 229, 0.72);
 		transition:
@@ -232,8 +233,8 @@ const logoSrc = typeof logo === 'string' ? logo : logo.src;
 
 	@media (max-width: 760px) {
 		.site-header {
-			width: min(100% - 28px, var(--container));
 			min-height: 68px;
+			padding-inline: 14px;
 			gap: 16px;
 		}
 
