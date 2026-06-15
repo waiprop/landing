@@ -1,0 +1,26 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { site } from '../config/site';
+import Button from '../components/ui/Button.astro';
+import PageHeader from '../components/PageHeader.astro';
+import BenefitGrid from '../components/sections/BenefitGrid.astro';
+
+const benefits = [
+	{ title: 'Bandeja compartida', text: 'Todos los mensajes en un solo lugar, con historial y asignación por vendedor.' },
+	{ title: 'Propiedades conectadas', text: 'La IA recomienda opciones de tu cartera según zona, presupuesto y operación.' },
+	{ title: 'Seguimiento comercial', text: 'Cada consulta entra al pipeline para medir etapas, visitas y oportunidades.' },
+];
+---
+
+<Layout title="Waichatt para inmobiliarias - WhatsApp, IA y CRM" description="Centralizá consultas, propiedades, visitas y seguimiento comercial en una sola plataforma para inmobiliarias." canonical="/para-inmobiliarias">
+	<main>
+		<PageHeader
+			eyebrow="Para inmobiliarias"
+			title="Ordená tu WhatsApp y no pierdas ningún interesado"
+			subtitle="Centralizá las consultas de toda tu cartera, organizá a tus vendedores y vinculá cada conversación con propiedades reales."
+		>
+			<Button href={site.links.register} track="Real estate page register">Empezá gratis</Button>
+		</PageHeader>
+		<BenefitGrid items={benefits} label="Beneficios para inmobiliarias" />
+	</main>
+</Layout>

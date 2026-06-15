@@ -1,0 +1,26 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { site } from '../config/site';
+import Button from '../components/ui/Button.astro';
+import PageHeader from '../components/PageHeader.astro';
+import BenefitGrid from '../components/sections/BenefitGrid.astro';
+
+const benefits = [
+	{ title: 'Respuesta inmediata', text: 'Los interesados reciben una primera respuesta aunque entren cientos de mensajes juntos.' },
+	{ title: 'Calificación comercial', text: 'Registrá zona, presupuesto, unidad de interés y madurez de compra desde la conversación.' },
+	{ title: 'Medición por campaña', text: 'Identificá qué campañas generan compradores reales y qué oportunidades siguen abiertas.' },
+];
+---
+
+<Layout title="Waichatt para desarrolladoras - Respondé lanzamientos con IA" description="Respondé picos de consultas, calificá interesados y repartí leads entre tu equipo comercial durante lanzamientos inmobiliarios." canonical="/para-desarrolladoras">
+	<main>
+		<PageHeader
+			eyebrow="Para desarrolladoras"
+			title="Respondé cada lanzamiento sin saturar a tu equipo"
+			subtitle="La IA contesta al instante, califica interesados y permite seguir cada oportunidad durante todo el ciclo de venta."
+		>
+			<Button href={site.links.register} track="Developers page register">Empezá gratis</Button>
+		</PageHeader>
+		<BenefitGrid items={benefits} label="Beneficios para desarrolladoras" />
+	</main>
+</Layout>

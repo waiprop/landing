@@ -1,0 +1,36 @@
+---
+import LegalLayout from '../layouts/LegalLayout.astro';
+import { site } from '../config/site';
+---
+
+<LegalLayout
+	title="Términos y Condiciones - Waichatt"
+	description="Términos de uso de Waichatt."
+	canonical="/terminos-y-condiciones"
+	heading="Términos y Condiciones"
+	lastUpdated="5 de abril de 2025"
+>
+	<p>
+		Waichatt es una plataforma independiente para centralizar conversaciones de WhatsApp, CRM, propiedades,
+		visitas y automatizaciones con IA para equipos comerciales.
+	</p>
+	<h2>Uso de WhatsApp e IA</h2>
+	<p>
+		El usuario debe contar con una cuenta activa de WhatsApp Business o API de WhatsApp Business y cumplir
+		las políticas aplicables. También debe obtener consentimiento explícito antes de enviar comunicaciones.
+	</p>
+	<p>
+		La IA puede generar respuestas inexactas o incompletas. El usuario es responsable de revisar la información
+		crítica y puede escalar conversaciones a personas de su equipo.
+	</p>
+	<h2>Responsabilidad</h2>
+	<p>
+		La responsabilidad acumulada de Waichatt se limita al monto pagado por el usuario durante los 3 meses
+		previos al evento que origine el reclamo.
+	</p>
+	<h2>Jurisdicción</h2>
+	<p>
+		Estos términos se rigen por las leyes de Argentina y la jurisdicción de los tribunales de San Miguel de Tucumán.
+	</p>
+	<p>Consultas: <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>.</p>
+</LegalLayout>

@@ -1,0 +1,58 @@
+---
+interface Benefit {
+	title: string;
+	text: string;
+}
+
+interface Props {
+	items: Benefit[];
+	label: string;
+}
+
+const { items, label } = Astro.props;
+---
+
+<section class="benefit-grid" aria-label={label}>
+	{items.map((item) => (
+		<article>
+			<h2>{item.title}</h2>
+			<p>{item.text}</p>
+		</article>
+	))}
+</section>
+
+<style>
+	.benefit-grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 16px;
+		width: min(var(--container), 100%);
+		margin-inline: auto;
+		padding: 54px 20px clamp(56px, 8vw, 104px);
+	}
+
+	article {
+		padding: 26px;
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius-md);
+		background: var(--color-surface);
+	}
+
+	h2 {
+		margin: 0 0 10px;
+		color: var(--color-text);
+		font-size: 1.3rem;
+	}
+
+	p {
+		margin: 0;
+		color: var(--color-muted);
+		line-height: 1.65;
+	}
+
+	@media (max-width: 820px) {
+		.benefit-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

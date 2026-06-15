@@ -1,0 +1,33 @@
+---
+import LegalLayout from '../layouts/LegalLayout.astro';
+import { site } from '../config/site';
+---
+
+<LegalLayout
+	title="Política de Privacidad - Waichatt"
+	description="Política de privacidad de Waichatt."
+	canonical="/politica-de-privacidad"
+	heading="Política de Privacidad"
+	lastUpdated="5 de abril de 2025"
+>
+	<p>
+		Waichatt trata datos necesarios para prestar el servicio: datos de cuenta, contacto, configuración del negocio,
+		conversaciones, propiedades, actividad de uso y datos técnicos.
+	</p>
+	<h2>Finalidades</h2>
+	<p>
+		Usamos la información para operar la plataforma, brindar soporte, mejorar el producto, procesar integraciones
+		y cumplir obligaciones legales.
+	</p>
+	<h2>Derechos del usuario</h2>
+	<p>
+		Podés solicitar acceso, rectificación, supresión, limitación, portabilidad, oposición o retiro de consentimiento
+		cuando corresponda.
+	</p>
+	<h2>Cookies</h2>
+	<p>
+		El sitio puede usar cookies necesarias, analíticas, funcionales y de orientación. Las analíticas y publicitarias
+		se activan solo si se configuran los proveedores correspondientes.
+	</p>
+	<p>Consultas de privacidad: <a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>.</p>
+</LegalLayout>

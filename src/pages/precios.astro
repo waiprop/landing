@@ -1,0 +1,92 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { site } from '../config/site';
+import { plans } from '../config/plans';
+import Button from '../components/ui/Button.astro';
+import PageHeader from '../components/PageHeader.astro';
+---
+
+<Layout title="Precios de Waichatt - Planes claros para inmobiliarias" description="Conocé los planes de Waichatt: empezá gratis y pasá al Pro cuando necesites agente IA, CRM y propiedades ilimitadas." canonical="/precios">
+	<main>
+		<PageHeader
+			eyebrow="Precios"
+			title="Planes claros, sin sorpresas"
+			subtitle="Empezá gratis y pasá al Pro cuando lo necesites. Sin costos ocultos."
+		/>
+		<section class="plans" aria-label="Planes">
+			{plans.map((plan) => (
+				<article class:list={[plan.featured && 'featured']}>
+					{plan.featured && <span class="badge">Más elegido</span>}
+					<h2>{plan.name}</h2>
+					<strong>{plan.priceLabel}<small>/mes</small></strong>
+					<p>{plan.summary}</p>
+					<Button href={site.links.register} variant={plan.featured ? 'primary' : 'ghost'} track={`Pricing page ${plan.name}`}>{plan.cta}</Button>
+				</article>
+			))}
+		</section>
+	</main>
+</Layout>
+
+<style>
+	.plans {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 16px;
+		width: min(var(--container), 100%);
+		margin-inline: auto;
+		padding: 48px 20px clamp(56px, 8vw, 104px);
+	}
+
+	article {
+		display: flex;
+		flex-direction: column;
+		padding: 28px;
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius-md);
+		background: var(--color-surface);
+	}
+
+	.featured {
+		border-color: #b8e0d2;
+		box-shadow: 0 22px 60px rgba(37, 154, 114, 0.12);
+	}
+
+	.badge {
+		align-self: flex-start;
+		margin-bottom: 14px;
+		color: var(--color-brand);
+		font-weight: 900;
+	}
+
+	h2 {
+		margin: 0;
+		color: var(--color-text);
+	}
+
+	article strong {
+		display: block;
+		margin-top: 22px;
+		color: var(--color-text);
+		font-size: 2rem;
+	}
+
+	small {
+		color: var(--color-muted);
+		font-size: 1rem;
+	}
+
+	article p {
+		color: var(--color-muted);
+		line-height: 1.65;
+	}
+
+	article :global(.button) {
+		margin-top: auto;
+	}
+
+	@media (max-width: 900px) {
+		.plans {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>
