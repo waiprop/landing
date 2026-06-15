@@ -1,10 +1,18 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Hero from '../components/sections/Hero.astro';
+import HomeSections from '../components/sections/HomeSections.astro';
+import { organizationSchema, softwareApplicationSchema } from '../config/schema';
 ---
 
-<Layout>
+<Layout
+	ogTitle="Tu WhatsApp atiende solo - Waichatt"
+	ogDescription="WhatsApp + IA + CRM en un solo lugar. Para inmobiliarias y desarrolladoras. Empezá gratis, sin tarjeta."
+	canonical="/"
+	jsonLd={[organizationSchema, softwareApplicationSchema]}
+>
 	<main>
 		<Hero />
+		<HomeSections />
 	</main>
 </Layout>
