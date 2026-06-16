@@ -1,9 +1,15 @@
 ---
 const gaId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
-const metaPixelId = import.meta.env.PUBLIC_META_PIXEL_ID;
+const defaultMetaPixelId = '4186385764838413';
+const metaPixelId = import.meta.env.PUBLIC_META_PIXEL_ID || defaultMetaPixelId;
+const metaPixelEnabled = import.meta.env.PUBLIC_META_PIXEL_ENABLED !== 'false';
 const hasGa = Boolean(gaId);
-const hasMeta = Boolean(metaPixelId);
+const hasMeta = metaPixelEnabled && Boolean(metaPixelId);
 ---
+
+{/* Warm up TLS/DNS to third-party tracking origins without blocking render. */}
+{hasGa && <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />}
+{hasMeta && <link rel="preconnect" href="https://connect.facebook.net" crossorigin />}
 
 {hasGa && (
 	<script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
@@ -11,7 +17,7 @@ const hasMeta = Boolean(metaPixelId);
 {hasGa && (
 	<script is:inline define:vars={{ gaId }}>
 		window.dataLayer = window.dataLayer || [];
-		function gtag(){dataLayer.push(arguments);}
+		window.gtag = function () { dataLayer.push(arguments); };
 		gtag('js', new Date());
 		gtag('config', gaId);
 	</script>
@@ -35,10 +41,44 @@ const hasMeta = Boolean(metaPixelId);
 <script>
 	const passthroughParams = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content', 'gclid', 'fbclid'];
 
+	const callFbq = (action: string, eventName: string, params?: Record<string, unknown>) => {
+		if (typeof window.fbq !== 'function') return;
+
+		try {
+			window.fbq(action, eventName, params);
+		} catch {
+			// Tracking must never block the user action that triggered it.
+		}
+	};
+
+	window.trackMetaEvent = (eventName, params) => {
+		callFbq('track', eventName, params);
+	};
+
+	window.trackMetaCustomEvent = (eventName, params) => {
+		callFbq('trackCustom', eventName, params);
+	};
+
+	window.trackWhatsAppClick = (ubicacion) => {
+		callFbq('track', 'Contact', {
+			content_name: 'WhatsApp',
+			ubicacion,
+		});
+		callFbq('trackCustom', 'ClicWhatsApp', { ubicacion });
+	};
+
+	window.trackScheduleClick = (ubicacion) => {
+		callFbq('track', 'Lead', {
+			content_name: 'Agendar demo',
+			ubicacion,
+		});
+		callFbq('trackCustom', 'ClicAgendar', { ubicacion });
+	};
+
 	const preserveAttribution = () => {
 		const currentParams = new URLSearchParams(window.location.search);
 		const attributionEntries = passthroughParams
-			.map((key) => [key, currentParams.get(key)])
+			.map((key) => [key, currentParams.get(key)] as [string, string | null])
 			.filter((entry) => entry[1]);
 
 		if (attributionEntries.length === 0) return;
@@ -58,15 +98,35 @@ const hasMeta = Boolean(metaPixelId);
 			link.addEventListener('click', () => {
 				if (!(link instanceof HTMLAnchorElement)) return;
 				const label = link.dataset.track ?? link.textContent?.trim() ?? 'CTA';
+				const normalizedLabel = label.toLowerCase();
+				const href = link.href;
+
 				window.gtag?.('event', 'click_cta', {
 					event_category: 'engagement',
 					event_label: label,
-					link_url: link.href,
+					link_url: href,
 				});
-				window.fbq?.('trackCustom', 'ClickCTA', {
+				callFbq('trackCustom', 'ClickCTA', {
 					label,
-					link_url: link.href,
+					link_url: href,
 				});
+
+				if (href.includes('wa.me') || normalizedLabel.includes('whatsapp')) {
+					window.trackWhatsAppClick?.(label);
+					return;
+				}
+
+				if (href.includes('/register') || normalizedLabel.includes('register') || normalizedLabel.includes('empez')) {
+					callFbq('track', 'Lead', {
+						content_name: 'Registro',
+						ubicacion: label,
+					});
+					return;
+				}
+
+				if (normalizedLabel.includes('demo') || normalizedLabel.includes('agendar')) {
+					window.trackScheduleClick?.(label);
+				}
 			});
 		});
 	};
