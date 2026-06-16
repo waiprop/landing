@@ -1,0 +1,193 @@
+---
+const comparison = [
+	{
+		before: 'Mensajes de madrugada que quedan para la mañana',
+		afterLead: 'La IA responde ',
+		afterStrong: 'al instante, 24/7',
+	},
+	{
+		before: 'Interesados que se enfrían sin seguimiento',
+		afterLead: 'CRM con pipeline y ',
+		afterStrong: 'recordatorios automáticos',
+	},
+	{
+		before: 'El WhatsApp repartido entre los celulares del equipo',
+		afterLead: 'Bandeja compartida con ',
+		afterStrong: 'asignación por vendedor',
+	},
+	{
+		before: 'Sin saber cuántas consultas entran ni se cierran',
+		afterLead: 'Métricas ',
+		afterStrong: 'reales de consultas y ventas',
+	},
+	{
+		before: 'Respuestas lentas que el cliente ya no espera',
+		afterLead: 'Respondé y agendá visitas ',
+		afterStrong: 'desde un solo lugar',
+	},
+];
+---
+
+<section class="problem section-band" id="problema" aria-labelledby="problema-title">
+	<div class="section-inner">
+		<div class="section-head section-head--center">
+			<p class="eyebrow">El problema y la solución</p>
+			<h2 id="problema-title">De consultas que se pierden a <span class="accent">ventas organizadas</span></h2>
+			<p>
+				Tenés los interesados. Lo que falta es responder, ordenar y hacer seguimiento sin depender
+				de quién mira el celular. Esto es lo que cambia con Waichatt.
+			</p>
+		</div>
+		<div class="compare">
+			<div class="compare-card compare-card--win">
+				<h3 class="compare-title">Con Waichatt</h3>
+				<ul>
+					{comparison.map((row) => (
+						<li>
+							<span class="ico ico--check" aria-hidden="true">✓</span>
+							<span>{row.afterLead}<strong>{row.afterStrong}</strong></span>
+						</li>
+					))}
+				</ul>
+			</div>
+			<div class="compare-card compare-card--lose">
+				<h3 class="compare-title">Sin Waichatt</h3>
+				<ul>
+					{comparison.map((row) => (
+						<li>
+							<span class="ico ico--x" aria-hidden="true">✕</span>
+							<span>{row.before}</span>
+						</li>
+					))}
+				</ul>
+			</div>
+		</div>
+	</div>
+</section>
+
+<style>
+	.problem {
+		background: linear-gradient(180deg, #f5f7fb, #eceff5);
+	}
+
+	.accent {
+		color: var(--color-brand);
+	}
+
+	.compare {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		align-items: center;
+		width: min(940px, 100%);
+		margin-inline: auto;
+	}
+
+	.compare-card {
+		border-radius: var(--radius-lg);
+	}
+
+	.compare-title {
+		margin: 0;
+		padding-bottom: 18px;
+		border-bottom: 1px solid rgba(20, 32, 27, 0.08);
+		text-align: center;
+		font-size: clamp(1.3rem, 2.2vw, 1.6rem);
+		font-weight: 800;
+	}
+
+	/* Tarjeta ganadora: blanca, elevada y montada sobre la otra */
+	.compare-card--win {
+		position: relative;
+		z-index: 2;
+		margin-right: -32px;
+		padding: clamp(28px, 3.2vw, 42px) clamp(24px, 2.8vw, 36px);
+		border: 1px solid #eef1ef;
+		background: var(--color-surface);
+		box-shadow: 0 34px 80px rgba(20, 32, 27, 0.16);
+	}
+
+	.compare-card--win .compare-title {
+		color: var(--color-text);
+	}
+
+	/* Tarjeta perdedora: plana, hundida detrás */
+	.compare-card--lose {
+		position: relative;
+		z-index: 1;
+		padding: clamp(34px, 3.8vw, 52px) clamp(24px, 2.8vw, 36px);
+		padding-left: calc(clamp(24px, 2.8vw, 36px) + 44px);
+		border: 1px solid rgba(20, 32, 27, 0.07);
+		border-radius: var(--radius-lg);
+		background: rgba(255, 255, 255, 0.5);
+	}
+
+	.compare-card--lose .compare-title {
+		color: var(--color-muted);
+		font-weight: 700;
+	}
+
+	.compare ul {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.compare li {
+		display: flex;
+		gap: 12px;
+		align-items: center;
+		padding: 16px 0;
+		border-bottom: 1px solid rgba(20, 32, 27, 0.07);
+		line-height: 1.45;
+	}
+
+	.compare li:last-child {
+		border-bottom: 0;
+		padding-bottom: 0;
+	}
+
+	.compare-card--win li {
+		color: var(--color-text);
+	}
+
+	.compare-card--win strong {
+		font-weight: 800;
+	}
+
+	.compare-card--lose li {
+		color: var(--color-muted);
+	}
+
+	.ico {
+		flex: 0 0 auto;
+		width: 18px;
+		font-size: 1.05rem;
+		font-weight: 900;
+		line-height: 1;
+		text-align: center;
+	}
+
+	.ico--check {
+		color: #1fae5a;
+	}
+
+	.ico--x {
+		color: #e5484d;
+	}
+
+	@media (max-width: 760px) {
+		.compare {
+			grid-template-columns: 1fr;
+			gap: 18px;
+			width: min(460px, 100%);
+		}
+
+		.compare-card--win {
+			margin-right: 0;
+		}
+
+		.compare-card--lose {
+			padding: clamp(24px, 5vw, 32px);
+		}
+	}
+</style>

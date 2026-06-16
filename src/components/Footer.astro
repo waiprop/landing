@@ -1,11 +1,15 @@
 ---
+import { Image } from 'astro:assets';
+import logo from '../assets/logo_waichatt.svg';
 import { site } from '../config/site';
 ---
 
 <footer class="site-footer">
 	<div class="footer-inner">
 		<div class="footer-brand">
-			<strong>{site.name}</strong>
+			<a class="footer-logo" href={site.links.home} aria-label={`${site.name} inicio`}>
+				<Image src={logo} alt={site.name} width={132} height={40} />
+			</a>
 			<p>WhatsApp, IA y CRM para inmobiliarias y desarrolladoras.</p>
 		</div>
 		<nav aria-label="Footer producto">
@@ -31,16 +35,19 @@ import { site } from '../config/site';
 			<a href={site.contact.whatsapp}>{site.contact.phone}</a>
 		</div>
 	</div>
-	<p class="footer-note">
-		Waichatt es una plataforma independiente. No está afiliada ni es distribuidora oficial de WhatsApp ni Meta.
-	</p>
+	<div class="footer-bottom">
+		<p class="footer-note">
+			Somos proveedores de tecnología en la Plataforma de WhatsApp Business de Meta. Waichatt es un producto independiente; WhatsApp y Meta son marcas de Meta Platforms, Inc.
+		</p>
+		<p class="footer-copyright">© 2026 Waichatt. Todos los derechos reservados.</p>
+	</div>
 </footer>
 
 <style>
 	.site-footer {
-		padding: 56px 20px 28px;
-		border-top: 1px solid var(--color-border);
-		background: #f6f7f6;
+		padding: 64px 20px 30px;
+		border-top: 1px solid rgba(255, 255, 255, 0.08);
+		background: #14201b;
 	}
 
 	.footer-inner {
@@ -51,14 +58,22 @@ import { site } from '../config/site';
 		margin-inline: auto;
 	}
 
-	.footer-brand strong {
-		color: var(--color-text);
-		font-size: 1.25rem;
+	.footer-logo {
+		display: inline-flex;
+		align-items: center;
+	}
+
+	.footer-logo img {
+		width: 132px;
+		max-width: 132px;
+		height: auto;
+		filter: brightness(0) invert(1);
 	}
 
 	.footer-brand p,
-	.footer-note {
-		color: var(--color-muted);
+	.footer-note,
+	.footer-copyright {
+		color: rgba(255, 255, 255, 0.68);
 		line-height: 1.6;
 	}
 
@@ -69,7 +84,7 @@ import { site } from '../config/site';
 
 	h2 {
 		margin: 0 0 12px;
-		color: var(--color-text);
+		color: #ffffff;
 		font-size: 0.82rem;
 		text-transform: uppercase;
 		letter-spacing: 0.08em;
@@ -83,22 +98,47 @@ import { site } from '../config/site';
 	}
 
 	a {
-		color: var(--color-muted);
+		color: rgba(255, 255, 255, 0.68);
 		font-weight: 700;
-		transition: color 180ms ease;
+		transition:
+			color 180ms ease,
+			opacity 180ms ease;
 	}
 
 	a:hover,
 	a:focus-visible {
-		color: var(--color-brand);
+		color: #ffffff;
 	}
 
 	.footer-note {
+		margin: 0;
+		max-width: 92ch;
+		font-size: 0.92rem;
+	}
+
+	.footer-bottom {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: 12px 32px;
 		width: min(var(--container), 100%);
 		margin: 34px auto 0;
 		padding-top: 20px;
-		border-top: 1px solid var(--color-border);
-		font-size: 0.92rem;
+		border-top: 1px solid rgba(255, 255, 255, 0.1);
+	}
+
+	.footer-note {
+		flex: 1 1 480px;
+	}
+
+	.footer-copyright {
+		margin: 0;
+		flex: 0 0 auto;
+		color: rgba(255, 255, 255, 0.78);
+		font-size: 0.86rem;
+		font-weight: 600;
+		white-space: nowrap;
 	}
 
 	@media (max-width: 900px) {
@@ -111,5 +151,6 @@ import { site } from '../config/site';
 		.footer-inner {
 			grid-template-columns: 1fr;
 		}
+
 	}
 </style>

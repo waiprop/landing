@@ -72,3 +72,61 @@ select {
 		animation-iteration-count: 1 !important;
 	}
 }
+
+/* === Scaffolding compartido de las secciones de la home === */
+.section-band {
+	padding: clamp(72px, 9vw, 128px) 20px;
+}
+
+.section-band--muted {
+	background: #f6f7f6;
+}
+
+.section-inner {
+	width: min(var(--container), 100%);
+	margin-inline: auto;
+}
+
+.section-head {
+	max-width: 760px;
+	margin-bottom: 34px;
+}
+
+.section-head--center {
+	max-width: 720px;
+	margin-inline: auto;
+	margin-bottom: clamp(36px, 5vw, 60px);
+	text-align: center;
+}
+
+.section-band .eyebrow {
+	margin: 0 0 12px;
+	color: var(--color-brand);
+	font-size: 0.82rem;
+	font-weight: 800;
+	text-transform: uppercase;
+}
+
+.section-band h2 {
+	margin: 0;
+	color: var(--color-text);
+	font-size: clamp(2rem, 4vw, 3.25rem);
+	line-height: 1.08;
+}
+
+.section-band h3 {
+	margin: 0;
+	color: var(--color-text);
+	font-size: 1.2rem;
+}
+
+.section-band p {
+	color: var(--color-muted);
+	line-height: 1.68;
+}
+
+@media (max-width: 680px) {
+	.section-band {
+		padding: 64px 16px;
+	}
+}

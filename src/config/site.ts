@@ -7,7 +7,7 @@ export const site = {
 	themeColor: '#259A72',
 	ogImage: '/og-waichatt.png',
 	contact: {
-		email: 'info@waichatt.com',
+		email: 'equipo@waichatt.com',
 		phone: '+54 381 681 4079',
 		whatsapp: 'https://wa.me/+5493816814079',
 	},

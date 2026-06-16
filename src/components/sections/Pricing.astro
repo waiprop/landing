@@ -1,0 +1,121 @@
+---
+import { plans } from '../../config/plans';
+import { site } from '../../config/site';
+import Button from '../ui/Button.astro';
+---
+
+<section class="pricing section-band" id="precios" aria-labelledby="pricing-title">
+	<div class="section-inner">
+		<div class="section-head">
+			<p class="eyebrow">Precios</p>
+			<h2 id="pricing-title">Planes claros, sin sorpresas</h2>
+			<p>Empezá gratis y pasá al Pro cuando lo necesites. Sin costos ocultos.</p>
+		</div>
+		<div class="pricing-grid">
+			{plans.map((plan) => (
+				<article class:list={['price-card', plan.featured && 'price-card--featured']}>
+					{plan.featured && <span class="popular">Más elegido</span>}
+					<h3>{plan.name}</h3>
+					<p class="price"><strong>{plan.priceLabel}</strong><span>/mes</span></p>
+					<p class="plan-detail">{plan.detail}</p>
+					<ul>
+						{plan.features.map((feature) => <li>{feature}</li>)}
+					</ul>
+					<Button href={site.links.register} variant={plan.featured ? 'primary' : 'ghost'} track={plan.track}>{plan.cta}</Button>
+				</article>
+			))}
+		</div>
+		<p class="pricing-note">Todos los planes incluyen un límite mensual de uso de IA. Si necesitás ampliar, te lo informamos antes.</p>
+	</div>
+</section>
+
+<style>
+	.pricing-grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		align-items: stretch;
+		gap: 16px;
+	}
+
+	.price-card {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		padding: 26px;
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius-md);
+		background: var(--color-surface);
+	}
+
+	.price-card--featured {
+		border-color: #b8e0d2;
+		box-shadow: 0 22px 60px rgba(37, 154, 114, 0.12);
+	}
+
+	.popular {
+		align-self: flex-start;
+		margin-bottom: 14px;
+		padding: 5px 10px;
+		border-radius: 999px;
+		background: var(--color-brand-soft);
+		color: var(--color-brand-strong);
+		font-size: 0.78rem;
+		font-weight: 900;
+	}
+
+	.price {
+		margin: 20px 0 4px;
+	}
+
+	.price strong {
+		color: var(--color-text);
+		font-size: 2.2rem;
+		line-height: 1;
+	}
+
+	.price span,
+	.plan-detail,
+	.pricing-note {
+		color: var(--color-muted);
+	}
+
+	.price-card ul {
+		display: grid;
+		gap: 10px;
+		margin: 24px 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.price-card li {
+		color: var(--color-text);
+		line-height: 1.45;
+	}
+
+	.price-card li::before {
+		content: '✓';
+		margin-right: 8px;
+		color: var(--color-brand);
+		font-weight: 900;
+	}
+
+	.price-card :global(.button) {
+		margin-top: auto;
+	}
+
+	.pricing-note {
+		margin-top: 20px;
+	}
+
+	@media (max-width: 980px) {
+		.pricing-grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+
+	@media (max-width: 680px) {
+		.pricing-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

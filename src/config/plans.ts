@@ -44,7 +44,6 @@ export const plans: Plan[] = [
 		detail: '1 usuario · 7 días de prueba',
 		featured: true,
 		features: [
-			'Dominio propio sin sello',
 			'Propiedades ilimitadas',
 			'Agente IA en WhatsApp',
 			'CRM con pipeline',

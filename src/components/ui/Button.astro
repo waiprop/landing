@@ -34,46 +34,28 @@ const {
 
 <style>
 	.button {
-		position: relative;
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		isolation: isolate;
-		overflow: hidden;
 		border: 1px solid transparent;
 		border-radius: var(--radius-md);
 		font-weight: 800;
 		white-space: nowrap;
+		/*
+			El relleno (fill in) lo anima el inset box-shadow.
+			Mantenemos la misma cantidad de sombras en reposo y en hover
+			(drop shadow + inset) para que la animación sea fluida.
+		*/
 		transition:
-			background 200ms ease,
 			border-color 200ms ease,
 			color 200ms ease,
-			box-shadow 200ms ease,
+			box-shadow 280ms ease,
 			transform 200ms ease;
-	}
-
-	.button::before {
-		content: '';
-		position: absolute;
-		inset: 0;
-		z-index: -1;
-		border-radius: inherit;
-		opacity: 0;
-		transform: translateX(-28%) skewX(-12deg);
-		transition:
-			opacity 220ms ease,
-			transform 360ms ease;
 	}
 
 	.button:hover,
 	.button:focus-visible {
 		transform: translateY(-2px);
-	}
-
-	.button:hover::before,
-	.button:focus-visible::before {
-		opacity: 1;
-		transform: translateX(0) skewX(-12deg);
 	}
 
 	.button:active {
@@ -84,39 +66,35 @@ const {
 		border-color: var(--color-brand);
 		background: var(--color-brand);
 		color: #ffffff;
-		box-shadow: 0 10px 22px rgba(37, 154, 114, 0.18);
-	}
-
-	.button-primary::before {
-		background: linear-gradient(115deg, transparent 0%, rgba(255, 255, 255, 0.22) 45%, transparent 78%);
+		box-shadow:
+			0 10px 22px rgba(37, 154, 114, 0.18),
+			inset 0 0 0 0 var(--color-brand-hover);
 	}
 
 	.button-primary:hover,
 	.button-primary:focus-visible {
 		border-color: var(--color-brand-hover);
-		background: var(--color-brand-hover);
-		box-shadow: 0 16px 34px rgba(37, 154, 114, 0.28);
+		box-shadow:
+			0 16px 34px rgba(37, 154, 114, 0.28),
+			inset 0 -3.5em 0 0 var(--color-brand-hover);
 	}
 
 	.button-ghost {
 		border-color: var(--color-border);
 		background: var(--color-surface);
 		color: var(--color-text);
-		box-shadow: 0 1px 2px rgba(20, 32, 27, 0.04);
-	}
-
-	.button-ghost::before {
-		background:
-			linear-gradient(115deg, rgba(37, 154, 114, 0), rgba(37, 154, 114, 0.1)),
-			var(--color-brand-soft);
+		box-shadow:
+			0 1px 2px rgba(20, 32, 27, 0.04),
+			inset 0 0 0 0 var(--color-brand-soft);
 	}
 
 	.button-ghost:hover,
 	.button-ghost:focus-visible {
 		border-color: #b8e0d2;
-		background: var(--color-brand-soft);
 		color: var(--color-brand-strong);
-		box-shadow: 0 12px 26px rgba(20, 32, 27, 0.1);
+		box-shadow:
+			0 12px 26px rgba(20, 32, 27, 0.1),
+			inset 0 -3.5em 0 0 var(--color-brand-soft);
 	}
 
 	.button-sm {

@@ -1,0 +1,37 @@
+---
+import { site } from '../../config/site';
+import Button from '../ui/Button.astro';
+---
+
+<section class="final-cta section-band" aria-labelledby="final-cta-title">
+	<div class="section-inner final-cta-inner">
+		<h2 id="final-cta-title">¿Listo para que tu WhatsApp atienda solo?</h2>
+		<p>Empezá gratis hoy. Sin tarjeta, sin instalación.</p>
+		<Button href={site.links.register} track="Final CTA register">Empezá gratis</Button>
+	</div>
+</section>
+
+<style>
+	.final-cta {
+		background: var(--color-brand-soft);
+		text-align: center;
+	}
+
+	.final-cta-inner {
+		max-width: 1200px;
+	}
+
+	.final-cta h2 {
+		margin: 0;
+		color: var(--color-text);
+		font-size: clamp(2rem, 4vw, 3.25rem);
+		line-height: 1.08;
+	}
+
+	.final-cta p {
+		margin: 18px auto 28px;
+		color: var(--color-muted);
+		font-size: 1.12rem;
+		line-height: 1.6;
+	}
+</style>

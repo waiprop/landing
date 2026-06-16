@@ -1,0 +1,197 @@
+---
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+import conversacionesShot from '../../assets/features/conversaciones.png';
+import agenteIaShot from '../../assets/features/agente-ia.png';
+import crmShot from '../../assets/features/crm.png';
+import propiedadesShot from '../../assets/features/propiedades.png';
+import calendarioShot from '../../assets/features/calendario.png';
+import metricasShot from '../../assets/features/metricas.png';
+
+interface Feature {
+	title: string;
+	text: string;
+	tags: string[];
+	image: ImageMetadata | null;
+	alt: string;
+}
+
+const features: Feature[] = [
+	{
+		title: 'Todo tu WhatsApp en una sola bandeja',
+		text: 'Cada consulta entra a un inbox compartido con etiquetas, asignación por vendedor y el historial completo del cliente al lado del chat.',
+		tags: ['Bandeja compartida', 'Etiquetas', 'Historial'],
+		image: conversacionesShot,
+		alt: 'Bandeja de conversaciones de Waichatt',
+	},
+	{
+	title: 'Una IA que responde como tu mejor vendedor',
+	text: 'Configurás el tono, el rol y las reglas del agente. Responde al instante, entiende qué busca el cliente y le recomienda propiedades de tu cartera. Cuando hace falta, deriva al vendedor.',
+	tags: ['Tono configurable', 'Reglas propias', 'Deriva al vendedor'],
+	image: agenteIaShot,
+	alt: 'Pantalla de configuración del agente IA de Waichatt: tono, rol y reglas',
+	},
+	{
+		title: 'Cada consulta, una oportunidad medible',
+		text: 'Contactos, leads y pipeline conectados a las conversaciones para saber qué vendedor atiende y en qué etapa está cada interesado.',
+		tags: ['Pipeline visual', 'Ficha del lead', 'Seguimientos'],
+		image: crmShot,
+		alt: 'Tablero del CRM con el pipeline de leads',
+	},
+	{
+		title: 'Tu cartera, lista para vender en todos lados',
+		text: 'Cargá o importá desde Tokko y dejá tus propiedades disponibles para la IA, el CRM, tu web y tus conversaciones.',
+		tags: ['Importá de Tokko', 'Tu web', 'Cartera única'],
+		image: propiedadesShot,
+		alt: 'Listado de propiedades cargadas en Waichatt',
+	},
+	{
+		title: 'De la consulta a la visita, sin idas y vueltas',
+		text: 'Agendá visitas vinculadas a lead, propiedad y vendedor, sincronizadas con Google Calendar.',
+		tags: ['Visitas', 'Google Calendar', 'Por vendedor'],
+		image: calendarioShot,
+		alt: 'Calendario de visitas sincronizado con Google Calendar',
+	},
+	{
+		title: 'Números reales de tu operación',
+		text: 'Consultas, respuestas de IA, rendimiento comercial y demanda por propiedad en un tablero fácil de leer.',
+		tags: ['Vista general', 'Rendimiento', 'Demanda por propiedad'],
+		image: metricasShot,
+		alt: 'Tablero de métricas y rendimiento comercial',
+	},
+];
+---
+
+<section class="features section-band" id="funciones" aria-labelledby="funciones-title">
+	<div class="section-inner">
+		<div class="section-head section-head--center">
+			<p class="eyebrow">Funciones</p>
+			<h2 id="funciones-title">Todo tu negocio inmobiliario, en una sola plataforma</h2>
+			<p>Del primer mensaje a la venta cerrada: conversaciones, IA, CRM, propiedades y métricas trabajando juntas.</p>
+		</div>
+
+		<div class="feature-list">
+			{features.map((feature, index) => (
+				<article class="feature">
+					<div class="feature-media">
+						{feature.image ? (
+							<Image src={feature.image} alt={feature.alt} widths={[480, 720, 960]} sizes="(max-width: 860px) 100vw, 50vw" loading="lazy" decoding="async" />
+						) : (
+							<div class="feature-placeholder" role="img" aria-label={feature.alt}>
+								<span>{feature.alt}</span>
+							</div>
+						)}
+					</div>
+					<div class="feature-body">
+						<span class="feature-num" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+						<h3>{feature.title}</h3>
+						<p>{feature.text}</p>
+						<ul class="feature-tags">
+							{feature.tags.map((tag) => <li>{tag}</li>)}
+						</ul>
+					</div>
+				</article>
+			))}
+		</div>
+	</div>
+</section>
+
+<style>
+	.feature-list {
+		display: flex;
+		flex-direction: column;
+		gap: clamp(56px, 8vw, 112px);
+	}
+
+	.feature {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		align-items: center;
+		gap: clamp(28px, 5vw, 72px);
+	}
+
+	/* Zigzag: en las features impares la imagen va a la derecha */
+	.feature:nth-child(odd) .feature-media {
+		order: 2;
+	}
+
+	.feature-media :global(img) {
+		width: 100%;
+		height: auto;
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius-lg);
+		box-shadow: 0 22px 60px rgba(20, 32, 27, 0.1);
+	}
+
+	.feature-placeholder {
+		display: grid;
+		place-items: center;
+		aspect-ratio: 4 / 3;
+		padding: 20px;
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius-lg);
+		background: linear-gradient(135deg, #eef1f4, #e2e7ec);
+		color: var(--color-muted);
+		text-align: center;
+	}
+
+	.feature-placeholder span {
+		font-size: 0.92rem;
+		font-weight: 700;
+	}
+
+	.feature-num {
+		display: block;
+		margin-bottom: 10px;
+		color: #c8e3d8;
+		font-size: clamp(2.4rem, 5vw, 3.4rem);
+		font-weight: 800;
+		line-height: 1;
+	}
+
+	.feature-body h3 {
+		font-size: clamp(1.5rem, 2.6vw, 2rem);
+		font-weight: 800;
+		line-height: 1.15;
+	}
+
+	.feature-body p {
+		margin: 16px 0 0;
+		font-size: 1.05rem;
+	}
+
+	.feature-tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+		margin: 22px 0 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.feature-tags li {
+		padding: 6px 13px;
+		border: 1px solid var(--color-border);
+		border-radius: 999px;
+		background: var(--color-surface);
+		color: var(--color-text);
+		font-size: 0.82rem;
+		font-weight: 700;
+	}
+
+	@media (max-width: 860px) {
+		.feature {
+			grid-template-columns: 1fr;
+			gap: 22px;
+		}
+
+		.feature-body {
+			order: 1;
+		}
+
+		.feature-media,
+		.feature:nth-child(odd) .feature-media {
+			order: 2;
+		}
+	}
+</style>
