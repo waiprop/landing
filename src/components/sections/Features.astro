@@ -1,6 +1,7 @@
 ---
 import type { ImageMetadata } from 'astro';
 import { Image } from 'astro:assets';
+import Conversaciones from '../mockups/Conversaciones.astro';
 import conversacionesShot from '../../assets/features/conversaciones.png';
 import agenteIaShot from '../../assets/features/agente-ia.png';
 import crmShot from '../../assets/features/crm.png';
@@ -14,6 +15,7 @@ interface Feature {
 	tags: string[];
 	image: ImageMetadata | null;
 	alt: string;
+	mockup?: 'conversaciones';
 }
 
 const features: Feature[] = [
@@ -23,6 +25,7 @@ const features: Feature[] = [
 		tags: ['Bandeja compartida', 'Etiquetas', 'Historial'],
 		image: conversacionesShot,
 		alt: 'Bandeja de conversaciones de Waichatt',
+		mockup: 'conversaciones',
 	},
 	{
 	title: 'Una IA que responde como tu mejor vendedor',
@@ -72,9 +75,11 @@ const features: Feature[] = [
 
 		<div class="feature-list">
 			{features.map((feature, index) => (
-				<article class="feature">
+				<article class={feature.mockup === 'conversaciones' ? 'feature feature--wide' : 'feature'}>
 					<div class="feature-media">
-						{feature.image ? (
+						{feature.mockup === 'conversaciones' ? (
+							<Conversaciones />
+						) : feature.image ? (
 							<Image src={feature.image} alt={feature.alt} widths={[480, 720, 960]} sizes="(max-width: 860px) 100vw, 50vw" loading="lazy" decoding="async" />
 						) : (
 							<div class="feature-placeholder" role="img" aria-label={feature.alt}>
@@ -97,6 +102,14 @@ const features: Feature[] = [
 </section>
 
 <style>
+	.features {
+		padding-top: clamp(64px, 7vw, 104px);
+	}
+
+	.features .section-head--center {
+		margin-bottom: clamp(28px, 3.5vw, 44px);
+	}
+
 	.feature-list {
 		display: flex;
 		flex-direction: column;
@@ -113,6 +126,33 @@ const features: Feature[] = [
 	/* Zigzag: en las features impares la imagen va a la derecha */
 	.feature:nth-child(odd) .feature-media {
 		order: 2;
+	}
+
+	/* Función 1: texto + mockup amplio en dos columnas */
+	.feature--wide {
+		grid-template-columns: minmax(260px, 360px) minmax(0, 1fr);
+		gap: clamp(34px, 5vw, 72px);
+		justify-items: stretch;
+		text-align: left;
+	}
+
+	.feature--wide .feature-body {
+		order: 1;
+		max-width: 360px;
+	}
+
+	.feature--wide .feature-media,
+	.feature--wide:nth-child(odd) .feature-media {
+		order: 2;
+		width: 100%;
+	}
+
+	.feature--wide .feature-tags {
+		justify-content: flex-start;
+	}
+
+	.feature--wide .feature-num {
+		margin-inline: 0;
 	}
 
 	.feature-media :global(img) {
@@ -142,9 +182,9 @@ const features: Feature[] = [
 
 	.feature-num {
 		display: block;
-		margin-bottom: 10px;
+		margin-bottom: 8px;
 		color: #c8e3d8;
-		font-size: clamp(2.4rem, 5vw, 3.4rem);
+		font-size: clamp(2.2rem, 4.5vw, 3rem);
 		font-weight: 800;
 		line-height: 1;
 	}
@@ -156,7 +196,7 @@ const features: Feature[] = [
 	}
 
 	.feature-body p {
-		margin: 16px 0 0;
+		margin: 12px 0 0;
 		font-size: 1.05rem;
 	}
 
@@ -164,7 +204,7 @@ const features: Feature[] = [
 		display: flex;
 		flex-wrap: wrap;
 		gap: 8px;
-		margin: 22px 0 0;
+		margin: 18px 0 0;
 		padding: 0;
 		list-style: none;
 	}
@@ -177,6 +217,27 @@ const features: Feature[] = [
 		color: var(--color-text);
 		font-size: 0.82rem;
 		font-weight: 700;
+	}
+
+	@media (max-width: 1080px) {
+		.feature--wide {
+			grid-template-columns: 1fr;
+			gap: clamp(18px, 2.5vw, 30px);
+			justify-items: center;
+			text-align: center;
+		}
+
+		.feature--wide .feature-body {
+			max-width: 720px;
+		}
+
+		.feature--wide .feature-tags {
+			justify-content: center;
+		}
+
+		.feature--wide .feature-num {
+			margin-inline: auto;
+		}
 	}
 
 	@media (max-width: 860px) {

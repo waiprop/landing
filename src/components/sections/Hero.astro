@@ -1,60 +1,16 @@
 ---
 import { site } from '../../config/site';
 import Button from '../ui/Button.astro';
-import BrandIcon from '../ui/BrandIcon.astro';
 
 ---
 
 <section class="hero" aria-labelledby="hero-title">
 	<div class="hero-stage">
-		<!-- Tarjetas flotantes: piezas reales del producto -->
-		<article class="float float--reminder" aria-hidden="true">
-			<span class="float-label">
-				<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-					<circle cx="12" cy="12" r="9" />
-					<path d="M12 7v5l3 2" />
-				</svg>
-				Próxima visita
-			</span>
-			<strong>Depto Palermo · 2 amb</strong>
-			<small>Hoy 17:30 · con Julián López</small>
-		</article>
-
-		<article class="float float--leads" aria-hidden="true">
-			<header class="leads-head">
-				<strong>Leads de hoy</strong>
-				<span class="leads-count">+12</span>
-			</header>
-			<ul class="leads-list">
-				<li><span class="dot dot--green"></span> Julián López <em>Comprar</em></li>
-				<li><span class="dot dot--amber"></span> María Gómez <em>Alquilar</em></li>
-				<li><span class="dot dot--blue"></span> Lucas Pérez <em>Tasación</em></li>
-			</ul>
-		</article>
-
-		<article class="float float--apps" aria-label="Integraciones disponibles">
-			<span class="float-label">Se conecta con</span>
-			<div class="apps-row">
-				<span class="app-chip app-chip--wa" title="WhatsApp">
-					<BrandIcon brand="whatsapp" size="21" aria-label="WhatsApp" />
-				</span>
-				<span class="app-chip app-chip--meta" title="Meta">
-					<BrandIcon brand="meta" size="21" aria-label="Meta" />
-				</span>
-				<span class="app-chip app-chip--cal" title="Google Calendar">
-					<BrandIcon brand="google-calendar" size="21" aria-label="Google Calendar" />
-				</span>
-				<span class="app-chip app-chip--more" title="Más conexiones">+Más</span>
-			</div>
-		</article>
-
-		<!-- Contenido central -->
 		<div class="hero-center">
-			<p class="hero-badge">Para inmobiliarias y desarrolladoras</p>
-			<h1 id="hero-title">Tu WhatsApp <span>atiende solo</span></h1>
+			<h1 id="hero-title">Gestioná tu negocio inmobiliario desde <span>un solo lugar</span></h1>
 			<p class="hero-subtitle">
-				Centralizá tus consultas, respondelas con IA y convertilas en leads organizados. Tu equipo
-				atiende, hace seguimiento y vende desde un solo lugar.
+				Centralizá consultas, propiedades, visitas y seguimiento comercial con un CRM pensado
+				para inmobiliarias.
 			</p>
 			<div class="hero-actions">
 				<Button href={site.links.register} track="Hero register">Empezá gratis</Button>
@@ -63,84 +19,277 @@ import BrandIcon from '../ui/BrandIcon.astro';
 			<p class="hero-note">Sin tarjeta. Sin instalación.</p>
 		</div>
 
-		<article class="float float--chat" aria-hidden="true">
-			<header class="chat-head">
-				<span class="chat-avatar">JL</span>
-				<span class="chat-id">
-					<strong>Julián López</strong>
-					<small>en línea</small>
-				</span>
-				<span class="chat-ai">Agente IA</span>
-			</header>
-			<div class="chat-body">
-				<p class="bubble bubble--in">Hola, busco un 2 ambientes en Palermo 🙌</p>
-				<p class="bubble bubble--out">¡Hola Julián! Tengo 3 opciones dentro de tu presupuesto. ¿Te paso fotos?</p>
+		<article class="hero-crm-card" aria-label="Ficha CRM generada por IA" data-hero-crm-card>
+			<div class="hero-crm-pad">
+				<header class="hero-crm-head">
+					<span class="hero-crm-avatar hero-crm-avatar--logo">
+						<img class="hero-crm-avatar-iso" src="/favicon.svg" alt="Waichatt" width="16" height="26" />
+					</span>
+					<span class="hero-crm-person">
+						<strong>Waichatt</strong>
+						<small>
+							<svg class="hero-crm-icon" viewBox="0 0 24 24" aria-hidden="true">
+								<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z" />
+							</svg>
+							54 9 3815 224110
+						</small>
+					</span>
+					<svg class="hero-crm-icon hero-crm-edit" viewBox="0 0 24 24" aria-hidden="true">
+						<path d="M12 20h9" />
+						<path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z" />
+					</svg>
+				</header>
+				<div class="hero-crm-mail">
+					<svg class="hero-crm-icon" viewBox="0 0 24 24" aria-hidden="true">
+						<rect x="3" y="5" width="18" height="14" rx="2" />
+						<polyline points="3,7 12,13 21,7" />
+					</svg>
+					<span>equipo@waichatt.com</span>
+					<svg class="hero-crm-icon hero-crm-mail-edit" viewBox="0 0 24 24" aria-hidden="true">
+						<path d="M12 20h9" />
+						<path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4 12.5-12.5z" />
+					</svg>
+				</div>
+				<div class="hero-crm-tags">
+					<span class="hero-crm-tag hero-crm-tag--green" data-crm-tag="0">Comprar</span>
+					<span class="hero-crm-tag hero-crm-tag--blue" data-crm-tag="1">2 ambientes</span>
+					<span class="hero-crm-tag hero-crm-tag--amber" data-crm-tag="2">Palermo</span>
+				</div>
+				<div class="hero-crm-tags">
+					<span class="hero-crm-tag hero-crm-tag--add">+ Etiqueta</span>
+				</div>
+				<div class="hero-crm-divider"></div>
+				<div class="hero-crm-row hero-crm-row--highlight">
+					<span class="hero-crm-label">Calificación</span>
+					<span class="hero-crm-pill hero-crm-pill--soft" data-crm-field="qualification">Listo para visitar</span>
+				</div>
+				<div class="hero-crm-row"><span>Operación</span><strong data-crm-field="operation">Comprar</strong></div>
+				<div class="hero-crm-row"><span>Tipo</span><strong data-crm-field="type">Departamento 2 amb</strong></div>
+				<div class="hero-crm-row"><span>Madurez</span><strong data-crm-field="maturity">Alta intención</strong></div>
+				<div class="hero-crm-row">
+					<span>Zonas</span>
+					<span class="hero-crm-pill hero-crm-pill--gray" data-crm-field="zone">Palermo</span>
+				</div>
+				<div class="hero-crm-summary-title">
+					<svg class="hero-crm-icon" viewBox="0 0 24 24" aria-hidden="true">
+						<polyline points="18 15 12 9 6 15" />
+					</svg>
+					Resumen para el asesor
+				</div>
+				<p class="hero-crm-summary">
+					<span data-crm-summary>
+						Raúl quiere comprar un departamento de 2 ambientes en Palermo. Tiene presupuesto definido,
+						pidió coordinar una visita esta semana y conviene responderle hoy con opciones disponibles.
+					</span><span class="hero-crm-caret" aria-hidden="true"></span>
+				</p>
+				<div class="hero-crm-divider"></div>
+				<div class="hero-crm-foot">
+					<span class="hero-crm-label">Lead CRM</span>
+					<span class="hero-crm-closed">
+						<svg class="hero-crm-icon" viewBox="0 0 24 24" aria-hidden="true">
+							<polyline points="20 6 9 17 4 12" />
+						</svg>
+						<span data-crm-field="badge">Calificado</span>
+					</span>
+				</div>
+				<div class="hero-crm-divider"></div>
+				<div class="hero-crm-foot">
+					<span class="hero-crm-label">Agente asignado</span>
+					<span class="hero-crm-agent">
+						<span class="hero-crm-agent-avatar" aria-hidden="true">MP</span>
+						<span class="hero-crm-agent-name">Matías Prieto</span>
+					</span>
+				</div>
 			</div>
 		</article>
 	</div>
 </section>
 
+<script>
+	const crmCard = document.querySelector('[data-hero-crm-card]');
+
+	if (crmCard) {
+		const states = [
+			{
+				tags: ['Explorando'],
+				analyzing: true,
+				qualification: 'Analizando',
+				operation: 'Detectando',
+				type: 'Detectando',
+				maturity: 'En análisis',
+				zone: 'Palermo',
+				badge: 'Leyendo',
+				summary: 'La IA está leyendo la conversación para detectar operación, zona, tipo de propiedad e intención real del lead.',
+			},
+			{
+				tags: ['Comprar', '2 ambientes', 'Palermo'],
+				qualification: 'Interesado activo',
+				operation: 'Comprar',
+				type: 'Departamento 2 amb',
+				maturity: 'Comparando opciones',
+				zone: 'Palermo',
+				badge: 'Organizado',
+				summary: 'El cliente busca comprar un departamento de 2 ambientes en Palermo. Ya pidió opciones concretas y tiene intención de avanzar si el precio encaja.',
+			},
+			{
+				tags: ['Comprar', 'Visita', 'Palermo'],
+				qualification: 'Listo para visitar',
+				operation: 'Comprar',
+				type: 'Departamento 2 amb',
+				maturity: 'Alta intención',
+				zone: 'Palermo',
+				badge: 'Calificado',
+				summary: 'El cliente tiene presupuesto definido, quiere coordinar una visita esta semana y conviene responderle hoy con unidades disponibles en Palermo.',
+			},
+		];
+
+		const tagNodes = [...crmCard.querySelectorAll('[data-crm-tag]')] as HTMLElement[];
+		const summaryNode = crmCard.querySelector('[data-crm-summary]');
+		const fieldNodes = {
+			qualification: crmCard.querySelector('[data-crm-field="qualification"]'),
+			operation: crmCard.querySelector('[data-crm-field="operation"]'),
+			type: crmCard.querySelector('[data-crm-field="type"]'),
+			maturity: crmCard.querySelector('[data-crm-field="maturity"]'),
+			zone: crmCard.querySelector('[data-crm-field="zone"]'),
+			badge: crmCard.querySelector('[data-crm-field="badge"]'),
+		};
+
+		let stateIndex = 0;
+		let timer = 0;
+		let typingTimer = 0;
+		let running = false;
+
+		const clearTimers = () => {
+			window.clearTimeout(timer);
+			window.clearTimeout(typingTimer);
+		};
+
+		const flashValue = (node, value, animate = true) => {
+			if (!node) return;
+			node.textContent = value;
+			node.classList.remove('is-changing');
+			if (!animate) return;
+			void node.offsetWidth;
+			node.classList.add('is-changing');
+		};
+
+		const typeSummary = (text) => {
+			if (!summaryNode) return;
+			window.clearTimeout(typingTimer);
+			summaryNode.textContent = '';
+			summaryNode.parentElement?.classList.add('is-typing');
+
+			let index = 0;
+			const step = () => {
+				index += 2 + Math.floor(Math.random() * 2);
+				summaryNode.textContent = text.slice(0, index);
+
+				if (index < text.length) {
+					typingTimer = window.setTimeout(step, 20);
+					return;
+				}
+
+				summaryNode.textContent = text;
+				summaryNode.parentElement?.classList.remove('is-typing');
+			};
+
+			typingTimer = window.setTimeout(step, 140);
+		};
+
+		const applyState = () => {
+			const state = states[stateIndex];
+			const analyzing = Boolean((state as any).analyzing);
+			const animate = !analyzing;
+
+			crmCard.classList.toggle('is-analyzing', analyzing);
+
+			tagNodes.forEach((tag, index) => {
+				const value = state.tags[index];
+				if (value) {
+					tag.style.display = '';
+					flashValue(tag, value);
+				} else {
+					tag.style.display = 'none';
+				}
+			});
+
+			flashValue(fieldNodes.qualification, state.qualification);
+			flashValue(fieldNodes.operation, state.operation, animate);
+			flashValue(fieldNodes.type, state.type, animate);
+			flashValue(fieldNodes.maturity, state.maturity, animate);
+			flashValue(fieldNodes.zone, state.zone, animate);
+			flashValue(fieldNodes.badge, state.badge, animate);
+			typeSummary(state.summary);
+
+			stateIndex = (stateIndex + 1) % states.length;
+			timer = window.setTimeout(applyState, 5200);
+		};
+
+		const start = () => {
+			if (running) return;
+			running = true;
+			applyState();
+		};
+
+		const stop = () => {
+			running = false;
+			clearTimers();
+		};
+
+		if ('IntersectionObserver' in window) {
+			const observer = new IntersectionObserver(
+				(entries) => {
+					entries.forEach((entry) => {
+						if (entry.isIntersecting) {
+							start();
+						} else {
+							stop();
+						}
+					});
+				},
+				{ threshold: 0.35 },
+			);
+
+			observer.observe(crmCard);
+		} else {
+			start();
+		}
+	}
+</script>
+
 <style>
 	.hero {
 		--hero-page-padding: clamp(10px, 1.4vw, 22px);
+		position: relative;
+		isolation: isolate;
 		display: grid;
 		min-height: calc(100vh - var(--header-height));
 		min-height: calc(100svh - var(--header-height));
 		padding: var(--hero-page-padding);
+		background: var(--color-background);
 	}
 
 	.hero-stage {
 		position: relative;
 		isolation: isolate;
+		z-index: 2;
 		display: grid;
-		place-items: center;
-		overflow: hidden;
-		width: 100%;
+		grid-template-columns: minmax(0, 1fr) minmax(320px, 370px);
+		align-items: center;
+		gap: clamp(28px, 4vw, 64px);
+		justify-self: center;
+		overflow: visible;
+		width: min(var(--container), 100%);
 		min-height: 0;
 		height: 100%;
 		padding: clamp(36px, 6svh, 78px) clamp(20px, 4vw, 40px);
-		border: 1px solid var(--color-border);
-		border-radius: clamp(20px, 2vw, 30px);
-		background:
-			radial-gradient(120% 70% at 50% -12%, rgba(37, 154, 114, 0.13), transparent 55%),
-			linear-gradient(180deg, #f2f9f5 0%, #f6f8f7 60%);
 	}
 
-	.hero-stage::before {
-		content: '';
-		position: absolute;
-		inset: 0;
-		z-index: -1;
-		background-image: radial-gradient(rgba(20, 32, 27, 0.06) 1.3px, transparent 1.3px);
-		background-size: 22px 22px;
-		-webkit-mask: radial-gradient(115% 95% at 50% 10%, #000 35%, transparent 78%);
-		mask: radial-gradient(115% 95% at 50% 10%, #000 35%, transparent 78%);
-		pointer-events: none;
-	}
-
-	/* Contenido central */
 	.hero-center {
 		position: relative;
 		z-index: 3;
-		max-width: 580px;
-		text-align: center;
-	}
-
-	.hero-mark {
-		display: grid;
-		place-items: center;
-		width: 60px;
-		height: 60px;
-		margin: 0 auto 20px;
-		border-radius: 18px;
-		background: var(--color-surface);
-		border: 1px solid var(--color-border);
-		box-shadow: 0 10px 24px rgba(20, 32, 27, 0.1);
-	}
-
-	.hero-mark img {
-		width: auto;
-		height: 30px;
+		max-width: 960px;
+		text-align: left;
 	}
 
 	.hero-badge {
@@ -154,16 +303,17 @@ import BrandIcon from '../ui/BrandIcon.astro';
 		color: var(--color-brand-strong);
 		font-size: 0.86rem;
 		font-weight: 700;
-		letter-spacing: 0.01em;
+		letter-spacing: 0;
 		box-shadow: 0 1px 2px rgba(20, 32, 27, 0.04);
 	}
 
 	h1 {
 		margin: 0;
 		color: var(--color-text);
-		font-size: clamp(3rem, 5vw, 4.8rem);
-		line-height: 1.04;
-		letter-spacing: -0.025em;
+		max-width: 18ch;
+		font-size: clamp(3.8rem, 5.2vw, 5.7rem);
+		line-height: 1.02;
+		letter-spacing: 0;
 		font-weight: 800;
 	}
 
@@ -172,8 +322,8 @@ import BrandIcon from '../ui/BrandIcon.astro';
 	}
 
 	.hero-subtitle {
-		max-width: 50ch;
-		margin: 22px auto 0;
+		max-width: 62ch;
+		margin: 28px 0 0;
 		color: var(--color-muted);
 		font-size: 1.14rem;
 		line-height: 1.66;
@@ -182,7 +332,7 @@ import BrandIcon from '../ui/BrandIcon.astro';
 	.hero-actions {
 		display: flex;
 		flex-wrap: wrap;
-		justify-content: center;
+		justify-content: flex-start;
 		gap: 12px;
 		margin-top: 32px;
 	}
@@ -193,324 +343,410 @@ import BrandIcon from '../ui/BrandIcon.astro';
 		font-size: 0.95rem;
 	}
 
-	/* Tarjetas flotantes */
-	.float {
-		position: absolute;
-		z-index: 2;
-		padding: 14px;
-		border: 1px solid var(--color-border);
-		border-radius: 16px;
+	.hero-crm-card {
+		position: relative;
+		z-index: 3;
+		justify-self: center;
+		width: min(390px, 100%);
+		color: var(--color-text);
+		font-size: 0.82rem;
+		text-align: left;
+		animation: product-float 7s ease-in-out infinite;
+	}
+
+	.hero-crm-pad {
+		padding: 18px;
+		border: 1px solid rgba(20, 32, 27, 0.12);
+		border-radius: 20px;
 		background: var(--color-surface);
-		box-shadow: 0 20px 44px rgba(20, 32, 27, 0.13);
-		animation: float-bob 7s ease-in-out infinite;
+		box-shadow: 0 22px 60px rgba(23, 72, 55, 0.12), 0 2px 8px rgba(20, 32, 27, 0.06);
 	}
 
-	/* Punto conector hacia el centro */
-	.float::after {
-		content: '';
-		position: absolute;
-		width: 13px;
-		height: 13px;
-		border-radius: 50%;
-		background: var(--color-brand);
-		border: 3px solid var(--color-surface);
-		box-shadow: 0 2px 6px rgba(20, 32, 27, 0.22);
-	}
-
-	.float--chat {
-		top: 8%;
-		left: 4%;
-		width: 286px;
-		rotate: -3deg;
-	}
-
-	.float--chat::after {
-		right: -6px;
-		bottom: -6px;
-	}
-
-	.float--reminder {
-		top: 8%;
-		right: 4%;
-		width: 250px;
-		rotate: 3deg;
-		animation-delay: -1.6s;
-	}
-
-	.float--reminder::after {
-		bottom: -6px;
-		left: -6px;
-	}
-
-	.float--leads {
-		bottom: 9%;
-		left: 4%;
-		width: 258px;
-		rotate: 2.5deg;
-		animation-delay: -3.4s;
-	}
-
-	.float--leads::after {
-		top: -6px;
-		right: -6px;
-	}
-
-	.float--apps {
-		right: 4%;
-		bottom: 9%;
-		width: 250px;
-		rotate: -2.5deg;
-		animation-delay: -5s;
-	}
-
-	.float--apps::after {
-		top: -6px;
-		left: -6px;
-	}
-
-	/* Chat card */
-	.chat-head {
+	.hero-crm-head {
 		display: flex;
 		align-items: center;
-		gap: 9px;
-		padding-bottom: 10px;
-		border-bottom: 1px solid var(--color-border);
+		gap: 12px;
 	}
 
-	.chat-avatar {
+	.hero-crm-avatar {
 		display: grid;
 		place-items: center;
 		flex: 0 0 auto;
-		width: 32px;
-		height: 32px;
+		width: 46px;
+		height: 46px;
 		border-radius: 50%;
 		background: var(--color-brand-soft);
 		color: var(--color-brand-strong);
-		font-size: 0.72rem;
 		font-weight: 800;
 	}
 
-	.chat-id {
-		display: flex;
-		flex-direction: column;
-		line-height: 1.2;
-		margin-right: auto;
-	}
-
-	.chat-id strong {
-		font-size: 0.86rem;
-		font-weight: 700;
-	}
-
-	.chat-id small {
-		color: var(--color-brand);
-		font-size: 0.72rem;
-	}
-
-	.chat-ai {
-		padding: 3px 8px;
-		border-radius: 999px;
+	.hero-crm-avatar--logo {
 		background: var(--color-brand-soft);
-		color: var(--color-brand-strong);
-		font-size: 0.66rem;
+	}
+
+	.hero-crm-avatar-iso {
+		width: auto;
+		height: 26px;
+	}
+
+	.hero-crm-person {
+		display: flex;
+		flex-direction: column;
+		min-width: 0;
+		line-height: 1.2;
+	}
+
+	.hero-crm-person strong {
+		font-size: 1.08rem;
 		font-weight: 800;
 	}
 
-	.chat-body {
+	.hero-crm-person small,
+	.hero-crm-mail,
+	.hero-crm-row > span:first-child {
+		color: #8d9692;
+	}
+
+	.hero-crm-person small,
+	.hero-crm-mail {
 		display: flex;
-		flex-direction: column;
+		align-items: center;
 		gap: 7px;
-		padding-top: 11px;
 	}
 
-	.bubble {
-		max-width: 88%;
-		margin: 0;
-		padding: 8px 11px;
-		border-radius: 13px;
-		font-size: 0.8rem;
-		line-height: 1.4;
+	.hero-crm-icon {
+		width: 1em;
+		height: 1em;
+		display: inline-block;
+		flex: 0 0 auto;
+		fill: none;
+		stroke: currentColor;
+		stroke-width: 2;
+		stroke-linecap: round;
+		stroke-linejoin: round;
 	}
 
-	.bubble--in {
-		align-self: flex-start;
-		border-bottom-left-radius: 4px;
-		background: #f0f2f1;
-		color: var(--color-text);
+	.hero-crm-edit,
+	.hero-crm-mail-edit {
+		margin-left: auto;
+		color: #8d9692;
 	}
 
-	.bubble--out {
-		align-self: flex-end;
-		border-bottom-right-radius: 4px;
-		background: var(--color-brand);
-		color: #fff;
+	.hero-crm-mail {
+		margin-top: 14px;
+		font-size: 0.95rem;
 	}
 
-	/* Reminder + apps shared label */
-	.float-label {
+	.hero-crm-tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 7px;
+		margin-top: 13px;
+	}
+
+	.hero-crm-tag {
 		display: inline-flex;
 		align-items: center;
 		gap: 6px;
-		color: var(--color-muted);
-		font-size: 0.74rem;
-		font-weight: 700;
-		text-transform: uppercase;
-		letter-spacing: 0.04em;
-	}
-
-	.float-label svg {
-		width: 15px;
-		height: 15px;
-		color: var(--color-brand);
-	}
-
-	.float--reminder strong {
-		display: block;
-		margin: 8px 0 3px;
-		font-size: 0.92rem;
-	}
-
-	.float--reminder small {
-		color: var(--color-muted);
+		padding: 5px 10px;
+		border-radius: 999px;
+		color: #fff;
 		font-size: 0.78rem;
-	}
-
-	/* Leads card */
-	.leads-head {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		margin-bottom: 10px;
-	}
-
-	.leads-head strong {
-		font-size: 0.92rem;
-	}
-
-	.leads-count {
-		padding: 2px 9px;
-		border-radius: 999px;
-		background: var(--color-brand-soft);
-		color: var(--color-brand-strong);
-		font-size: 0.72rem;
 		font-weight: 800;
+		white-space: nowrap;
+		transition:
+			background 0.35s ease,
+			transform 0.35s ease,
+			opacity 0.35s ease;
 	}
 
-	.leads-list {
-		display: flex;
-		flex-direction: column;
-		gap: 9px;
-		margin: 0;
-		padding: 0;
-		list-style: none;
+	.hero-crm-tag--amber {
+		background: #eab308;
 	}
 
-	.leads-list li {
-		display: flex;
-		align-items: center;
-		gap: 8px;
-		font-size: 0.82rem;
-		font-weight: 600;
+	.hero-crm-tag--green {
+		background: var(--color-brand);
 	}
 
-	.leads-list em {
-		margin-left: auto;
-		padding: 2px 8px;
-		border-radius: 999px;
-		background: #f0f2f1;
-		color: var(--color-muted);
-		font-size: 0.68rem;
-		font-style: normal;
-		font-weight: 700;
-	}
-
-	.dot {
-		width: 8px;
-		height: 8px;
-		border-radius: 50%;
-		flex: 0 0 auto;
-	}
-
-	.dot--green {
-		background: #259a72;
-	}
-	.dot--amber {
-		background: #e0a32e;
-	}
-	.dot--blue {
+	.hero-crm-tag--blue {
 		background: #3b82f6;
 	}
 
-	/* Apps card */
-	.apps-row {
+	.hero-crm-tag--add {
+		border: 1px dashed rgba(20, 32, 27, 0.14);
+		background: transparent;
+		color: #8d9692;
+		font-weight: 700;
+	}
+
+	.hero-crm-divider {
+		height: 1px;
+		margin: 17px 0;
+		background: var(--color-border);
+	}
+
+	.hero-crm-row,
+	.hero-crm-foot {
 		display: flex;
 		align-items: center;
-		gap: 8px;
-		margin-top: 11px;
+		justify-content: space-between;
+		gap: 14px;
+		margin: 9px 0;
 	}
 
-	.app-chip {
+	.hero-crm-row strong {
+		font-weight: 800;
+		text-align: right;
+	}
+
+	/* Mientras la IA analiza, los datos aún sin resolver se ven borrosos */
+	.hero-crm-row strong,
+	.hero-crm-pill--gray {
+		transition:
+			filter 0.5s ease,
+			opacity 0.5s ease;
+	}
+
+	.hero-crm-card.is-analyzing .hero-crm-row strong,
+	.hero-crm-card.is-analyzing .hero-crm-pill--gray {
+		filter: blur(3.5px);
+		opacity: 0.5;
+	}
+
+	.hero-crm-tag.is-changing,
+	.hero-crm-pill.is-changing,
+	.hero-crm-row strong.is-changing,
+	.hero-crm-closed span.is-changing {
+		animation: value-change 0.48s ease both;
+	}
+
+	.hero-crm-row--highlight {
+		position: relative;
+		overflow: hidden;
+		padding: 7px 9px;
+		margin-inline: -9px;
+		border-radius: 10px;
+		background: linear-gradient(90deg, rgba(37, 154, 114, 0.08), rgba(37, 154, 114, 0.02));
+	}
+
+	.hero-crm-row--highlight::after {
+		content: '';
+		position: absolute;
+		inset: 0 auto 0 -55%;
+		width: 45%;
+		background: linear-gradient(110deg, transparent, rgba(37, 154, 114, 0.18), transparent);
+		transform: skewX(-18deg);
+		animation: crm-scan 3.8s ease-in-out infinite;
+		pointer-events: none;
+	}
+
+	.hero-crm-label {
+		color: var(--color-muted);
+		font-size: 0.78rem;
+		font-weight: 800;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+	}
+
+	.hero-crm-agent {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+	}
+
+	.hero-crm-agent-avatar {
 		display: grid;
 		place-items: center;
-		width: 38px;
-		height: 38px;
-		border-radius: 11px;
-		background: #f4f6f5;
-		border: 1px solid var(--color-border);
+		flex: 0 0 auto;
+		width: 26px;
+		height: 26px;
+		border-radius: 50%;
+		background: linear-gradient(135deg, var(--color-brand), var(--color-brand-strong));
+		color: #fff;
+		font-size: 0.62rem;
+		font-weight: 800;
+		letter-spacing: 0.02em;
+		box-shadow: 0 0 0 2px var(--color-surface), 0 1px 3px rgba(20, 32, 27, 0.18);
 	}
 
-	.app-chip svg {
-		width: 21px;
-		height: 21px;
+	.hero-crm-agent-name {
+		color: var(--color-text);
+		font-weight: 700;
 	}
 
-	.app-chip--wa {
-		color: #1fae5a;
-	}
-	.app-chip--meta {
-		color: #0866ff;
-	}
-	.app-chip--cal {
-		color: #4285f4;
-	}
-	.app-chip--more {
-		width: auto;
-		min-width: 38px;
-		padding-inline: 10px;
-		color: var(--color-muted);
-		font-size: 0.72rem;
+	.hero-crm-pill {
+		padding: 3px 10px;
+		border-radius: 999px;
+		font-size: 0.78rem;
 		font-weight: 800;
 	}
 
-	@keyframes float-bob {
-		0%,
-		100% {
-			translate: 0 0;
+	.hero-crm-pill--soft {
+		background: var(--color-brand-soft);
+		color: var(--color-brand-strong);
+	}
+
+	.hero-crm-pill--gray {
+		background: #f0f2f1;
+		color: var(--color-muted);
+	}
+
+	.hero-crm-summary-title {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		margin: 15px 0 8px;
+		color: var(--color-brand);
+		font-weight: 800;
+	}
+
+	.hero-crm-summary {
+		position: relative;
+		overflow: hidden;
+		min-height: 84px;
+		margin: 0 -8px;
+		padding: 8px;
+		border-radius: 8px;
+		color: var(--color-text);
+		font-size: 0.82rem;
+		line-height: 1.5;
+		text-align: center;
+		transition:
+			background 0.25s ease,
+			box-shadow 0.25s ease;
+	}
+
+	.hero-crm-summary.is-typing {
+		background: linear-gradient(90deg, transparent, rgba(37, 154, 114, 0.08));
+		box-shadow: inset 0 0 0 1px rgba(37, 154, 114, 0.08);
+	}
+
+	.hero-crm-summary::after {
+		content: '';
+		position: absolute;
+		inset: 0 auto 0 -60%;
+		width: 52%;
+		background: linear-gradient(110deg, transparent, rgba(37, 154, 114, 0.1), transparent);
+		transform: skewX(-18deg);
+		animation: crm-scan 4.6s ease-in-out infinite 0.5s;
+		pointer-events: none;
+	}
+
+	.hero-crm-caret {
+		display: none;
+		width: 2px;
+		height: 1em;
+		margin-left: 2px;
+		vertical-align: -2px;
+		background: var(--color-brand);
+		box-shadow: 0 0 8px rgba(37, 154, 114, 0.35);
+	}
+
+	.hero-crm-summary.is-typing .hero-crm-caret {
+		display: inline-block;
+		animation: caret-blink 0.6s step-end infinite;
+	}
+
+	.hero-crm-closed {
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+		padding: 5px 10px;
+		border-radius: 8px;
+		background: var(--color-brand);
+		color: #fff;
+		font-weight: 800;
+		opacity: 1;
+		transform: scale(1);
+		animation: badge-pop 3.8s ease-in-out infinite;
+		transition:
+			opacity 0.35s ease,
+			transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+	}
+
+	.hero-crm-closed.show {
+		opacity: 1;
+		transform: scale(1);
+	}
+
+	.hero-crm-closed .hero-crm-icon {
+		stroke: #fff;
+	}
+
+	@keyframes value-change {
+		0% {
+			opacity: 0;
+			transform: translateY(6px);
+			filter: blur(2px);
 		}
-		50% {
-			translate: 0 -9px;
+		100% {
+			opacity: 1;
+			transform: translateY(0);
+			filter: blur(0);
 		}
 	}
 
-	/* Oculta los accesorios más chicos antes de que aprieten */
-	@media (max-width: 1320px) {
-		.float--reminder,
-		.float--apps {
-			display: none;
+	@keyframes caret-blink {
+		50% {
+			opacity: 0;
+		}
+	}
+
+	@keyframes product-float {
+		0%,
+		100% {
+			transform: translateY(0) rotate(1deg);
+		}
+		50% {
+			transform: translateY(-10px) rotate(-0.4deg);
+		}
+	}
+
+	@keyframes crm-scan {
+		0%,
+		42% {
+			left: -55%;
+			opacity: 0;
+		}
+		52% {
+			opacity: 1;
+		}
+		100% {
+			left: 115%;
+			opacity: 0;
+		}
+	}
+
+	@keyframes badge-pop {
+		0%,
+		100% {
+			transform: scale(1);
+			box-shadow: none;
+		}
+		12% {
+			transform: scale(1.04);
+			box-shadow: 0 8px 20px rgba(31, 174, 90, 0.18);
 		}
 	}
 
 	@media (max-width: 1140px) {
-		.float {
-			display: none;
-		}
-
-		.float::after {
-			display: none;
-		}
-
 		.hero-stage {
-			min-height: 0;
+			grid-template-columns: 1fr;
+			justify-items: center;
+			gap: 34px;
+		}
+
+		.hero-center {
+			max-width: 720px;
+			text-align: center;
+		}
+
+		.hero-subtitle {
+			margin-inline: auto;
+		}
+
+		.hero-actions {
+			justify-content: center;
 		}
 	}
 
@@ -521,6 +757,7 @@ import BrandIcon from '../ui/BrandIcon.astro';
 
 		.hero-stage {
 			padding: clamp(28px, 5svh, 52px) 18px clamp(34px, 6svh, 60px);
+			gap: 30px;
 		}
 
 		h1 {
@@ -540,22 +777,13 @@ import BrandIcon from '../ui/BrandIcon.astro';
 
 	@media (max-height: 760px) and (min-width: 1141px) {
 		.hero-stage {
+			grid-template-columns: minmax(0, 1fr) minmax(300px, 350px);
+			gap: clamp(26px, 3.6vw, 54px);
 			padding-block: clamp(26px, 4.8svh, 42px);
 		}
 
 		.hero-center {
-			max-width: 540px;
-		}
-
-		.hero-mark {
-			width: 50px;
-			height: 50px;
-			margin-bottom: 14px;
-			border-radius: 16px;
-		}
-
-		.hero-mark img {
-			height: 26px;
+			max-width: 860px;
 		}
 
 		.hero-badge {
@@ -565,7 +793,7 @@ import BrandIcon from '../ui/BrandIcon.astro';
 		}
 
 		h1 {
-			font-size: clamp(2.7rem, 4.7vw, 4rem);
+			font-size: clamp(3.2rem, 4.6vw, 4.9rem);
 		}
 
 		.hero-subtitle {
@@ -582,32 +810,12 @@ import BrandIcon from '../ui/BrandIcon.astro';
 			margin-top: 10px;
 		}
 
-		.float {
-			scale: 0.9;
-		}
-
-		.float--chat,
-		.float--leads {
-			left: 3%;
-		}
-
-		.float--reminder,
-		.float--apps {
-			right: 3%;
+		.hero-crm-card {
+			font-size: 0.76rem;
 		}
 	}
 
 	@media (max-height: 700px) and (max-width: 680px) {
-		.hero-mark {
-			width: 48px;
-			height: 48px;
-			margin-bottom: 12px;
-		}
-
-		.hero-mark img {
-			height: 24px;
-		}
-
 		.hero-badge {
 			margin-bottom: 12px;
 		}
