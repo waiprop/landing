@@ -238,13 +238,26 @@ const tabs = [
 			saveButton?.classList.toggle('is-disabled', !(index === 1 || index === 3));
 		};
 
+		const card = root.closest('.product-card--agent');
+
+		// Distancia real en la que la card queda pinneada: del momento en que
+		// llega a su 'top' sticky hasta que el shell termina de pasar.
+		const getMetrics = () => {
+			if (!(shell instanceof HTMLElement) || !(card instanceof HTMLElement)) return null;
+			const cardTop = parseFloat(getComputedStyle(card).top) || 0;
+			const pinned = Math.max(1, shell.offsetHeight - card.offsetHeight);
+			return { cardTop, pinned };
+		};
+
 		const syncFromScroll = () => {
 			frame = 0;
-			if (!(shell instanceof HTMLElement) || tabs.length === 0) return;
+			if (tabs.length === 0 || window.innerWidth < 861) return;
+
+			const metrics = getMetrics();
+			if (!metrics || !(shell instanceof HTMLElement)) return;
 
 			const rect = shell.getBoundingClientRect();
-			const scrollable = Math.max(1, rect.height - window.innerHeight);
-			const progress = clamp(-rect.top / scrollable, 0, 0.999);
+			const progress = clamp((metrics.cardTop - rect.top) / metrics.pinned, 0, 0.999);
 			setActive(Math.floor(progress * tabs.length));
 		};
 
@@ -255,20 +268,50 @@ const tabs = [
 
 		tabs.forEach((tab, index) => {
 			tab.addEventListener('click', () => {
-				if (shell instanceof HTMLElement) {
-					const top = shell.getBoundingClientRect().top + window.scrollY;
-					const scrollable = Math.max(1, shell.offsetHeight - window.innerHeight);
-					window.scrollTo({ top: top + scrollable * ((index + 0.5) / tabs.length), behavior: 'smooth' });
+				const metrics = getMetrics();
+				if (metrics && window.innerWidth >= 861 && shell instanceof HTMLElement) {
+					const shellTop = shell.getBoundingClientRect().top + window.scrollY;
+					const target = shellTop - metrics.cardTop + metrics.pinned * ((index + 0.5) / tabs.length);
+					window.scrollTo({ top: target, behavior: 'smooth' });
 					return;
 				}
 				setActive(index);
 			});
 		});
 
+		const fitDemo = () => {
+			if (!(root instanceof HTMLElement)) return;
+			const card = root.closest('.product-card--agent');
+
+			// Solo escalamos en el layout de escritorio (card pinneada).
+			if (!(card instanceof HTMLElement) || window.innerWidth < 861) {
+				root.style.transform = '';
+				root.style.height = '';
+				return;
+			}
+
+			root.style.transform = 'none';
+			root.style.height = 'auto';
+
+			const natural = root.scrollHeight;
+			const cardStyles = getComputedStyle(card);
+			const padBottom = parseFloat(cardStyles.paddingBottom) || 0;
+			const available = card.getBoundingClientRect().bottom - padBottom - root.getBoundingClientRect().top;
+			const scale = clamp(available / natural, 0.78, 1);
+
+			root.style.transform = `scale(${scale})`;
+			root.style.height = `${natural * scale}px`;
+		};
+
 		setActive(0);
 		syncFromScroll();
+		fitDemo();
 		window.addEventListener('scroll', requestSync, { passive: true });
-		window.addEventListener('resize', requestSync);
+		window.addEventListener('resize', () => {
+			requestSync();
+			fitDemo();
+		});
+		window.addEventListener('load', fitDemo);
 	});
 </script>
 
@@ -362,16 +405,14 @@ const tabs = [
 
 	.ai-panel-body {
 		position: relative;
+		display: grid;
 		flex: 1;
 		min-height: 0;
-		overflow: hidden;
 	}
 
 	.ai-view {
-		position: absolute;
-		inset: 0;
+		grid-area: 1 / 1;
 		padding: 26px 28px 86px;
-		overflow-y: auto;
 		opacity: 0;
 		pointer-events: none;
 		transform: translateY(14px);
@@ -1013,6 +1054,70 @@ const tabs = [
 			bottom: 12px;
 			left: 12px;
 			justify-content: flex-end;
+		}
+	}
+
+	@media (min-width: 861px) {
+		.ai-demo {
+			min-height: 0;
+		}
+
+		.ai-app {
+			gap: 14px;
+		}
+
+		.ai-tabs {
+			padding: 12px 24px 0;
+		}
+
+		.ai-view {
+			padding: 16px 22px 52px;
+		}
+
+		.ai-view h4 {
+			margin: 16px 0 9px;
+		}
+
+		.ai-perm {
+			padding: 12px;
+		}
+
+		.ai-perm p,
+		.ai-coex small,
+		.ai-choice p,
+		.ai-summary p {
+			margin-top: 7px;
+		}
+
+		.ai-coex {
+			margin-top: 9px;
+			padding: 13px;
+		}
+
+		.ai-notice {
+			margin-top: 13px;
+		}
+
+		.ai-recontact {
+			margin-top: 10px;
+			padding: 13px;
+		}
+
+		.ai-mode {
+			margin-top: 9px;
+		}
+
+		.ai-label {
+			margin: 11px 0 6px;
+		}
+
+		.ai-input,
+		.ai-textarea {
+			padding: 10px 13px;
+		}
+
+		.ai-textarea {
+			min-height: 74px;
 		}
 	}
 

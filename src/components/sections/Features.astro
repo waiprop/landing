@@ -20,7 +20,7 @@ const pipelineColumns = [
 		title: 'Negociacion',
 		count: 2,
 		cards: [
-			{ name: 'Juan Lopez Asis', property: 'Casa en J. L. Suarez', date: '05 jun', time: '17:28' },
+			{ name: 'Juan Lopez', property: 'Casa en J. L. Suarez', date: '05 jun', time: '17:28' },
 			{ name: 'Sofia Vega', property: 'PH en Tafi Viejo', date: '02 jun', time: '09:55', plus: '+2' },
 		],
 	},
@@ -454,17 +454,51 @@ const pipelineColumns = [
 	}
 
 	@media (min-width: 861px) {
+		.product-stack {
+			padding-bottom: clamp(80px, 12vw, 150px);
+		}
+
+		.product-card-shell--agent {
+			min-height: clamp(1500px, 240vh, 2400px);
+		}
+
+		.product-card {
+			position: sticky;
+			top: clamp(88px, 12vh, 132px);
+			transform-origin: center top;
+		}
+
+		.product-card--pipeline {
+			transform: scale(0.985);
+		}
+
 		.product-card--agent {
+			top: clamp(48px, 6vh, 80px);
+			max-height: min(920px, calc(100vh - 72px));
+			padding: clamp(18px, 1.8vw, 28px);
+			gap: 12px;
+			margin-top: 0;
 			overflow: visible;
 		}
 
+		.product-card--agent :global(.ai-demo) {
+			min-height: 0;
+			transform-origin: top center;
+		}
+
+		.product-card--agent .product-eyebrow {
+			margin-bottom: 8px;
+		}
+
 		.product-card--agent .product-copy h3 {
-			font-size: clamp(1.45rem, 2.1vw, 1.9rem);
+			font-size: clamp(1.3rem, 1.7vw, 1.6rem);
+			line-height: 1.15;
 		}
 
 		.product-card--agent .product-copy p {
-			margin-top: 8px;
-			line-height: 1.5;
+			margin-top: 6px;
+			font-size: 0.92rem;
+			line-height: 1.45;
 		}
 	}
 </style>
