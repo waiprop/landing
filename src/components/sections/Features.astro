@@ -1,66 +1,36 @@
 ---
-import type { ImageMetadata } from 'astro';
-import { Image } from 'astro:assets';
+import AgenteIa from '../mockups/AgenteIa.astro';
 import Conversaciones from '../mockups/Conversaciones.astro';
-import conversacionesShot from '../../assets/features/conversaciones.png';
-import agenteIaShot from '../../assets/features/agente-ia.png';
-import crmShot from '../../assets/features/crm.png';
-import propiedadesShot from '../../assets/features/propiedades.png';
-import calendarioShot from '../../assets/features/calendario.png';
-import metricasShot from '../../assets/features/metricas.png';
 
-interface Feature {
-	title: string;
-	text: string;
-	tags: string[];
-	image: ImageMetadata | null;
-	alt: string;
-	mockup?: 'conversaciones';
-}
-
-const features: Feature[] = [
+const pipelineColumns = [
 	{
-		title: 'Todo tu WhatsApp en una sola bandeja',
-		text: 'Cada consulta entra a un inbox compartido con etiquetas, asignación por vendedor y el historial completo del cliente al lado del chat.',
-		tags: ['Bandeja compartida', 'Etiquetas', 'Historial'],
-		image: conversacionesShot,
-		alt: 'Bandeja de conversaciones de Waichatt',
-		mockup: 'conversaciones',
+		title: 'Visita Agendada',
+		count: 1,
+		cards: [{ name: 'Gustavo Salomone', property: 'Terreno en J. L. Suarez', date: '29 may', time: '13:57', plus: '+2' }],
 	},
 	{
-	title: 'Una IA que responde como tu mejor vendedor',
-	text: 'Configurás el tono, el rol y las reglas del agente. Responde al instante, entiende qué busca el cliente y le recomienda propiedades de tu cartera. Cuando hace falta, deriva al vendedor.',
-	tags: ['Tono configurable', 'Reglas propias', 'Deriva al vendedor'],
-	image: agenteIaShot,
-	alt: 'Pantalla de configuración del agente IA de Waichatt: tono, rol y reglas',
+		title: 'Post Visita',
+		count: 2,
+		cards: [
+			{ name: 'Carla Ferreyra', property: 'Depto en Yerba Buena', date: '29 may', time: '14:00', plus: '+1' },
+			{ name: 'Diego Brizuela', property: 'Local en centro', date: '30 may', time: '11:20', drag: true },
+		],
 	},
 	{
-		title: 'Cada consulta, una oportunidad medible',
-		text: 'Contactos, leads y pipeline conectados a las conversaciones para saber qué vendedor atiende y en qué etapa está cada interesado.',
-		tags: ['Pipeline visual', 'Ficha del lead', 'Seguimientos'],
-		image: crmShot,
-		alt: 'Tablero del CRM con el pipeline de leads',
+		title: 'Negociacion',
+		count: 2,
+		cards: [
+			{ name: 'Juan Lopez Asis', property: 'Casa en J. L. Suarez', date: '05 jun', time: '17:28' },
+			{ name: 'Sofia Vega', property: 'PH en Tafi Viejo', date: '02 jun', time: '09:55', plus: '+2' },
+		],
 	},
 	{
-		title: 'Tu cartera, lista para vender en todos lados',
-		text: 'Cargá o importá desde Tokko y dejá tus propiedades disponibles para la IA, el CRM, tu web y tus conversaciones.',
-		tags: ['Importá de Tokko', 'Tu web', 'Cartera única'],
-		image: propiedadesShot,
-		alt: 'Listado de propiedades cargadas en Waichatt',
-	},
-	{
-		title: 'De la consulta a la visita, sin idas y vueltas',
-		text: 'Agendá visitas vinculadas a lead, propiedad y vendedor, sincronizadas con Google Calendar.',
-		tags: ['Visitas', 'Google Calendar', 'Por vendedor'],
-		image: calendarioShot,
-		alt: 'Calendario de visitas sincronizado con Google Calendar',
-	},
-	{
-		title: 'Números reales de tu operación',
-		text: 'Consultas, respuestas de IA, rendimiento comercial y demanda por propiedad en un tablero fácil de leer.',
-		tags: ['Vista general', 'Rendimiento', 'Demanda por propiedad'],
-		image: metricasShot,
-		alt: 'Tablero de métricas y rendimiento comercial',
+		title: 'Cerrado',
+		count: 2,
+		cards: [
+			{ name: 'Raul M', property: 'Francia 485', date: '04 jun', time: '14:38', plus: '+1' },
+			{ name: 'Lucia Romano', property: 'Depto en Barrio Norte', date: '08 jun', time: '16:10' },
+		],
 	},
 ];
 ---
@@ -68,35 +38,81 @@ const features: Feature[] = [
 <section class="features section-band" id="funciones" aria-labelledby="funciones-title">
 	<div class="section-inner">
 		<div class="section-head section-head--center">
-			<p class="eyebrow">Funciones</p>
-			<h2 id="funciones-title">Todo tu negocio inmobiliario, en una sola plataforma</h2>
-			<p>Del primer mensaje a la venta cerrada: conversaciones, IA, CRM, propiedades y métricas trabajando juntas.</p>
+			<p class="eyebrow">El producto</p>
+			<h2 id="funciones-title">Mirá Waichatt por dentro</h2>
+			<p>No es una promesa: es la herramienta real atendiendo, calificando y ordenando tu operación.</p>
 		</div>
 
-		<div class="feature-list">
-			{features.map((feature, index) => (
-				<article class={feature.mockup === 'conversaciones' ? 'feature feature--wide' : 'feature'}>
-					<div class="feature-media">
-						{feature.mockup === 'conversaciones' ? (
-							<Conversaciones />
-						) : feature.image ? (
-							<Image src={feature.image} alt={feature.alt} widths={[480, 720, 960]} sizes="(max-width: 860px) 100vw, 50vw" loading="lazy" decoding="async" />
-						) : (
-							<div class="feature-placeholder" role="img" aria-label={feature.alt}>
-								<span>{feature.alt}</span>
-							</div>
-						)}
+		<article class="product-showcase" aria-label="Waichatt atendiendo una conversación y completando el CRM en vivo">
+			<Conversaciones />
+		</article>
+
+		<div class="product-stack">
+			<article class="product-card product-card--pipeline">
+				<div class="product-copy">
+					<span class="product-eyebrow">
+						<svg class="product-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+						Pipeline
+					</span>
+					<h3>Tu embudo siempre ordenado</h3>
+					<p>Cada lead cae en la etapa que corresponde y avanza solo. Lo seguís en un tablero claro, sin cargar datos dos veces.</p>
+					<ul class="product-list">
+						<li><span>Etapas claras: de la visita agendada al cierre</span></li>
+						<li><span>La IA mueve los leads sin que cargues nada</span></li>
+						<li><span>Sabés siempre con quién seguir hoy</span></li>
+					</ul>
+				</div>
+
+				<div class="product-mock product-mock--wide" aria-label="Pipeline de ventas con leads por etapa" role="img">
+					<div class="kanban">
+						<header class="kanban-head">
+							<h4>Pipeline de ventas</h4>
+							<p>Gestioná tus oportunidades y el avance de clientes potenciales.</p>
+						</header>
+						<div class="kanban-cols">
+							{pipelineColumns.map((column) => (
+								<section class="kanban-col">
+									<h5>{column.title} <span>{column.count}</span></h5>
+									{column.cards.map((card) => (
+										<article class={card.drag ? 'kanban-card kanban-card--drag' : 'kanban-card'}>
+											<strong>{card.name}</strong>
+											<div class="kanban-property">{card.property}</div>
+											{card.plus && <span class="kanban-plus">{card.plus}</span>}
+											<div class="kanban-meta">
+												<span>
+													<svg class="product-icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+													{card.date}
+												</span>
+												<span>
+													<svg class="product-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><polyline points="12 7 12 12 15 14"></polyline></svg>
+													{card.time}
+												</span>
+											</div>
+											<div class="kanban-line"></div>
+											<div class="kanban-actions">
+												<svg class="product-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+												<svg class="product-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+											</div>
+										</article>
+									))}
+								</section>
+							))}
+						</div>
 					</div>
-					<div class="feature-body">
-						<span class="feature-num" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
-						<h3>{feature.title}</h3>
-						<p>{feature.text}</p>
-						<ul class="feature-tags">
-							{feature.tags.map((tag) => <li>{tag}</li>)}
-						</ul>
+				</div>
+			</article>
+
+			<div class="product-card-shell product-card-shell--agent" data-agent-scroll-shell>
+				<article class="product-card product-card--agent">
+					<div class="product-copy product-copy--wide">
+						<span class="product-eyebrow">Agente IA</span>
+						<h3>Configurás tu agente y lo probás en vivo</h3>
+						<p>Decís qué puede hacer, cómo responde y cuándo se pausa si toma el control un asesor humano.</p>
 					</div>
+
+					<AgenteIa />
 				</article>
-			))}
+			</div>
 		</div>
 	</div>
 </section>
@@ -104,155 +120,351 @@ const features: Feature[] = [
 <style>
 	.features {
 		padding-top: clamp(64px, 7vw, 104px);
+		overflow: visible;
 	}
 
 	.features .section-head--center {
 		margin-bottom: clamp(28px, 3.5vw, 44px);
 	}
 
-	.feature-list {
+	.product-card {
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius-lg);
+		background:
+			linear-gradient(180deg, rgba(233, 245, 240, 0.58), rgba(255, 255, 255, 0) 46%),
+			var(--color-surface);
+		box-shadow:
+			0 1px 2px rgba(20, 32, 27, 0.04),
+			0 24px 70px rgba(20, 32, 27, 0.1);
+	}
+
+	.product-showcase {
+		margin-inline: auto;
+	}
+
+	.product-showcase :global(.cv) {
+		max-width: 1180px;
+		height: clamp(580px, 45vw, 640px);
+	}
+
+	.product-stack {
 		display: flex;
 		flex-direction: column;
-		gap: clamp(56px, 8vw, 112px);
+		gap: clamp(28px, 4vw, 52px);
+		margin-top: clamp(28px, 4vw, 52px);
+		isolation: isolate;
 	}
 
-	.feature {
+	.product-card {
+		position: relative;
+		padding: clamp(22px, 3.4vw, 46px);
+		overflow: hidden;
+	}
+
+	.product-card-shell {
+		position: relative;
+	}
+
+	.product-card-shell--agent {
+		z-index: 2;
+	}
+
+	.product-card--pipeline {
+		z-index: 1;
+	}
+
+	.product-card--agent {
+		z-index: 2;
+	}
+
+	.product-card--pipeline {
 		display: grid;
-		grid-template-columns: 1fr 1fr;
+		grid-template-columns: minmax(260px, 0.85fr) minmax(0, 1.15fr);
 		align-items: center;
-		gap: clamp(28px, 5vw, 72px);
+		gap: clamp(28px, 4vw, 56px);
 	}
 
-	/* Zigzag: en las features impares la imagen va a la derecha */
-	.feature:nth-child(odd) .feature-media {
-		order: 2;
+	.product-card--agent {
+		display: flex;
+		flex-direction: column;
+		gap: 24px;
 	}
 
-	/* Función 1: texto + mockup amplio en dos columnas */
-	.feature--wide {
-		grid-template-columns: minmax(260px, 360px) minmax(0, 1fr);
-		gap: clamp(34px, 5vw, 72px);
-		justify-items: stretch;
+	.product-card--agent .product-copy p {
+		max-width: 760px;
+	}
+
+	.product-copy {
 		text-align: left;
 	}
 
-	.feature--wide .feature-body {
-		order: 1;
-		max-width: 360px;
+	.product-copy--wide {
+		max-width: 660px;
 	}
 
-	.feature--wide .feature-media,
-	.feature--wide:nth-child(odd) .feature-media {
-		order: 2;
-		width: 100%;
-	}
-
-	.feature--wide .feature-tags {
-		justify-content: flex-start;
-	}
-
-	.feature--wide .feature-num {
-		margin-inline: 0;
-	}
-
-	.feature-media :global(img) {
-		width: 100%;
-		height: auto;
-		border: 1px solid var(--color-border);
-		border-radius: var(--radius-lg);
-		box-shadow: 0 22px 60px rgba(20, 32, 27, 0.1);
-	}
-
-	.feature-placeholder {
-		display: grid;
-		place-items: center;
-		aspect-ratio: 4 / 3;
-		padding: 20px;
-		border: 1px solid var(--color-border);
-		border-radius: var(--radius-lg);
-		background: linear-gradient(135deg, #eef1f4, #e2e7ec);
-		color: var(--color-muted);
-		text-align: center;
-	}
-
-	.feature-placeholder span {
-		font-size: 0.92rem;
-		font-weight: 700;
-	}
-
-	.feature-num {
-		display: block;
-		margin-bottom: 8px;
-		color: #c8e3d8;
-		font-size: clamp(2.2rem, 4.5vw, 3rem);
+	.product-eyebrow {
+		display: inline-flex;
+		align-items: center;
+		gap: 7px;
+		margin-bottom: 14px;
+		padding: 5px 12px;
+		border-radius: 999px;
+		background: var(--color-brand-soft);
+		color: var(--color-brand-hover);
+		font-size: 0.72rem;
 		font-weight: 800;
-		line-height: 1;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
 	}
 
-	.feature-body h3 {
-		font-size: clamp(1.5rem, 2.6vw, 2rem);
+	.product-copy h3 {
+		margin: 0;
+		color: var(--color-text);
+		font-size: clamp(1.55rem, 2.5vw, 2.1rem);
 		font-weight: 800;
-		line-height: 1.15;
+		line-height: 1.12;
 	}
 
-	.feature-body p {
+	.product-copy p {
 		margin: 12px 0 0;
-		font-size: 1.05rem;
+		color: var(--color-muted);
+		font-size: 1rem;
+		line-height: 1.6;
 	}
 
-	.feature-tags {
+	.product-list {
 		display: flex;
-		flex-wrap: wrap;
-		gap: 8px;
+		flex-direction: column;
+		gap: 10px;
 		margin: 18px 0 0;
 		padding: 0;
 		list-style: none;
 	}
 
-	.feature-tags li {
-		padding: 6px 13px;
+	.product-list li {
+		display: flex;
+		gap: 10px;
+		color: var(--color-muted);
+		font-size: 0.94rem;
+		line-height: 1.45;
+	}
+
+	.product-list li::before {
+		content: '';
+		flex: 0 0 auto;
+		width: 16px;
+		height: 16px;
+		margin-top: 2px;
+		border-radius: 5px;
+		background:
+			linear-gradient(135deg, var(--color-brand), var(--color-brand-hover));
+		clip-path: polygon(14% 53%, 28% 39%, 44% 55%, 73% 24%, 87% 38%, 44% 82%);
+	}
+
+	.product-icon {
+		display: inline-block;
+		width: 1em;
+		height: 1em;
+		fill: none;
+		stroke: currentColor;
+		stroke-width: 2;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+		vertical-align: -0.12em;
+	}
+
+	.product-mock {
+		min-width: 0;
+	}
+
+	.kanban {
+		padding: 22px;
 		border: 1px solid var(--color-border);
-		border-radius: 999px;
+		border-radius: 18px;
 		background: var(--color-surface);
+		box-shadow: 0 20px 60px rgba(20, 32, 27, 0.1);
+	}
+
+	.kanban-head h4 {
+		margin: 0;
 		color: var(--color-text);
-		font-size: 0.82rem;
+		font-size: 1.25rem;
+		font-weight: 800;
+	}
+
+	.kanban-head p {
+		margin: 4px 0 18px;
+		color: var(--color-muted);
+		font-size: 0.92rem;
+	}
+
+	.kanban-cols {
+		display: grid;
+		grid-template-columns: repeat(4, minmax(135px, 1fr));
+		gap: 14px;
+	}
+
+	.kanban-col h5 {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		margin: 0 0 12px;
+		color: #253246;
+		font-size: 0.86rem;
+		font-weight: 800;
+	}
+
+	.kanban-col h5 span {
+		padding: 2px 8px;
+		border-radius: 7px;
+		background: #eef0f3;
+		color: var(--color-muted);
+		font-size: 0.72rem;
+	}
+
+	.kanban-card {
+		position: relative;
+		margin-bottom: 11px;
+		padding: 13px;
+		border: 1px solid var(--color-border);
+		border-radius: 13px;
+		background: #fff;
+		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+	}
+
+	.kanban-card--drag {
+		z-index: 3;
+		animation: kanban-drag 4.5s ease-in-out infinite;
+		transform-origin: center;
+	}
+
+	.kanban-card strong {
+		display: block;
+		margin-bottom: 8px;
+		color: var(--color-text);
+		font-size: 0.88rem;
+	}
+
+	.kanban-property {
+		display: inline-block;
+		padding: 4px 8px;
+		border-radius: 7px;
+		background: #edf5ff;
+		color: #2568b7;
+		font-size: 0.66rem;
+		font-weight: 800;
+		letter-spacing: 0.02em;
+		text-transform: uppercase;
+	}
+
+	.kanban-plus {
+		margin-left: 4px;
+		color: #9aa1ab;
+		font-size: 0.72rem;
 		font-weight: 700;
 	}
 
+	.kanban-meta {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+		margin-top: 11px;
+		color: #9aa1ab;
+		font-size: 0.72rem;
+	}
+
+	.kanban-meta span,
+	.kanban-actions {
+		display: flex;
+		align-items: center;
+		gap: 5px;
+	}
+
+	.kanban-line {
+		height: 1px;
+		margin: 11px 0;
+		background: var(--color-border);
+	}
+
+	.kanban-actions {
+		color: #9aa1ab;
+	}
+
+	@keyframes kanban-drag {
+		0%,
+		12% {
+			transform: translateX(0) translateY(0) rotate(0);
+			box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+		}
+		22% {
+			transform: translateX(6px) translateY(-6px) rotate(2deg) scale(1.03);
+			box-shadow: 0 14px 30px rgba(31, 157, 107, 0.18);
+		}
+		50% {
+			transform: translateX(64px) translateY(-6px) rotate(2deg) scale(1.03);
+			box-shadow: 0 16px 34px rgba(31, 157, 107, 0.2);
+		}
+		68% {
+			transform: translateX(6px) translateY(-6px) rotate(2deg) scale(1.03);
+			box-shadow: 0 14px 30px rgba(31, 157, 107, 0.18);
+		}
+		80%,
+		100% {
+			transform: translateX(0) translateY(0) rotate(0);
+			box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+		}
+	}
+
 	@media (max-width: 1080px) {
-		.feature--wide {
+		.product-card--pipeline {
 			grid-template-columns: 1fr;
-			gap: clamp(18px, 2.5vw, 30px);
-			justify-items: center;
-			text-align: center;
 		}
 
-		.feature--wide .feature-body {
+		.product-copy--wide {
 			max-width: 720px;
-		}
-
-		.feature--wide .feature-tags {
-			justify-content: center;
-		}
-
-		.feature--wide .feature-num {
-			margin-inline: auto;
 		}
 	}
 
 	@media (max-width: 860px) {
-		.feature {
-			grid-template-columns: 1fr;
-			gap: 22px;
+		.kanban-cols {
+			grid-template-columns: repeat(2, minmax(135px, 1fr));
+		}
+	}
+
+	@media (max-width: 720px) {
+		.product-showcase :global(.cv) {
+			height: auto;
+		}
+	}
+
+	@media (max-width: 560px) {
+		.kanban {
+			overflow-x: auto;
 		}
 
-		.feature-body {
-			order: 1;
+		.kanban-cols {
+			min-width: 620px;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.kanban-card--drag {
+			animation: none;
+		}
+	}
+
+	@media (min-width: 861px) {
+		.product-card--agent {
+			overflow: visible;
 		}
 
-		.feature-media,
-		.feature:nth-child(odd) .feature-media {
-			order: 2;
+		.product-card--agent .product-copy h3 {
+			font-size: clamp(1.45rem, 2.1vw, 1.9rem);
+		}
+
+		.product-card--agent .product-copy p {
+			margin-top: 8px;
+			line-height: 1.5;
 		}
 	}
 </style>

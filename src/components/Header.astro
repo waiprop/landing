@@ -38,20 +38,71 @@ const logoSrc = typeof logo === 'string' ? logo : logo.src;
 	const header = document.querySelector('[data-header]');
 	const mobileMenu = document.querySelector('[data-mobile-menu]');
 	const mobileSummary = mobileMenu?.querySelector('summary');
+	const hideDistance = 120;
+	const floatingStart = 12;
+	let lastScrollY = window.scrollY;
+	let hiddenProgress = 0;
+	let frame = 0;
 
-	const syncScrolledState = () => {
-		header?.toggleAttribute('data-scrolled', window.scrollY > 8);
+	const syncHeaderMode = (scrollY = window.scrollY) => {
+		header?.toggleAttribute('data-scrolled', scrollY > 8);
+		header?.toggleAttribute('data-floating', scrollY > floatingStart);
+	};
+
+	const setHeaderProgress = (progress) => {
+		if (!(header instanceof HTMLElement)) return;
+		hiddenProgress = Math.max(0, Math.min(1, progress));
+		header.style.setProperty('--header-hide-progress', String(hiddenProgress));
+		header.toggleAttribute('data-hidden', hiddenProgress >= 1);
+	};
+
+	const revealHeader = () => {
+		header?.setAttribute('data-revealing', '');
+		setHeaderProgress(0);
+		window.setTimeout(() => header?.removeAttribute('data-revealing'), 320);
+	};
+
+	const syncVisibility = () => {
+		frame = 0;
+
+		const currentY = Math.max(0, window.scrollY);
+		const delta = currentY - lastScrollY;
+		const menuIsOpen = mobileMenu instanceof HTMLDetailsElement && mobileMenu.open;
+
+		syncHeaderMode(currentY);
+
+		if (menuIsOpen || currentY <= 8) {
+			revealHeader();
+			lastScrollY = currentY;
+			return;
+		}
+
+		if (delta > 0) {
+			header?.removeAttribute('data-revealing');
+			setHeaderProgress(hiddenProgress + delta / hideDistance);
+		} else if (delta < -2) {
+			revealHeader();
+		}
+
+		lastScrollY = currentY;
+	};
+
+	const requestVisibilitySync = () => {
+		if (frame) return;
+		frame = window.requestAnimationFrame(syncVisibility);
 	};
 
 	const syncMenuState = () => {
 		if (mobileMenu instanceof HTMLDetailsElement) {
 			mobileSummary?.setAttribute('aria-expanded', String(mobileMenu.open));
+			if (mobileMenu.open) revealHeader();
 		}
 	};
 
-	syncScrolledState();
+	syncHeaderMode();
+	setHeaderProgress(0);
 	syncMenuState();
-	window.addEventListener('scroll', syncScrolledState, { passive: true });
+	window.addEventListener('scroll', requestVisibilitySync, { passive: true });
 	mobileMenu?.addEventListener('toggle', syncMenuState);
 	mobileMenu?.querySelectorAll('a').forEach((link) => {
 		link.addEventListener('click', () => {
@@ -67,6 +118,7 @@ const logoSrc = typeof logo === 'string' ? logo : logo.src;
 
 <style>
 	.site-header {
+		--header-hide-progress: 0;
 		position: sticky;
 		top: 0;
 		z-index: 20;
@@ -79,8 +131,17 @@ const logoSrc = typeof logo === 'string' ? logo : logo.src;
 		padding-inline: max(20px, calc((100% - var(--container)) / 2));
 		background: var(--color-surface);
 		backdrop-filter: blur(14px);
-		border-bottom: 1px solid rgba(228, 231, 229, 0.72);
+		border-bottom: 1px solid transparent;
+		opacity: calc(1 - var(--header-hide-progress));
+		pointer-events: auto;
+		transform: translate3d(0, calc(var(--header-hide-progress) * -100%), 0);
+		will-change: transform, opacity;
 		transition:
+			top 260ms ease,
+			width 260ms ease,
+			min-height 260ms ease,
+			padding 260ms ease,
+			border-radius 260ms ease,
 			border-color 200ms ease,
 			box-shadow 200ms ease;
 	}
@@ -88,6 +149,34 @@ const logoSrc = typeof logo === 'string' ? logo : logo.src;
 	.site-header[data-scrolled] {
 		border-bottom-color: var(--color-border);
 		box-shadow: 0 10px 30px rgba(20, 32, 27, 0.06);
+	}
+
+	.site-header[data-floating] {
+		top: 14px;
+		width: min(1120px, calc(100% - 32px));
+		min-height: 64px;
+		padding-inline: clamp(16px, 3vw, 24px);
+		border: 1px solid rgba(228, 231, 229, 0.9);
+		border-radius: var(--radius-lg);
+		background: rgba(255, 255, 255, 0.94);
+		box-shadow: 0 18px 52px rgba(20, 32, 27, 0.14);
+	}
+
+	.site-header[data-hidden] {
+		pointer-events: none;
+	}
+
+	.site-header[data-revealing] {
+		transition:
+			top 260ms ease,
+			width 260ms ease,
+			min-height 260ms ease,
+			padding 260ms ease,
+			border-radius 260ms ease,
+			border-color 200ms ease,
+			box-shadow 200ms ease,
+			opacity 260ms ease,
+			transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
 	}
 
 	.brand {
@@ -236,6 +325,14 @@ const logoSrc = typeof logo === 'string' ? logo : logo.src;
 			min-height: 68px;
 			padding-inline: 14px;
 			gap: 16px;
+		}
+
+		.site-header[data-floating] {
+			top: 10px;
+			width: calc(100% - 20px);
+			min-height: 62px;
+			padding-inline: 12px;
+			border-radius: var(--radius-md);
 		}
 
 		.brand img {
