@@ -38,156 +38,368 @@ const comparison = [
 				de quién mira el celular. Esto es lo que cambia con Waichatt.
 			</p>
 		</div>
-		<div class="compare">
-			<div class="compare-card compare-card--win">
-				<h3 class="compare-title">Con Waichatt</h3>
-				<ul>
-					{comparison.map((row) => (
-						<li>
-							<span class="ico ico--check" aria-hidden="true">✓</span>
-							<span>{row.afterLead}<strong>{row.afterStrong}</strong></span>
-						</li>
-					))}
-				</ul>
-			</div>
-			<div class="compare-card compare-card--lose">
-				<h3 class="compare-title">Sin Waichatt</h3>
-				<ul>
-					{comparison.map((row) => (
-						<li>
-							<span class="ico ico--x" aria-hidden="true">✕</span>
-							<span>{row.before}</span>
-						</li>
-					))}
-				</ul>
-			</div>
+
+		<div class="cmp-legend" aria-hidden="true">
+			<span class="cmp-legend__before"><span class="cmp-legend__dot cmp-legend__dot--red"></span> Hoy</span>
+			<span class="cmp-legend__after"><span class="cmp-legend__dot cmp-legend__dot--green"></span> Con Waichatt</span>
 		</div>
+
+		<ul class="cmp-list">
+			{comparison.map((row, i) => (
+				<li class="cmp-card" style={`--i: ${i}`}>
+					<div class="cmp-card__inner">
+						<div class="cmp-side cmp-side--before">
+							<span class="cmp-ico cmp-ico--x" aria-hidden="true">
+								<svg viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" /></svg>
+							</span>
+							<p>{row.before}</p>
+						</div>
+						<span class="cmp-arrow" aria-hidden="true">
+							<svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+						</span>
+						<div class="cmp-side cmp-side--after">
+							<span class="cmp-ico cmp-ico--check" aria-hidden="true">
+								<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12" /></svg>
+							</span>
+							<p>{row.afterLead}<strong>{row.afterStrong}</strong></p>
+						</div>
+					</div>
+				</li>
+			))}
+		</ul>
 	</div>
 </section>
 
 <style>
 	.problem {
-		background: linear-gradient(180deg, #f5f7fb, #eceff5);
+		background: var(--color-background);
 	}
 
 	.accent {
 		color: var(--color-brand);
 	}
 
-	.compare {
+	/* Leyenda de columnas */
+	.cmp-legend {
 		display: grid;
 		grid-template-columns: 1fr 1fr;
-		align-items: center;
-		width: min(940px, 100%);
-		margin-inline: auto;
-	}
-
-	.compare-card {
-		border-radius: var(--radius-lg);
-	}
-
-	.compare-title {
-		margin: 0;
-		padding-bottom: 18px;
-		border-bottom: 1px solid rgba(20, 32, 27, 0.08);
-		text-align: center;
-		font-size: clamp(1.3rem, 2.2vw, 1.6rem);
+		gap: clamp(16px, 4vw, 56px);
+		width: min(920px, 100%);
+		margin: 0 auto 16px;
+		padding: 0 clamp(22px, 2.6vw, 32px);
+		font-size: 0.74rem;
 		font-weight: 800;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
 	}
 
-	/* Tarjeta ganadora: blanca, elevada y montada sobre la otra */
-	.compare-card--win {
-		position: relative;
-		z-index: 2;
-		margin-right: -32px;
-		padding: clamp(28px, 3.2vw, 42px) clamp(24px, 2.8vw, 36px);
-		border: 1px solid #eef1ef;
-		background: var(--color-surface);
-		box-shadow: 0 34px 80px rgba(20, 32, 27, 0.16);
+	.cmp-legend span {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
 	}
 
-	.compare-card--win .compare-title {
-		color: var(--color-text);
+	.cmp-legend__before {
+		color: #b04a4e;
 	}
 
-	/* Tarjeta perdedora: plana, hundida detrás */
-	.compare-card--lose {
-		position: relative;
-		z-index: 1;
-		padding: clamp(34px, 3.8vw, 52px) clamp(24px, 2.8vw, 36px);
-		padding-left: calc(clamp(24px, 2.8vw, 36px) + 44px);
-		border: 1px solid rgba(20, 32, 27, 0.07);
-		border-radius: var(--radius-lg);
-		background: rgba(255, 255, 255, 0.5);
+	.cmp-legend__after {
+		color: var(--color-brand);
 	}
 
-	.compare-card--lose .compare-title {
-		color: var(--color-muted);
-		font-weight: 700;
+	.cmp-legend__dot {
+		width: 8px;
+		height: 8px;
+		border-radius: 50%;
 	}
 
-	.compare ul {
-		margin: 0;
+	.cmp-legend__dot--red {
+		background: #e5484d;
+	}
+
+	.cmp-legend__dot--green {
+		background: var(--color-brand);
+		box-shadow: 0 0 0 4px rgba(37, 154, 114, 0.16);
+	}
+
+	.cmp-list {
+		display: grid;
+		gap: 16px;
+		width: min(920px, 100%);
+		margin-inline: auto;
 		padding: 0;
 		list-style: none;
 	}
 
-	.compare li {
+	/* Revelado escalonado al entrar en viewport */
+	.cmp-card {
+		opacity: 0;
+		transform: translateY(20px);
+		transition:
+			opacity 0.55s ease,
+			transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+		transition-delay: calc(var(--i) * 75ms);
+	}
+
+	.cmp-card.is-visible {
+		opacity: 1;
+		transform: translateY(0);
+	}
+
+	.cmp-card__inner {
+		position: relative;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		align-items: stretch;
+		border: 1px solid var(--color-border);
+		border-radius: 18px;
+		background: var(--color-surface);
+		box-shadow:
+			0 1px 2px rgba(20, 32, 27, 0.04),
+			0 10px 26px rgba(20, 32, 27, 0.05);
+		overflow: hidden;
+		transition:
+			transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+			box-shadow 0.3s ease,
+			border-color 0.3s ease;
+	}
+
+	/* Barrido de luz al pasar el mouse */
+	.cmp-card__inner::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		z-index: 3;
+		background: linear-gradient(110deg, transparent 35%, rgba(255, 255, 255, 0.5) 50%, transparent 65%);
+		transform: translateX(-120%);
+		pointer-events: none;
+	}
+
+	.cmp-card__inner:hover {
+		transform: translateY(-5px);
+		border-color: #c4e3d6;
+		box-shadow:
+			0 1px 2px rgba(20, 32, 27, 0.04),
+			0 26px 50px rgba(20, 32, 27, 0.12);
+	}
+
+	.cmp-card__inner:hover::after {
+		animation: cmp-sheen 0.9s ease;
+	}
+
+	.cmp-side {
+		position: relative;
 		display: flex;
-		gap: 12px;
 		align-items: center;
-		padding: 16px 0;
-		border-bottom: 1px solid rgba(20, 32, 27, 0.07);
-		line-height: 1.45;
+		gap: 14px;
+		padding: clamp(18px, 2.4vw, 26px) clamp(20px, 2.4vw, 30px);
 	}
 
-	.compare li:last-child {
-		border-bottom: 0;
-		padding-bottom: 0;
+	.cmp-side--before {
+		padding-right: clamp(34px, 3.2vw, 46px);
+		background: linear-gradient(135deg, rgba(229, 72, 77, 0.06), rgba(229, 72, 77, 0.015));
 	}
 
-	.compare-card--win li {
-		color: var(--color-text);
+	.cmp-side--after {
+		padding-left: clamp(34px, 3.2vw, 46px);
+		background: linear-gradient(135deg, rgba(37, 154, 114, 0.09), rgba(37, 154, 114, 0.02));
 	}
 
-	.compare-card--win strong {
-		font-weight: 800;
+	/* Resplandor sutil del lado solución */
+	.cmp-side--after::before {
+		content: '';
+		position: absolute;
+		top: -30%;
+		right: -10%;
+		width: 55%;
+		height: 160%;
+		background: radial-gradient(circle, rgba(37, 154, 114, 0.16), transparent 70%);
+		opacity: 0;
+		transition: opacity 0.35s ease;
+		pointer-events: none;
 	}
 
-	.compare-card--lose li {
+	.cmp-card__inner:hover .cmp-side--after::before {
+		opacity: 1;
+	}
+
+	.cmp-side p {
+		position: relative;
+		z-index: 1;
+		margin: 0;
+		font-size: 1rem;
+		line-height: 1.42;
+	}
+
+	.cmp-side--before p {
 		color: var(--color-muted);
 	}
 
-	.ico {
+	.cmp-side--after p {
+		color: var(--color-text);
+	}
+
+	.cmp-side--after strong {
+		font-weight: 800;
+		color: var(--color-brand-strong);
+	}
+
+	.cmp-ico {
+		display: grid;
+		place-items: center;
 		flex: 0 0 auto;
-		width: 18px;
-		font-size: 1.05rem;
-		font-weight: 900;
-		line-height: 1;
-		text-align: center;
+		width: 30px;
+		height: 30px;
+		border-radius: 50%;
+		transition: transform 0.3s ease;
 	}
 
-	.ico--check {
-		color: #1fae5a;
+	.cmp-card__inner:hover .cmp-ico--check {
+		transform: scale(1.12);
 	}
 
-	.ico--x {
+	.cmp-ico svg {
+		width: 15px;
+		height: 15px;
+		fill: none;
+		stroke: currentColor;
+		stroke-width: 2.6;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+	}
+
+	.cmp-ico--x {
+		background: rgba(229, 72, 77, 0.12);
 		color: #e5484d;
 	}
 
-	@media (max-width: 760px) {
-		.compare {
+	.cmp-ico--check {
+		background: var(--color-brand-soft);
+		color: var(--color-brand);
+		box-shadow: 0 0 0 0 rgba(37, 154, 114, 0.35);
+	}
+
+	/* El check se "dibuja" al revelarse la tarjeta */
+	.cmp-ico--check svg polyline {
+		stroke-dasharray: 26;
+		stroke-dashoffset: 26;
+	}
+
+	.cmp-card.is-visible .cmp-ico--check svg polyline {
+		animation: cmp-draw 0.5s ease forwards;
+		animation-delay: calc(var(--i) * 75ms + 0.35s);
+	}
+
+	/* Flecha que conecta problema → solución */
+	.cmp-arrow {
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		z-index: 2;
+		display: grid;
+		place-items: center;
+		width: 48px;
+		height: 48px;
+		border-radius: 50%;
+		background: var(--color-surface);
+		border: 1px solid var(--color-border);
+		color: var(--color-brand);
+		box-shadow: 0 10px 22px rgba(20, 32, 27, 0.14);
+		transform: translate(-50%, -50%);
+		transition:
+			background 0.3s ease,
+			color 0.3s ease,
+			transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+			box-shadow 0.3s ease;
+	}
+
+	.cmp-arrow svg {
+		width: 22px;
+		height: 22px;
+		fill: none;
+		stroke: currentColor;
+		stroke-width: 2.4;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+		transition: transform 0.3s ease;
+	}
+
+	.cmp-card__inner:hover .cmp-arrow {
+		background: var(--color-brand);
+		color: #fff;
+		transform: translate(-50%, -50%) scale(1.1);
+		box-shadow: 0 14px 30px rgba(37, 154, 114, 0.4);
+	}
+
+	.cmp-card__inner:hover .cmp-arrow svg {
+		transform: translateX(2px);
+	}
+
+	@keyframes cmp-sheen {
+		to {
+			transform: translateX(120%);
+		}
+	}
+
+	@keyframes cmp-draw {
+		to {
+			stroke-dashoffset: 0;
+		}
+	}
+
+	@media (max-width: 720px) {
+		.cmp-legend {
+			display: none;
+		}
+
+		.cmp-card__inner {
 			grid-template-columns: 1fr;
-			gap: 18px;
-			width: min(460px, 100%);
 		}
 
-		.compare-card--win {
-			margin-right: 0;
+		.cmp-side {
+			gap: 12px;
 		}
 
-		.compare-card--lose {
-			padding: clamp(24px, 5vw, 32px);
+		.cmp-side--before {
+			padding: clamp(18px, 5vw, 24px) clamp(18px, 5vw, 24px) clamp(28px, 6vw, 34px);
+		}
+
+		.cmp-side--after {
+			padding: clamp(28px, 6vw, 34px) clamp(18px, 5vw, 24px) clamp(18px, 5vw, 24px);
+		}
+
+		.cmp-arrow {
+			width: 42px;
+			height: 42px;
+			transform: translate(-50%, -50%) rotate(90deg);
+		}
+
+		.cmp-card__inner:hover .cmp-arrow {
+			transform: translate(-50%, -50%) rotate(90deg) scale(1.1);
+		}
+
+		.cmp-card__inner:hover .cmp-arrow svg {
+			transform: none;
 		}
 	}
 </style>
+
+<script>
+	const cards = document.querySelectorAll('#problema .cmp-card');
+	if ('IntersectionObserver' in window && cards.length) {
+		const io = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					if (entry.isIntersecting) {
+						entry.target.classList.add('is-visible');
+						io.unobserve(entry.target);
+					}
+				});
+			},
+			{ threshold: 0.2 },
+		);
+		cards.forEach((card) => io.observe(card));
+	} else {
+		cards.forEach((card) => card.classList.add('is-visible'));
+	}
+</script>

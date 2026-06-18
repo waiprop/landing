@@ -30,9 +30,13 @@ body {
 	background: var(--color-background);
 	color: var(--color-text);
 	font-family:
-		'Avenir Next',
-		'Segoe UI',
+		Inter,
+		ui-sans-serif,
 		system-ui,
+		-apple-system,
+		BlinkMacSystemFont,
+		'Helvetica Neue',
+		Arial,
 		sans-serif;
 	-webkit-font-smoothing: antialiased;
 	text-rendering: optimizeLegibility;
@@ -75,11 +79,26 @@ select {
 
 /* === Scaffolding compartido de las secciones de la home === */
 .section-band {
+	position: relative;
 	padding: clamp(72px, 9vw, 128px) 20px;
 }
 
-.section-band--muted {
-	background: #f6f7f6;
+/* Separador fino entre secciones: línea centrada que se desvanece en los bordes */
+.section-band::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	width: min(var(--container), calc(100% - 40px));
+	height: 1px;
+	background: linear-gradient(
+		90deg,
+		transparent,
+		rgba(37, 154, 114, 0.22) 18%,
+		rgba(37, 154, 114, 0.22) 82%,
+		transparent
+	);
 }
 
 .section-inner {
