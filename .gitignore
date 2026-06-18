@@ -68,6 +68,7 @@ docs/*.html
 *~
 
 #AI
+AGENTS.md
 .codex/
 .claude/
 .agents/
