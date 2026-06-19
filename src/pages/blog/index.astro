@@ -2,15 +2,22 @@
 import { getCollection } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import { site } from '../../config/site';
+import { breadcrumbSchema } from '../../config/schema';
 
 const posts = (await getCollection('blog')).filter((post) => !post.data.draft);
 posts.sort((a, b) => b.data.publishDate.getTime() - a.data.publishDate.getTime());
+
+const jsonLd = breadcrumbSchema([
+	{ name: 'Inicio', path: '/' },
+	{ name: 'Blog', path: '/blog/' },
+]);
 ---
 
 <Layout
 	title="Blog de Waichatt - WhatsApp, IA y ventas inmobiliarias"
 	description="Guías, tutoriales y mejores prácticas para ordenar consultas de WhatsApp, IA y CRM en negocios inmobiliarios."
-	canonical="/blog"
+	canonical="/blog/"
+	jsonLd={jsonLd}
 >
 	<main class="page">
 		<section class="hero-lite">

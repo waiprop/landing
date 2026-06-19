@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
+import { blogPostingSchema, breadcrumbSchema } from '../../config/schema';
 
 export async function getStaticPaths() {
 	const posts = (await getCollection('blog')).filter((post) => !post.data.draft);
@@ -12,9 +13,29 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { Content } = await render(post);
+
+const postPath = `/blog/${post.id}/`;
+const publishedTime = post.data.publishDate.toISOString();
+const modifiedTime = (post.data.updatedDate ?? post.data.publishDate).toISOString();
+const jsonLd = [
+	blogPostingSchema(post, postPath),
+	breadcrumbSchema([
+		{ name: 'Inicio', path: '/' },
+		{ name: 'Blog', path: '/blog/' },
+		{ name: post.data.title, path: postPath },
+	]),
+];
 ---
 
-<Layout title={`${post.data.title} - Waichatt`} description={post.data.description} canonical={`/blog/${post.id}/`}>
+<Layout
+	title={`${post.data.title} - Waichatt`}
+	description={post.data.description}
+	canonical={postPath}
+	ogType="article"
+	publishedTime={publishedTime}
+	modifiedTime={modifiedTime}
+	jsonLd={jsonLd}
+>
 	<main class="article-page">
 		<article>
 			<a class="back" href="/blog">Blog</a>

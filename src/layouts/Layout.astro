@@ -11,12 +11,15 @@ interface Props {
 	ogTitle?: string;
 	ogDescription?: string;
 	ogImage?: string;
+	ogType?: 'website' | 'article';
+	publishedTime?: string;
+	modifiedTime?: string;
 	canonical?: string;
 	noindex?: boolean;
 	jsonLd?: Record<string, unknown> | Array<Record<string, unknown>>;
 }
 
-const { title, description, ogTitle, ogDescription, ogImage, canonical, noindex, jsonLd } = Astro.props;
+const { title, description, ogTitle, ogDescription, ogImage, ogType, publishedTime, modifiedTime, canonical, noindex, jsonLd } = Astro.props;
 ---
 
 <!doctype html>
@@ -28,6 +31,9 @@ const { title, description, ogTitle, ogDescription, ogImage, canonical, noindex,
 			ogTitle={ogTitle}
 			ogDescription={ogDescription}
 			ogImage={ogImage}
+			ogType={ogType}
+			publishedTime={publishedTime}
+			modifiedTime={modifiedTime}
 			canonical={canonical}
 			noindex={noindex}
 			jsonLd={jsonLd}

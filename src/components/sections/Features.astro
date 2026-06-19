@@ -2,7 +2,16 @@
 import AgenteIa from '../mockups/AgenteIa.astro';
 import Conversaciones from '../mockups/Conversaciones.astro';
 
-const pipelineColumns = [
+type KanbanCard = {
+	name: string;
+	property: string;
+	date: string;
+	time: string;
+	plus?: string;
+	drag?: boolean;
+};
+
+const pipelineColumns: { title: string; count: number; cards: KanbanCard[] }[] = [
 	{
 		title: 'Visita Agendada',
 		count: 1,

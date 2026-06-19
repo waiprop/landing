@@ -8,6 +8,7 @@ const site = process.env.PUBLIC_SITE_URL ?? 'https://waichatt.com';
 // https://astro.build/config
 export default defineConfig({
 	site,
+	trailingSlash: 'always',
 	integrations: [
 		sitemap(),
 		icon({
