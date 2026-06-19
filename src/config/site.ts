@@ -15,12 +15,12 @@ export const site = {
 		home: '/',
 		app: 'https://waichatt.app',
 		register: 'https://waichatt.app/register',
-		blog: '/blog',
-		pricing: '/precios',
-		realEstate: '/para-inmobiliarias',
-		developers: '/para-desarrolladoras',
-		privacy: '/politica-de-privacidad',
-		terms: '/terminos-y-condiciones',
+		blog: '/blog/',
+		pricing: '/precios/',
+		realEstate: '/para-inmobiliarias/',
+		developers: '/para-desarrolladoras/',
+		privacy: '/politica-de-privacidad/',
+		terms: '/terminos-y-condiciones/',
 	},
 } as const;
 
