@@ -7,14 +7,14 @@ import Steps from '../components/sections/Steps.astro';
 import Pricing from '../components/sections/Pricing.astro';
 import Faq from '../components/sections/Faq.astro';
 import FinalCta from '../components/sections/FinalCta.astro';
-import { organizationSchema, softwareApplicationSchema } from '../config/schema';
+import { organizationSchema, softwareApplicationSchema, faqSchema } from '../config/schema';
 ---
 
 <Layout
 	ogTitle="Tu WhatsApp atiende solo - Waichatt"
 	ogDescription="WhatsApp + IA + CRM en un solo lugar. Para inmobiliarias y desarrolladoras. Empezá gratis, sin tarjeta."
 	canonical="/"
-	jsonLd={[organizationSchema, softwareApplicationSchema]}
+	jsonLd={[organizationSchema, softwareApplicationSchema, faqSchema]}
 >
 	<main>
 		<Hero />

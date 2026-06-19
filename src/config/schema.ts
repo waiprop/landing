@@ -1,4 +1,5 @@
 import type { CollectionEntry } from 'astro:content';
+import { faqs } from './faqs';
 import { plans } from './plans';
 import { site } from './site';
 
@@ -51,6 +52,20 @@ export const softwareApplicationSchema = {
 		name: site.name,
 		url: site.url,
 	},
+};
+
+// Preguntas frecuentes (rich results: acordeón de FAQ en buscadores).
+export const faqSchema = {
+	'@context': 'https://schema.org',
+	'@type': 'FAQPage',
+	mainEntity: faqs.map((faq) => ({
+		'@type': 'Question',
+		name: faq.question,
+		acceptedAnswer: {
+			'@type': 'Answer',
+			text: faq.answer,
+		},
+	})),
 };
 
 // Datos estructurados de un artículo del blog (rich results: fecha, autor, etc.).
