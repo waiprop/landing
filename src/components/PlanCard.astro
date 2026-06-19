@@ -1,0 +1,141 @@
+---
+import type { Plan } from '../config/plans';
+import { site } from '../config/site';
+import Button from './ui/Button.astro';
+
+interface Props {
+	plan: Plan;
+	track?: string;
+}
+
+const { plan, track } = Astro.props;
+---
+
+<article class="plan-card">
+	<h3 class="plan-card__name">{plan.name}</h3>
+	<p class="plan-card__price"><strong>{plan.priceLabel}</strong><span>/mes</span></p>
+	<p class="plan-card__detail">{plan.detail}</p>
+
+	<Button href={site.links.register} class="plan-card__cta" track={track ?? plan.track}>{plan.cta}</Button>
+
+	<div class="plan-card__divider"></div>
+
+	<p class="plan-card__label">Todo lo que incluye</p>
+	<ul class="plan-card__features">
+		{plan.features.map((feature) => (
+			<li>
+				<span class="plan-card__check" aria-hidden="true">
+					<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12" /></svg>
+				</span>
+				<span>{feature}</span>
+			</li>
+		))}
+	</ul>
+</article>
+
+<style>
+	.plan-card {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		padding: clamp(24px, 3vw, 34px);
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius-lg);
+		background: var(--color-surface);
+		box-shadow:
+			0 1px 2px rgba(20, 32, 27, 0.04),
+			0 24px 60px rgba(20, 32, 27, 0.1);
+	}
+
+	.plan-card__name {
+		margin: 0;
+		color: var(--color-text);
+		font-size: 1.3rem;
+		font-weight: 800;
+	}
+
+	.plan-card__price {
+		display: flex;
+		align-items: baseline;
+		gap: 8px;
+		margin: 16px 0 0;
+	}
+
+	.plan-card__price strong {
+		color: var(--color-text);
+		font-size: clamp(2.6rem, 5vw, 3.2rem);
+		line-height: 1;
+		letter-spacing: -0.02em;
+	}
+
+	.plan-card__price span {
+		color: var(--color-muted);
+		font-size: 1rem;
+		font-weight: 600;
+	}
+
+	.plan-card__detail {
+		margin: 8px 0 0;
+		color: var(--color-muted);
+		font-size: 0.95rem;
+	}
+
+	.plan-card :global(.plan-card__cta) {
+		width: 100%;
+		margin-top: 24px;
+	}
+
+	.plan-card__divider {
+		height: 1px;
+		margin: 26px 0;
+		background-image: radial-gradient(circle, var(--color-border) 1.3px, transparent 1.3px);
+		background-size: 9px 1px;
+		background-repeat: repeat-x;
+	}
+
+	.plan-card__label {
+		margin: 0 0 18px;
+		color: var(--color-muted);
+		font-size: 0.78rem;
+		font-weight: 800;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+	}
+
+	.plan-card__features {
+		display: grid;
+		gap: 14px;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.plan-card__features li {
+		display: flex;
+		align-items: center;
+		gap: 12px;
+		color: var(--color-text);
+		line-height: 1.4;
+	}
+
+	.plan-card__check {
+		display: grid;
+		place-items: center;
+		flex: 0 0 auto;
+		width: 22px;
+		height: 22px;
+		border-radius: 50%;
+		background: var(--color-brand-soft);
+		color: var(--color-brand);
+	}
+
+	.plan-card__check svg {
+		width: 13px;
+		height: 13px;
+		fill: none;
+		stroke: currentColor;
+		stroke-width: 3;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+	}
+</style>

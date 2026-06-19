@@ -1,98 +1,65 @@
 ---
 import { plans } from '../../config/plans';
-import { site } from '../../config/site';
-import Button from '../ui/Button.astro';
+import PlanCard from '../PlanCard.astro';
+
+const plan = plans[0];
 ---
 
 <section class="pricing section-band" id="precios" aria-labelledby="pricing-title">
-	<div class="section-inner">
-		<div class="section-head">
+	<div class="section-inner pricing-layout">
+		<div class="pricing-intro">
 			<p class="eyebrow">Precios</p>
 			<h2 id="pricing-title">Un plan simple, sin sorpresas</h2>
 			<p>Todo incluido en un solo plan. Probalo 5 días gratis, sin tarjeta.</p>
+			<p class="pricing-note">El plan incluye un límite mensual de uso de IA. Si necesitás ampliar, te lo informamos antes.</p>
 		</div>
-		<div class="pricing-grid">
-			{plans.map((plan) => (
-				<article class:list={['price-card', plan.featured && 'price-card--featured']}>
-					<h3>{plan.name}</h3>
-					<p class="price"><strong>{plan.priceLabel}</strong><span>/mes</span></p>
-					<p class="plan-detail">{plan.detail}</p>
-					<ul>
-						{plan.features.map((feature) => <li>{feature}</li>)}
-					</ul>
-					<Button href={site.links.register} variant={plan.featured ? 'primary' : 'ghost'} track={plan.track}>{plan.cta}</Button>
-				</article>
-			))}
+		<div class="pricing-card-col">
+			<PlanCard plan={plan} track="Pricing pro" />
 		</div>
-		<p class="pricing-note">El plan incluye un límite mensual de uso de IA. Si necesitás ampliar, te lo informamos antes.</p>
 	</div>
 </section>
 
 <style>
-	.pricing-grid {
+	.pricing-layout {
 		display: grid;
+		grid-template-columns: minmax(0, 480px) minmax(0, 410px);
 		justify-content: center;
-		grid-template-columns: min(440px, 100%);
-		align-items: stretch;
-		gap: 16px;
+		align-items: center;
+		gap: clamp(32px, 4vw, 64px);
 	}
 
-	.price-card {
-		position: relative;
-		display: flex;
-		flex-direction: column;
-		padding: 26px;
-		border: 1px solid var(--color-border);
-		border-radius: var(--radius-md);
-		background: var(--color-surface);
+	.pricing-intro {
+		max-width: 480px;
 	}
 
-	.price-card--featured {
-		border-color: #b8e0d2;
-		box-shadow: 0 22px 60px rgba(37, 154, 114, 0.12);
+	.pricing-intro h2 {
+		margin-top: 12px;
 	}
 
-	.price {
-		margin: 20px 0 4px;
-	}
-
-	.price strong {
-		color: var(--color-text);
-		font-size: 2.2rem;
-		line-height: 1;
-	}
-
-	.price span,
-	.plan-detail,
-	.pricing-note {
-		color: var(--color-muted);
-	}
-
-	.price-card ul {
-		display: grid;
-		gap: 10px;
-		margin: 24px 0;
-		padding: 0;
-		list-style: none;
-	}
-
-	.price-card li {
-		color: var(--color-text);
-		line-height: 1.45;
-	}
-
-	.price-card li::before {
-		content: '✓';
-		margin-right: 8px;
-		color: var(--color-brand);
-		font-weight: 900;
-	}
-
-	.price-card :global(.button) {
-		margin-top: auto;
+	.pricing-intro > p {
+		margin: 18px 0 0;
+		font-size: 1.08rem;
 	}
 
 	.pricing-note {
-		margin-top: 20px;
+		margin-top: 22px;
+		font-size: 0.95rem;
+	}
+
+	@media (max-width: 900px) {
+		.pricing-layout {
+			grid-template-columns: 1fr;
+			justify-items: center;
+			gap: 36px;
+		}
+
+		.pricing-intro {
+			max-width: 560px;
+			text-align: center;
+		}
+
+		.pricing-card-col {
+			width: min(440px, 100%);
+		}
 	}
 </style>

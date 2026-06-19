@@ -1,79 +1,89 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import { site } from '../config/site';
 import { plans } from '../config/plans';
-import Button from '../components/ui/Button.astro';
-import PageHeader from '../components/PageHeader.astro';
+import PlanCard from '../components/PlanCard.astro';
+
+const plan = plans[0];
 ---
 
 <Layout title="Precios de Waichatt - Un plan simple para inmobiliarias" description="El plan de Waichatt con todo incluido: agente IA, CRM y propiedades ilimitadas. Probalo 5 días gratis, sin tarjeta." canonical="/precios">
-	<main>
-		<PageHeader
-			eyebrow="Precios"
-			title="Un plan simple, sin sorpresas"
-			subtitle="Todo incluido en un solo plan. Probalo 5 días gratis, sin tarjeta."
-		/>
-		<section class="plans" aria-label="Planes">
-			{plans.map((plan) => (
-				<article class:list={[plan.featured && 'featured']}>
-					<h2>{plan.name}</h2>
-					<strong>{plan.priceLabel}<small>/mes</small></strong>
-					<p>{plan.summary}</p>
-					<Button href={site.links.register} variant={plan.featured ? 'primary' : 'ghost'} track={`Pricing page ${plan.name}`}>{plan.cta}</Button>
-				</article>
-			))}
-		</section>
+	<main class="pricing-page">
+		<div class="pricing-layout">
+			<div class="pricing-intro">
+				<p class="eyebrow">Precios</p>
+				<h1>Un plan simple, sin sorpresas</h1>
+				<p class="subtitle">Todo incluido en un solo plan. Probalo 5 días gratis, sin tarjeta.</p>
+				<p class="note">El plan incluye un límite mensual de uso de IA. Si necesitás ampliar, te lo informamos antes.</p>
+			</div>
+			<div class="pricing-card-col">
+				<PlanCard plan={plan} track="Pricing page Plan Pro" />
+			</div>
+		</div>
 	</main>
 </Layout>
 
 <style>
-	.plans {
-		display: grid;
-		justify-content: center;
-		grid-template-columns: min(460px, 100%);
-		gap: 16px;
+	.pricing-page {
 		width: min(var(--container), 100%);
 		margin-inline: auto;
-		padding: 48px 20px clamp(56px, 8vw, 104px);
+		padding: clamp(56px, 8vw, 104px) 20px;
 	}
 
-	article {
-		display: flex;
-		flex-direction: column;
-		padding: 28px;
-		border: 1px solid var(--color-border);
-		border-radius: var(--radius-md);
-		background: var(--color-surface);
+	.pricing-layout {
+		display: grid;
+		grid-template-columns: minmax(0, 480px) minmax(0, 410px);
+		justify-content: center;
+		align-items: center;
+		gap: clamp(32px, 4vw, 64px);
 	}
 
-	.featured {
-		border-color: #b8e0d2;
-		box-shadow: 0 22px 60px rgba(37, 154, 114, 0.12);
+	.pricing-intro {
+		max-width: 480px;
 	}
 
-	h2 {
+	.eyebrow {
+		margin: 0 0 12px;
+		color: var(--color-brand);
+		font-weight: 900;
+		text-transform: uppercase;
+		letter-spacing: 0.08em;
+	}
+
+	h1 {
 		margin: 0;
 		color: var(--color-text);
+		font-size: clamp(2.4rem, 5vw, 4rem);
+		line-height: 1.04;
 	}
 
-	article strong {
-		display: block;
-		margin-top: 22px;
-		color: var(--color-text);
-		font-size: 2rem;
-	}
-
-	small {
+	.subtitle {
+		margin: 18px 0 0;
 		color: var(--color-muted);
-		font-size: 1rem;
-	}
-
-	article p {
-		color: var(--color-muted);
+		font-size: 1.08rem;
 		line-height: 1.65;
 	}
 
-	article :global(.button) {
-		margin-top: auto;
+	.note {
+		margin: 22px 0 0;
+		color: var(--color-muted);
+		font-size: 0.95rem;
+		line-height: 1.6;
+	}
+
+	@media (max-width: 900px) {
+		.pricing-layout {
+			grid-template-columns: 1fr;
+			justify-items: center;
+			gap: 36px;
+		}
+
+		.pricing-intro {
+			max-width: 560px;
+			text-align: center;
+		}
+
+		.pricing-card-col {
+			width: min(440px, 100%);
+		}
 	}
 </style>
