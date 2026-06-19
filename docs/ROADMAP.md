@@ -11,6 +11,15 @@ Objetivo: una landing B2B minimalista, rápida y bien posicionada en Google, pen
 
 Las fases están ordenadas para plasmarlas de arriba hacia abajo. Cada una deja algo terminado antes de pasar a la siguiente. Con las fases 0 a 6 ya tenés una landing que posiciona, carga rápido y recibe publicidad. La fase 7 es continua.
 
+> **Estado al 2026-06-18 (relevado contra el código):** la landing está construida y funcionando. Fases 0, 1, 4 y 6 prácticamente completas; fase 2 con la paleta y los componentes hechos pero **la tipografía no sigue el plan** (ver abajo); fase 3 resuelta con **mockups en vivo HTML/CSS** en lugar de capturas/videos; fase 5 mayormente cubierta salvo fuentes; fase 7 con la infraestructura del blog y las páginas hijas listas.
+>
+> **Divergencias respecto del plan original:**
+> - **Tipografía:** se usa **Inter** del sistema (sin auto-hospedar, sin `@fontsource`), justo la fuente que el roadmap pedía evitar. No se incorporaron General Sans / Cabinet Grotesk. → *pendiente real de Fase 2/5*.
+> - **CSS:** se usa **CSS plano con `:root` + scope de Astro**, no Tailwind v4. (Era la alternativa contemplada en el Stack, así que es una desviación válida.)
+> - **Íconos:** Phosphor solo vía `astro-icon` para logos de marca (WhatsApp/Meta/Calendar); el resto de íconos de los mockups son **SVG inline propios** (`MockIcon.astro`), no Phosphor.
+> - **Mostrar el sistema:** en vez de screenshots + video se hicieron **mockups interactivos en vivo** (Conversaciones, Agente IA, Pipeline). Los PNG en `src/assets/features/` quedaron sin usar. Faltan los videos.
+> - **Orden de secciones:** la home final no usa el orden literal de la Fase 1. La sección "Problema" (`ProblemSolution`) **se eliminó** del proyecto; la home va Hero → Features → Audiences → Steps → Pricing → FAQ → FinalCta.
+
 > **Dos principios que atraviesan todo el roadmap:**
 > 1. **Velocidad** — cada decisión técnica se elige por su impacto en Core Web Vitals. Cero JS donde no haga falta, fuentes auto-hospedadas, imágenes y video optimizados.
 > 2. **SEO** — el contenido importante siempre en el HTML (no escondido tras JS), jerarquía de encabezados correcta, metadatos completos. Google tiene que poder leer y entender todo sin ejecutar scripts.
@@ -67,9 +76,9 @@ Secciones de la home, en orden:
 
 Tareas:
 
-- [ ] Integrar el copy y ajustar textos al público dual (negocio/equipo, no solo "inmobiliaria").
-- [ ] Jerarquía SEO: **un solo `<h1>`** (el del hero); el resto `<h2>`/`<h3>` en orden lógico.
-- [ ] Dejar preparada la estructura de carpetas para páginas hijas: `/precios`, `/para-inmobiliarias`, `/para-desarrolladoras`, `/blog`.
+- [x] Integrar el copy y ajustar textos al público dual (negocio/equipo, no solo "inmobiliaria"). — planes neutralizados en `config/plans.ts`; sección `Audiences` cubre los dos públicos.
+- [x] Jerarquía SEO: **un solo `<h1>`** (el del hero); el resto `<h2>`/`<h3>` en orden lógico. — un único `<h1>` en `Hero.astro`.
+- [x] Dejar preparada la estructura de carpetas para páginas hijas: `/precios`, `/para-inmobiliarias`, `/para-desarrolladoras`, `/blog`. — las cuatro existen en `src/pages/`.
 
 ### Planes (nombres neutralizados para los dos públicos)
 
@@ -85,9 +94,9 @@ Tareas:
 
 ## Fase 2 — Sistema de diseño
 
-- [ ] Paleta como variables CSS: verde `#259A72` y su escala (tinte claro, hover oscuro, texto verde fuerte) + neutros.
-- [ ] Una sola tipografía por rol: una para títulos, una para texto (ver Stack).
-- [ ] Componentes base reutilizables: botón primario, botón secundario, tarjeta, badge, contenedor de sección.
+- [x] Paleta como variables CSS: verde `#259A72` y su escala (tinte claro, hover oscuro, texto verde fuerte) + neutros. — en `:root` de `global.css`. *Falta:* los colores funcionales (error/éxito/advertencia) aún no están como variables; solo existe `--focus-ring`.
+- [ ] Una sola tipografía por rol: una para títulos, una para texto (ver Stack). — ⚠️ **no hecho según el plan:** se usa **Inter del sistema** (sin auto-hospedar), la fuente que el roadmap pedía evitar.
+- [x] Componentes base reutilizables: botón primario, botón secundario, tarjeta, badge, contenedor de sección. — `ui/Button.astro`, contenedores `.section-band`/`.section-inner`, badges (`.eyebrow`). *Falta:* un componente `Card` reutilizable (las tarjetas hoy son CSS por sección).
 
 Criterio de diseño de toda la fase:
 
@@ -128,27 +137,27 @@ No son de diseño visible — no afectan la estética general — pero hacen fal
 
 La fase que más convierte.
 
-- [ ] Capturas reales del sistema con datos de demo prolijos (nombres y propiedades ficticias pero creíbles), dentro de mockups de navegador/celular.
-- [ ] Video principal de 60–90 s: flujo completo "consulta entra → IA responde → se crea lead → se agenda visita".
-- [ ] Videos cortos en loop de 10–20 s por módulo (Conversaciones, Agente IA, CRM, Propiedades, Calendario, Dashboard, Campañas).
+- [x] Capturas reales del sistema con datos de demo prolijos (nombres y propiedades ficticias pero creíbles), dentro de mockups de navegador/celular. — *resuelto distinto:* **mockups interactivos en vivo** (`Conversaciones`, `AgenteIa`, Pipeline kanban) con datos de demo creíbles, en lugar de screenshots.
+- [ ] Video principal de 60–90 s: flujo completo "consulta entra → IA responde → se crea lead → se agenda visita". — pendiente.
+- [ ] Videos cortos en loop de 10–20 s por módulo (Conversaciones, Agente IA, CRM, Propiedades, Calendario, Dashboard, Campañas). — pendiente.
 
 Técnico (impacto directo en velocidad):
 
-- [ ] Videos **nunca** alojados en el propio servidor → YouTube/Vimeo embebido, o Mux / Cloudflare Stream para algo más profesional.
-- [ ] Imágenes pasadas por el componente `<Image />` de Astro (convierte a WebP/AVIF y sirve el tamaño justo).
-- [ ] Cada imagen con su `alt` describiendo qué módulo muestra (suma SEO y accesibilidad).
+- [ ] Videos **nunca** alojados en el propio servidor → YouTube/Vimeo embebido, o Mux / Cloudflare Stream para algo más profesional. — todavía no hay videos.
+- [ ] Imágenes pasadas por el componente `<Image />` de Astro (convierte a WebP/AVIF y sirve el tamaño justo). — solo el logo del `Footer` usa `<Image />`; los PNG de `src/assets/features/` quedaron sin usar (reemplazados por mockups).
+- [x] Cada imagen con su `alt` describiendo qué módulo muestra (suma SEO y accesibilidad). — imágenes y mockups presentes tienen `alt`/`aria-label`.
 
 ---
 
 ## Fase 4 — SEO técnico
 
-- [ ] Meta description por página.
-- [ ] Open Graph completo (título, descripción e imagen) + Twitter Card (para que el link se vea bien al compartirlo y en los anuncios).
-- [ ] Datos estructurados schema.org: `SoftwareApplication` y `Organization`.
-- [ ] `sitemap.xml` (la genera el plugin) y `robots.txt`.
-- [ ] URLs limpias y descriptivas.
-- [ ] Canonical tags.
-- [ ] Componente `<SEO />` reutilizable en Astro: cada página le pasa título, descripción e imagen (así no se olvida ninguna).
+- [x] Meta description por página. — vía `SEO.astro`; cada página pasa su `description`.
+- [x] Open Graph completo (título, descripción e imagen) + Twitter Card (para que el link se vea bien al compartirlo y en los anuncios). — OG completo + `twitter:card summary_large_image` en `SEO.astro`.
+- [x] Datos estructurados schema.org: `SoftwareApplication` y `Organization`. — en `config/schema.ts` (además `BlogPosting` y `BreadcrumbList`).
+- [x] `sitemap.xml` (la genera el plugin) y `robots.txt`. — `@astrojs/sitemap` genera `sitemap-index.xml`; `robots.txt` en `public/` lo referencia.
+- [x] URLs limpias y descriptivas. — `/precios`, `/para-inmobiliarias`, etc., con `trailingSlash: 'always'`.
+- [x] Canonical tags. — `canonical` + `og:url` normalizados en `SEO.astro`.
+- [x] Componente `<SEO />` reutilizable en Astro: cada página le pasa título, descripción e imagen (así no se olvida ninguna). — `components/SEO.astro`.
 
 ---
 
@@ -156,11 +165,11 @@ Técnico (impacto directo en velocidad):
 
 Objetivo: Core Web Vitals en verde (factor de ranking de Google).
 
-- [ ] Medir con PageSpeed Insights y trabajar sobre lo que marque.
-- [ ] Lazy-loading en imágenes y videos debajo del pliegue.
-- [ ] Fuentes auto-hospedadas con `font-display: swap` (ver Stack).
-- [ ] Cero JavaScript en lo que no lo necesite (Astro ya ayuda).
-- [ ] Contenido importante en el HTML aunque el JS no corra (la animación es un agregado, no un requisito para ver el contenido).
+- [ ] Medir con PageSpeed Insights y trabajar sobre lo que marque. — sin registro de medición todavía.
+- [x] Lazy-loading en imágenes y videos debajo del pliegue. — `<Image />` de Astro hace lazy por defecto (hoy hay pocas imágenes; el sistema se muestra con mockups CSS).
+- [ ] Fuentes auto-hospedadas con `font-display: swap` (ver Stack). — ⚠️ **no hecho:** se usa Inter del sistema; no hay fuentes auto-hospedadas.
+- [x] Cero JavaScript en lo que no lo necesite (Astro ya ayuda). — sitio mayormente HTML/CSS estático; JS mínimo e `is:inline` para tracking y algún `IntersectionObserver`.
+- [x] Contenido importante en el HTML aunque el JS no corra (la animación es un agregado, no un requisito para ver el contenido). — todo el contenido se renderiza en el HTML; las animaciones son mejora progresiva.
 
 ---
 
@@ -168,12 +177,12 @@ Objetivo: Core Web Vitals en verde (factor de ranking de Google).
 
 Antes de gastar en ads:
 
-- [ ] La landing capaz de recibir parámetros UTM.
-- [ ] Píxel de Meta instalado.
-- [ ] Google Analytics 4 instalado.
-- [ ] Evento de conversión configurado (clic en "Empezá gratis" o registro completado).
-- [ ] Mensaje del anuncio = mensaje del hero (si el ad promete "automatizá tu WhatsApp", el hero repite esa promesa).
-- [ ] Probar la página en celular real, no solo en la compu.
+- [x] La landing capaz de recibir parámetros UTM. — `Tracking.astro` propaga `utm_*`, `gclid` y `fbclid` a los links salientes (`data-preserve-utm`).
+- [x] Píxel de Meta instalado. — `fbq` en `Tracking.astro` (con pixel id por defecto, configurable por env).
+- [x] Google Analytics 4 instalado. — `gtag` en `Tracking.astro` (se activa con `PUBLIC_GA_MEASUREMENT_ID`).
+- [x] Evento de conversión configurado (clic en "Empezá gratis" o registro completado). — `trackClicks` dispara `Lead`/`click_cta` y detecta `/register` y WhatsApp.
+- [ ] Mensaje del anuncio = mensaje del hero (si el ad promete "automatizá tu WhatsApp", el hero repite esa promesa). — operativo (depende de las campañas).
+- [ ] Probar la página en celular real, no solo en la compu. — operativo, a verificar.
 
 ---
 
@@ -181,13 +190,13 @@ Antes de gastar en ads:
 
 Continuo, se alimenta con el sitio ya en vivo.
 
-- [ ] Activar el blog con constancia (Astro content collections + Markdown).
-- [ ] Artículos que respondan lo que el cliente busca en Google. Ejemplos:
-  - "Cómo organizar las consultas de WhatsApp de una inmobiliaria"
-  - "Qué es un CRM inmobiliario"
-  - "Vender en pozo: cómo no perder interesados"
-- [ ] Lanzar páginas hijas `/para-inmobiliarias` y `/para-desarrolladoras`.
-- [ ] Apuntar cada campaña de ads a su página hija (convierten mejor que mandar todo a la home).
+- [x] Activar el blog con constancia (Astro content collections + Markdown). — infraestructura lista: `content.config.ts`, `/blog` y `/blog/[slug]`. La "constancia" (publicar seguido) es continua.
+- [ ] Artículos que respondan lo que el cliente busca en Google. Ejemplos: — publicado 1 de los 3 ejemplos:
+  - [x] "Cómo organizar las consultas de WhatsApp de una inmobiliaria" — ya está en `src/content/blog/`.
+  - [ ] "Qué es un CRM inmobiliario"
+  - [ ] "Vender en pozo: cómo no perder interesados"
+- [x] Lanzar páginas hijas `/para-inmobiliarias` y `/para-desarrolladoras`. — ambas existen y usan `PageHeader` + `BenefitGrid`.
+- [ ] Apuntar cada campaña de ads a su página hija (convierten mejor que mandar todo a la home). — operativo (depende de las campañas).
 
 ---
 
