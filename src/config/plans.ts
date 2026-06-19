@@ -5,7 +5,7 @@ export interface Plan {
 	priceUsd: number;
 	/** Precio listo para mostrar, ej. "USD 80". */
 	priceLabel: string;
-	/** Aclaración bajo el precio, ej. "1 usuario · 7 días de prueba". */
+	/** Aclaración bajo el precio, ej. "5 usuarios · 5 días de prueba". */
 	detail: string;
 	/** Plan destacado ("Más elegido"). */
 	featured: boolean;
@@ -21,48 +21,23 @@ export interface Plan {
 
 export const plans: Plan[] = [
 	{
-		name: 'Tu negocio online',
-		priceUsd: 0,
-		priceLabel: 'USD 0',
-		detail: 'Para siempre',
-		featured: false,
-		features: [
-			'Web propia en subdominio',
-			'Hasta 20 propiedades',
-			'Botón de WhatsApp directo',
-			'1 usuario',
-			'Sello Hecho con Waichatt',
-		],
-		summary: 'Web propia en subdominio, hasta 20 propiedades, botón de WhatsApp directo y 1 usuario.',
-		cta: 'Empezá gratis',
-		track: 'Pricing free',
-	},
-	{
-		name: 'Para quien trabaja solo',
-		priceUsd: 80,
-		priceLabel: 'USD 80',
-		detail: '1 usuario · 7 días de prueba',
+		name: 'Plan Pro',
+		priceUsd: 180,
+		priceLabel: 'USD 180',
+		detail: '5 usuarios · 5 días de prueba',
 		featured: true,
 		features: [
 			'Propiedades ilimitadas',
 			'Agente IA en WhatsApp',
 			'CRM con pipeline',
 			'Seguimientos masivos',
-			'Soporte por chat',
+			'Asignación de leads por vendedor',
+			'Soporte prioritario',
+			'Onboarding asistido',
 		],
-		summary: 'Propiedades ilimitadas, agente IA en WhatsApp, CRM con pipeline, seguimientos masivos y soporte por chat.',
-		cta: 'Probar 7 días gratis',
+		summary:
+			'Propiedades ilimitadas, agente IA en WhatsApp, CRM con pipeline, seguimientos masivos, asignación de leads por vendedor, soporte prioritario y onboarding asistido.',
+		cta: 'Probar 5 días gratis',
 		track: 'Pricing pro',
-	},
-	{
-		name: 'Para equipos con vendedores',
-		priceUsd: 180,
-		priceLabel: 'USD 180',
-		detail: '5 usuarios',
-		featured: false,
-		features: ['Todo lo del Pro', 'Asignación de leads por vendedor', 'Soporte prioritario', 'Onboarding asistido'],
-		summary: '5 usuarios, asignación de leads por vendedor, soporte prioritario y onboarding asistido.',
-		cta: 'Empezá gratis',
-		track: 'Pricing team',
 	},
 ];

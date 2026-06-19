@@ -6,17 +6,16 @@ import Button from '../components/ui/Button.astro';
 import PageHeader from '../components/PageHeader.astro';
 ---
 
-<Layout title="Precios de Waichatt - Planes claros para inmobiliarias" description="Conocé los planes de Waichatt: empezá gratis y pasá al Pro cuando necesites agente IA, CRM y propiedades ilimitadas." canonical="/precios">
+<Layout title="Precios de Waichatt - Un plan simple para inmobiliarias" description="El plan de Waichatt con todo incluido: agente IA, CRM y propiedades ilimitadas. Probalo 5 días gratis, sin tarjeta." canonical="/precios">
 	<main>
 		<PageHeader
 			eyebrow="Precios"
-			title="Planes claros, sin sorpresas"
-			subtitle="Empezá gratis y pasá al Pro cuando lo necesites. Sin costos ocultos."
+			title="Un plan simple, sin sorpresas"
+			subtitle="Todo incluido en un solo plan. Probalo 5 días gratis, sin tarjeta."
 		/>
 		<section class="plans" aria-label="Planes">
 			{plans.map((plan) => (
 				<article class:list={[plan.featured && 'featured']}>
-					{plan.featured && <span class="badge">Más elegido</span>}
 					<h2>{plan.name}</h2>
 					<strong>{plan.priceLabel}<small>/mes</small></strong>
 					<p>{plan.summary}</p>
@@ -30,7 +29,8 @@ import PageHeader from '../components/PageHeader.astro';
 <style>
 	.plans {
 		display: grid;
-		grid-template-columns: repeat(3, minmax(0, 1fr));
+		justify-content: center;
+		grid-template-columns: min(460px, 100%);
 		gap: 16px;
 		width: min(var(--container), 100%);
 		margin-inline: auto;
@@ -49,13 +49,6 @@ import PageHeader from '../components/PageHeader.astro';
 	.featured {
 		border-color: #b8e0d2;
 		box-shadow: 0 22px 60px rgba(37, 154, 114, 0.12);
-	}
-
-	.badge {
-		align-self: flex-start;
-		margin-bottom: 14px;
-		color: var(--color-brand);
-		font-weight: 900;
 	}
 
 	h2 {
@@ -82,11 +75,5 @@ import PageHeader from '../components/PageHeader.astro';
 
 	article :global(.button) {
 		margin-top: auto;
-	}
-
-	@media (max-width: 900px) {
-		.plans {
-			grid-template-columns: 1fr;
-		}
 	}
 </style>
