@@ -340,15 +340,16 @@
 		gap: 4px;
 		padding: 13px 15px;
 		border-radius: 12px;
-		border-top-right-radius: 2px;
-		background: var(--cv-green);
+		border-top-left-radius: 2px;
+		background: #fff;
+		box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
 	}
 
 	.cv-typing span {
 		width: 7px;
 		height: 7px;
 		border-radius: 50%;
-		background: rgba(255, 255, 255, 0.8);
+		background: #c4c9d0;
 		animation: cv-blink 1.2s infinite;
 	}
 
@@ -793,14 +794,14 @@
 			'<svg class="cv-checks" viewBox="0 0 24 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 8l5 5L17 2"/><path d="M7 8l5 5L23 2"/></svg>';
 
 		const convo = [
-			{ type: 'in', text: 'Hola', time: '13:57' },
-			{ type: 'out', text: 'Hola, soy el asistente virtual de la inmobiliaria. ¿En qué puedo ayudarte?', time: '13:57', typingMs: 1400 },
-			{ type: 'in', text: 'Estoy buscando alquilar un depto', time: '13:57', panel: 'depto' },
-			{ type: 'out', text: 'Perfecto, te ayudo a encontrar el departamento ideal para alquilar. ¿En qué zona o ciudad te gustaría que esté?', time: '13:57', typingMs: 1600 },
-			{ type: 'in', text: 'No estoy seguro, puedes recomendarme?', time: '13:58' },
-			{ type: 'out', text: 'Claro, te cuento qué tenemos disponible. Trabajamos en varias zonas como Capital Federal, La Plata y Rosario. ¿Hay alguna que te llame la atención o preferís que te muestre opciones en Capital?', time: '13:58', typingMs: 1900 },
-			{ type: 'in', text: 'Capital federal', time: '13:58', panel: 'capital' },
-			{ type: 'out', text: 'Perfecto, Capital Federal tiene bastante stock. Antes de mostrarte opciones: ¿cuántos ambientes buscás y cuál es tu presupuesto aproximado para el alquiler?', time: '13:58', typingMs: 1700 },
+			{ type: 'in', text: 'Hola', time: '13:57', typingMs: 900 },
+			{ type: 'out', text: 'Hola, soy el asistente virtual de la inmobiliaria. ¿En qué puedo ayudarte?', time: '13:57' },
+			{ type: 'in', text: 'Estoy buscando alquilar un depto', time: '13:57', panel: 'depto', typingMs: 1500 },
+			{ type: 'out', text: 'Perfecto, te ayudo a encontrar el departamento ideal para alquilar. ¿En qué zona o ciudad te gustaría que esté?', time: '13:57' },
+			{ type: 'in', text: 'No estoy seguro, puedes recomendarme?', time: '13:58', typingMs: 1600 },
+			{ type: 'out', text: 'Claro, te cuento qué tenemos disponible. Trabajamos en varias zonas como Capital Federal, La Plata y Rosario. ¿Hay alguna que te llame la atención o preferís que te muestre opciones en Capital?', time: '13:58' },
+			{ type: 'in', text: 'Capital federal', time: '13:58', panel: 'capital', typingMs: 1100 },
+			{ type: 'out', text: 'Perfecto, Capital Federal tiene bastante stock. Antes de mostrarte opciones: ¿cuántos ambientes buscás y cuál es tu presupuesto aproximado para el alquiler?', time: '13:58' },
 		];
 
 		const panelStates: Record<string, any> = {
@@ -874,9 +875,9 @@
 			scrollDown();
 		};
 
-		const addTyping = () => {
+		const addTyping = (type: string) => {
 			const row = document.createElement('div');
-			row.className = 'cv-msg cv-msg--out';
+			row.className = 'cv-msg cv-msg--' + type;
 			row.innerHTML = '<div class="cv-typing"><span></span><span></span><span></span></div>';
 			messages.appendChild(row);
 			scrollDown();
@@ -943,16 +944,18 @@
 				for (const m of convo) {
 					if (!active) break;
 					if (m.type === 'in') {
-						addBubble(m);
-						if (m.panel) applyPanel(panelStates[m.panel]);
-						await sleep(900);
-					} else {
-						const typing = addTyping();
-						await sleep(m.typingMs || 1500);
+						const typing = addTyping('in');
+						await sleep(m.typingMs || 1200);
 						if (!active) break;
 						typing.remove();
 						addBubble(m);
-						await sleep(1000);
+						if (m.panel) applyPanel(panelStates[m.panel]);
+						await sleep(700);
+					} else {
+						await sleep(550);
+						if (!active) break;
+						addBubble(m);
+						await sleep(1100);
 					}
 				}
 				if (!active) break;
