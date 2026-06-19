@@ -6,7 +6,7 @@ import Button from './ui/Button.astro';
 const logoSrc = typeof logo === 'string' ? logo : logo.src;
 ---
 
-<header class="site-header" data-header>
+<header class="site-header" data-header data-no-motion>
 	<a class="brand" href={site.links.home} aria-label={`${site.name} inicio`}>
 		<img src={logoSrc} alt={site.name} width="299" height="90" />
 	</a>
@@ -43,6 +43,16 @@ const logoSrc = typeof logo === 'string' ? logo : logo.src;
 	let lastScrollY = window.scrollY;
 	let hiddenProgress = 0;
 	let frame = 0;
+	let motionTimer = 0;
+
+	const pauseHeaderMotion = () => {
+		if (!(header instanceof HTMLElement)) return;
+		header.setAttribute('data-no-motion', '');
+		window.clearTimeout(motionTimer);
+		motionTimer = window.setTimeout(() => {
+			header.removeAttribute('data-no-motion');
+		}, 180);
+	};
 
 	const syncHeaderMode = (scrollY = window.scrollY) => {
 		header?.toggleAttribute('data-scrolled', scrollY > 8);
@@ -99,10 +109,25 @@ const logoSrc = typeof logo === 'string' ? logo : logo.src;
 		}
 	};
 
-	syncHeaderMode();
-	setHeaderProgress(0);
-	syncMenuState();
+	const syncRestoredHeader = () => {
+		pauseHeaderMotion();
+		header?.removeAttribute('data-revealing');
+		const currentY = Math.max(0, window.scrollY);
+		syncHeaderMode(currentY);
+		setHeaderProgress(0);
+		lastScrollY = currentY;
+		syncMenuState();
+	};
+
+	syncRestoredHeader();
+	window.requestAnimationFrame(() => {
+		syncRestoredHeader();
+		window.requestAnimationFrame(syncRestoredHeader);
+	});
+
 	window.addEventListener('scroll', requestVisibilitySync, { passive: true });
+	window.addEventListener('pageshow', syncRestoredHeader);
+	window.addEventListener('pagehide', syncRestoredHeader);
 	mobileMenu?.addEventListener('toggle', syncMenuState);
 	mobileMenu?.querySelectorAll('a').forEach((link) => {
 		link.addEventListener('click', () => {
@@ -177,6 +202,10 @@ const logoSrc = typeof logo === 'string' ? logo : logo.src;
 			box-shadow 200ms ease,
 			opacity 260ms ease,
 			transform 320ms cubic-bezier(0.22, 1, 0.36, 1);
+	}
+
+	.site-header[data-no-motion] {
+		transition: none !important;
 	}
 
 	.brand {
