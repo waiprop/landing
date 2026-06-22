@@ -1,0 +1,369 @@
+---
+// Mockup mobile del Pipeline (Kanban), fiel a la app real:
+// header + "Agregar lead" + tabs Kanban/Tabla + hints, y un carrusel de etapas
+// con scroll-snap. Interactivo: se desliza para ver columnas (dots sincronizados).
+type Card = { name: string; tag: string; date: string; time: string };
+type Column = { title: string; count: number; cards: Card[] };
+
+const columns: Column[] = [
+	{
+		title: 'Visita Agendada',
+		count: 1,
+		cards: [{ name: 'Raúl M', tag: 'Local en Chilavert', date: '13 jun', time: '14:30' }],
+	},
+	{
+		title: 'Post Visita',
+		count: 2,
+		cards: [
+			{ name: 'Gianna Ferreyra', tag: 'Casa en Yerba Buena', date: '13 jun', time: '14:00' },
+			{ name: 'Alberto Díaz', tag: 'Depto en Centro', date: '13 jun', time: '11:20' },
+		],
+	},
+	{
+		title: 'Negociación',
+		count: 2,
+		cards: [
+			{ name: 'Juan López', tag: 'Casa en J. L. Suárez', date: '05 jun', time: '17:28' },
+			{ name: 'Sofía Vega', tag: 'PH en Tafí Viejo', date: '02 jun', time: '09:55' },
+		],
+	},
+	{
+		title: 'Cerrado',
+		count: 2,
+		cards: [
+			{ name: 'Gustavo Salomone', tag: 'Terreno en J. L. Suárez', date: '29 may', time: '13:57' },
+			{ name: 'Lucía Romano', tag: 'Depto en Barrio Norte', date: '08 jun', time: '16:10' },
+		],
+	},
+];
+---
+
+<div class="pm" data-pm aria-label="Pipeline de ventas (vista Kanban)">
+	<div class="pm-hints" aria-hidden="true">
+		<span>
+			<svg viewBox="0 0 24 24"><path d="M7 4 3 8l4 4" /><path d="M3 8h13" /><path d="M17 20l4-4-4-4" /><path d="M21 16H8" /></svg>
+			Deslizá para ver columnas
+		</span>
+		<span class="pm-hint-sep">·</span>
+		<span>
+			<svg viewBox="0 0 24 24"><path d="M18 11V6a2 2 0 0 0-4 0v5" /><path d="M14 10V4a2 2 0 0 0-4 0v6" /><path d="M10 10.5V6a2 2 0 0 0-4 0v8" /><path d="M18 8a2 2 0 0 1 4 0v6a8 8 0 0 1-8 8h-2a8 8 0 0 1-7.4-5l-.9-2a2 2 0 0 1 3.5-2L8 14" /></svg>
+			Mantenés para arrastrar
+		</span>
+	</div>
+
+	<div class="pm-cols" data-pm-cols>
+		{columns.map((col) => (
+			<section class="pm-col">
+				<header class="pm-col-head">
+					<h5>{col.title}</h5>
+					<span class="pm-col-help" aria-hidden="true">
+						<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" /><path d="M9.6 9a2.4 2.4 0 1 1 3.2 2.3c-.7.3-1 .8-1 1.6" /><line x1="12" y1="17" x2="12.01" y2="17" /></svg>
+					</span>
+					<span class="pm-col-count">{col.count}</span>
+					<span class="pm-col-more" aria-hidden="true">
+						<svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="1.4" /><circle cx="12" cy="12" r="1.4" /><circle cx="19" cy="12" r="1.4" /></svg>
+					</span>
+				</header>
+
+				{col.cards.map((card) => (
+					<article class="pm-card">
+						<span class="pm-grip" aria-hidden="true">
+							<svg viewBox="0 0 16 16"><circle cx="6" cy="4" r="1" /><circle cx="10" cy="4" r="1" /><circle cx="6" cy="8" r="1" /><circle cx="10" cy="8" r="1" /><circle cx="6" cy="12" r="1" /><circle cx="10" cy="12" r="1" /></svg>
+						</span>
+						<span class="pm-card-archive" aria-hidden="true">
+							<svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="4" rx="1" /><path d="M5 8v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8" /><path d="M10 12h4" /></svg>
+						</span>
+						<strong class="pm-card-name">{card.name}</strong>
+						<span class="pm-card-tag">{card.tag}</span>
+						<div class="pm-card-meta">
+							<span>
+								<svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2" /><line x1="16" y1="2" x2="16" y2="6" /><line x1="8" y1="2" x2="8" y2="6" /><line x1="3" y1="10" x2="21" y2="10" /></svg>
+								{card.date}
+							</span>
+							<span class="pm-sep">·</span>
+							<span>
+								<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" /><polyline points="12 7 12 12 15 14" /></svg>
+								{card.time}
+							</span>
+						</div>
+						<div class="pm-card-line"></div>
+						<span class="pm-card-phone" aria-hidden="true">
+							<svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z" /></svg>
+						</span>
+					</article>
+				))}
+			</section>
+		))}
+	</div>
+
+	<div class="pm-dots" aria-hidden="true">
+		{columns.map((_, index) => <span class={index === 0 ? 'is-on' : ''} data-pm-dot></span>)}
+	</div>
+</div>
+
+<style>
+	.pm {
+		display: none;
+		width: 100%;
+		min-width: 0;
+		padding: 18px 0 16px;
+		border: 1px solid #e9ebef;
+		border-radius: 18px;
+		background: #f6f7f9;
+		box-shadow:
+			0 1px 2px rgba(20, 32, 27, 0.04),
+			0 20px 50px rgba(20, 32, 27, 0.08);
+		color: #1f2937;
+		text-align: left;
+	}
+
+	.pm svg {
+		display: block;
+		fill: none;
+		stroke: currentColor;
+		stroke-width: 1.9;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+	}
+
+	.pm-hints {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: 6px 12px;
+		margin: 0 0 16px;
+		padding: 0 18px;
+		color: #9aa1ab;
+		font-size: 0.8rem;
+	}
+
+	.pm-hints > span {
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+	}
+
+	.pm-hints svg {
+		width: 15px;
+		height: 15px;
+	}
+
+	.pm-hint-sep {
+		opacity: 0.6;
+	}
+
+	/* Carrusel de etapas */
+	.pm-cols {
+		display: flex;
+		gap: 14px;
+		padding: 0 18px 4px;
+		overflow-x: auto;
+		scroll-snap-type: x mandatory;
+		scrollbar-width: none;
+		-webkit-overflow-scrolling: touch;
+	}
+
+	.pm-cols::-webkit-scrollbar {
+		display: none;
+	}
+
+	.pm-col {
+		flex: 0 0 84%;
+		scroll-snap-align: start;
+	}
+
+	.pm-col-head {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		margin-bottom: 12px;
+	}
+
+	.pm-col-head h5 {
+		margin: 0;
+		color: #253246;
+		font-size: 0.98rem;
+		font-weight: 800;
+	}
+
+	.pm-col-help {
+		color: #b6bcc4;
+	}
+
+	.pm-col-help svg {
+		width: 16px;
+		height: 16px;
+	}
+
+	.pm-col-count {
+		padding: 2px 9px;
+		border-radius: 8px;
+		background: #e8eaef;
+		color: #6b7280;
+		font-size: 0.76rem;
+		font-weight: 700;
+	}
+
+	.pm-col-more {
+		margin-left: auto;
+		color: #b6bcc4;
+	}
+
+	.pm-col-more svg {
+		width: 18px;
+		height: 18px;
+		fill: currentColor;
+		stroke: none;
+	}
+
+	.pm-card {
+		position: relative;
+		margin-bottom: 12px;
+		padding: 14px 14px 12px 30px;
+		border: 1px solid #e8eaee;
+		border-radius: 14px;
+		background: #fff;
+		box-shadow: 0 1px 3px rgba(20, 32, 27, 0.06);
+	}
+
+	.pm-grip {
+		position: absolute;
+		top: 15px;
+		left: 9px;
+		color: #c7ccd3;
+	}
+
+	.pm-grip svg {
+		width: 14px;
+		height: 14px;
+		fill: currentColor;
+		stroke: none;
+	}
+
+	.pm-card-archive {
+		position: absolute;
+		top: 13px;
+		right: 13px;
+		color: #aab0b8;
+	}
+
+	.pm-card-archive svg {
+		width: 17px;
+		height: 17px;
+	}
+
+	.pm-card-name {
+		display: block;
+		margin-bottom: 9px;
+		padding-right: 20px;
+		color: #14201b;
+		font-size: 0.98rem;
+		font-weight: 800;
+	}
+
+	.pm-card-tag {
+		display: inline-block;
+		padding: 4px 9px;
+		border-radius: 7px;
+		background: #edf5ff;
+		color: #2568b7;
+		font-size: 0.68rem;
+		font-weight: 800;
+		letter-spacing: 0.02em;
+		text-transform: uppercase;
+	}
+
+	.pm-card-meta {
+		display: flex;
+		align-items: center;
+		gap: 7px;
+		margin-top: 12px;
+		color: #9aa1ab;
+		font-size: 0.78rem;
+	}
+
+	.pm-card-meta > span {
+		display: inline-flex;
+		align-items: center;
+		gap: 5px;
+	}
+
+	.pm-card-meta svg {
+		width: 14px;
+		height: 14px;
+	}
+
+	.pm-sep {
+		opacity: 0.6;
+	}
+
+	.pm-card-line {
+		height: 1px;
+		margin: 12px 0 10px;
+		background: #eef0f3;
+	}
+
+	.pm-card-phone {
+		display: inline-flex;
+		color: #9aa1ab;
+	}
+
+	.pm-card-phone svg {
+		width: 18px;
+		height: 18px;
+	}
+
+	.pm-dots {
+		display: flex;
+		justify-content: center;
+		gap: 7px;
+		margin-top: 16px;
+	}
+
+	.pm-dots span {
+		width: 6px;
+		height: 6px;
+		border-radius: 999px;
+		background: #d4d8de;
+		transition:
+			background 220ms ease,
+			transform 220ms ease;
+	}
+
+	.pm-dots span.is-on {
+		background: var(--color-brand, #259a72);
+		transform: scale(1.4);
+	}
+
+	/* Solo en mobile (reemplaza al kanban de escritorio) */
+	@media (max-width: 720px) {
+		.pm {
+			display: block;
+		}
+	}
+</style>
+
+<script>
+	const cols = document.querySelector('[data-pm-cols]');
+	const dots = Array.from(document.querySelectorAll('[data-pm-dot]'));
+
+	if (cols && dots.length) {
+		let frame = 0;
+		const sync = () => {
+			frame = 0;
+			const col = cols.querySelector('.pm-col');
+			if (!col) return;
+			const step = col.getBoundingClientRect().width + 14;
+			const index = Math.min(Math.round(cols.scrollLeft / step), dots.length - 1);
+			dots.forEach((dot, i) => dot.classList.toggle('is-on', i === index));
+		};
+		cols.addEventListener(
+			'scroll',
+			() => {
+				if (frame) return;
+				frame = requestAnimationFrame(sync);
+			},
+			{ passive: true },
+		);
+	}
+</script>
