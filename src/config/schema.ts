@@ -41,6 +41,11 @@ export const softwareApplicationSchema = {
 	url: site.url,
 	image: absoluteUrl(site.ogImage),
 	description: site.defaultDescription,
+	featureList: [
+		'Gestión de conversaciones y leads inmobiliarios',
+		'Agente de inteligencia artificial configurable',
+		'Sincronización opcional de visitas y citas con Google Calendar',
+	],
 	offers: plans.map((plan) => ({
 		'@type': 'Offer',
 		name: plan.name,

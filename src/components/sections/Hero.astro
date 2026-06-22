@@ -7,6 +7,7 @@ import Button from '../ui/Button.astro';
 <section class="hero" aria-labelledby="hero-title">
 	<div class="hero-stage">
 		<div class="hero-center">
+			<p class="hero-badge">{site.name}</p>
 			<h1 id="hero-title">Gestioná tu negocio inmobiliario desde <span>un solo lugar</span></h1>
 			<p class="hero-subtitle">
 				Centralizá consultas, propiedades, visitas y seguimiento comercial con un CRM pensado
@@ -23,7 +24,7 @@ import Button from '../ui/Button.astro';
 			<div class="hero-crm-pad">
 				<header class="hero-crm-head">
 					<span class="hero-crm-avatar hero-crm-avatar--logo">
-						<img class="hero-crm-avatar-iso" src="/favicon.svg" alt="Waichatt" width="16" height="26" />
+						<span class="hero-crm-avatar-iso" aria-hidden="true"></span>
 					</span>
 					<span class="hero-crm-person">
 						<strong>Waichatt</strong>
@@ -397,8 +398,12 @@ import Button from '../ui/Button.astro';
 	}
 
 	.hero-crm-avatar-iso {
-		width: auto;
+		display: block;
+		width: 16px;
 		height: 26px;
+		background: var(--color-brand);
+		-webkit-mask: url('/favicon.svg') center / contain no-repeat;
+		mask: url('/favicon.svg') center / contain no-repeat;
 	}
 
 	.hero-crm-person {

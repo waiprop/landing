@@ -26,6 +26,7 @@ export const site = {
 
 export const mainNavItems = [
 	{ label: 'Funciones', href: '/#funciones' },
+	{ label: 'Integraciones', href: '/#integraciones' },
 	{ label: 'Precios', href: site.links.pricing },
 	{ label: 'Blog', href: site.links.blog },
 ] as const;

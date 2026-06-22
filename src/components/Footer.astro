@@ -1,5 +1,4 @@
 ---
-import { Image } from 'astro:assets';
 import logo from '../assets/logo_waichatt.svg';
 import { site } from '../config/site';
 ---
@@ -8,13 +7,18 @@ import { site } from '../config/site';
 	<div class="footer-inner">
 		<div class="footer-brand">
 			<a class="footer-logo" href={site.links.home} aria-label={`${site.name} inicio`}>
-				<Image src={logo} alt={site.name} width={132} height={40} />
+				<span
+					class="footer-logo-mark"
+					aria-hidden="true"
+					style={`--footer-logo-url: url("${logo.src}")`}
+				></span>
 			</a>
-			<p>WhatsApp, IA y CRM para inmobiliarias y desarrolladoras.</p>
+			<p>Waichatt integra WhatsApp, IA y CRM para inmobiliarias y desarrolladoras.</p>
 		</div>
 		<nav aria-label="Footer producto">
 			<h2>Producto</h2>
 			<a href="/#funciones">Funciones</a>
+			<a href="/#integraciones">Google Calendar</a>
 			<a href={site.links.pricing}>Precios</a>
 			<a href={site.links.app} data-preserve-utm="true">Ingresar</a>
 		</nav>
@@ -63,10 +67,11 @@ import { site } from '../config/site';
 		align-items: center;
 	}
 
-	.footer-logo img {
+	.footer-logo-mark {
+		display: block;
 		width: 132px;
-		max-width: 132px;
-		height: auto;
+		height: 40px;
+		background: var(--footer-logo-url) center / contain no-repeat;
 		filter: brightness(0) invert(1);
 	}
 

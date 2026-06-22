@@ -1,8 +1,10 @@
 ---
 import AgenteIa from '../mockups/AgenteIa.astro';
+import Calendario from '../mockups/Calendario.astro';
 import Conversaciones from '../mockups/Conversaciones.astro';
 import ConversacionesMobile from '../mockups/ConversacionesMobile.astro';
 import PipelineMobile from '../mockups/PipelineMobile.astro';
+import { site } from '../../config/site';
 
 type KanbanCard = {
 	name: string;
@@ -116,6 +118,23 @@ const pipelineColumns: { title: string; count: number; cards: KanbanCard[] }[] =
 				<PipelineMobile />
 			</article>
 
+			<article class="product-card product-card--calendar" id="integraciones">
+				<div class="product-copy product-copy--calendar">
+					<span class="product-eyebrow">Agenda e integraciones</span>
+					<h3>Tus visitas, sincronizadas con Google Calendar</h3>
+					<p>
+						Conectá tu cuenta de Google de forma opcional para leer, crear y actualizar en tu calendario
+						las visitas y citas que gestionás desde Waichatt.
+					</p>
+					<p class="calendar-disclosure">
+						Waichatt usa esos datos solamente para sincronizar tu agenda. Podés revocar el acceso cuando
+						quieras. <a href={`${site.links.privacy}#servicios-de-google`}>Cómo tratamos tus datos de Google</a>
+					</p>
+				</div>
+
+				<Calendario />
+			</article>
+
 			<div class="product-card-shell product-card-shell--agent" data-agent-scroll-shell>
 				<article class="product-card product-card--agent">
 					<div class="product-copy product-copy--wide">
@@ -180,7 +199,7 @@ const pipelineColumns: { title: string; count: number; cards: KanbanCard[] }[] =
 	}
 
 	.product-card-shell--agent {
-		z-index: 2;
+		z-index: 3;
 	}
 
 	.product-card--pipeline {
@@ -188,7 +207,14 @@ const pipelineColumns: { title: string; count: number; cards: KanbanCard[] }[] =
 	}
 
 	.product-card--agent {
+		z-index: 3;
+	}
+
+	.product-card--calendar {
 		z-index: 2;
+		display: flex;
+		flex-direction: column;
+		gap: 20px;
 	}
 
 	.product-card--pipeline {
@@ -206,6 +232,22 @@ const pipelineColumns: { title: string; count: number; cards: KanbanCard[] }[] =
 
 	.product-card--agent .product-copy p {
 		max-width: 760px;
+	}
+
+	.product-copy--calendar {
+		max-width: 940px;
+	}
+
+	.calendar-disclosure {
+		font-size: 0.88rem !important;
+	}
+
+	.calendar-disclosure a {
+		color: var(--color-brand-hover);
+		font-weight: 800;
+		text-decoration: underline;
+		text-decoration-thickness: 1px;
+		text-underline-offset: 3px;
 	}
 
 	.product-copy {
@@ -465,6 +507,20 @@ const pipelineColumns: { title: string; count: number; cards: KanbanCard[] }[] =
 			font-size: 0.92rem;
 			line-height: 1.55;
 		}
+
+		.product-card--calendar {
+			gap: 18px;
+			padding: 22px 14px 14px;
+		}
+
+		.product-card--calendar .product-copy {
+			padding-inline: 6px;
+		}
+
+		.product-card--calendar .product-copy p {
+			font-size: 0.92rem;
+			line-height: 1.55;
+		}
 	}
 
 	@media (prefers-reduced-motion: reduce) {
@@ -482,6 +538,7 @@ const pipelineColumns: { title: string; count: number; cards: KanbanCard[] }[] =
 			min-height: clamp(1500px, 240vh, 2400px);
 		}
 
+		/* Cada producto se apila sobre el anterior al avanzar por la sección. */
 		.product-card {
 			position: sticky;
 			top: clamp(88px, 12vh, 132px);
@@ -519,6 +576,34 @@ const pipelineColumns: { title: string; count: number; cards: KanbanCard[] }[] =
 			margin-top: 6px;
 			font-size: 0.92rem;
 			line-height: 1.45;
+		}
+
+		.product-card--calendar {
+			top: clamp(48px, 6vh, 80px);
+			max-height: min(920px, calc(100vh - 72px));
+			padding: clamp(18px, 1.8vw, 28px);
+			gap: 12px;
+			overflow: visible;
+		}
+
+		.product-card--calendar .product-eyebrow {
+			margin-bottom: 8px;
+		}
+
+		.product-card--calendar .product-copy h3 {
+			font-size: clamp(1.3rem, 1.7vw, 1.6rem);
+		}
+
+		.product-card--calendar .product-copy > p:not(.calendar-disclosure) {
+			margin-top: 6px;
+			font-size: 0.9rem;
+			line-height: 1.42;
+		}
+
+		.product-card--calendar .calendar-disclosure {
+			margin-top: 4px;
+			font-size: 0.78rem !important;
+			line-height: 1.4;
 		}
 	}
 </style>

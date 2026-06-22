@@ -34,6 +34,11 @@ export const faqs: Faq[] = [
 		answer: 'Sí. Importación y sincronización de propiedades vía API.',
 	},
 	{
+		tag: 'Google Calendar',
+		question: '¿Qué pasa cuando conecto Google Calendar?',
+		answer: 'Waichatt usa la cuenta y el calendario que autorizás para sincronizar las visitas y citas de tu negocio. La conexión es opcional y podés revocarla en cualquier momento.',
+	},
+	{
 		tag: 'Sitio web',
 		question: '¿Incluye una web para mi negocio?',
 		answer: 'Sí. Un sitio propio que se actualiza solo con tu cartera de propiedades.',
