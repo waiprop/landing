@@ -92,8 +92,8 @@ import Button from '../ui/Button.astro';
 						<span data-crm-field="badge">Calificado</span>
 					</span>
 				</div>
-				<div class="hero-crm-divider"></div>
-				<div class="hero-crm-foot">
+				<div class="hero-crm-divider hero-crm-trim"></div>
+				<div class="hero-crm-foot hero-crm-trim">
 					<span class="hero-crm-label">Agente asignado</span>
 					<span class="hero-crm-agent">
 						<span class="hero-crm-agent-avatar" aria-hidden="true">MP</span>
@@ -772,6 +772,19 @@ import Button from '../ui/Button.astro';
 		.hero-actions,
 		.hero-actions :global(.button) {
 			width: 100%;
+		}
+
+		/* La ficha completa + float duplican el mockup de Conversaciones: compactamos */
+		.hero-crm-card {
+			animation: none;
+		}
+
+		.hero-crm-pad {
+			padding: 16px;
+		}
+
+		.hero-crm-trim {
+			display: none;
 		}
 	}
 

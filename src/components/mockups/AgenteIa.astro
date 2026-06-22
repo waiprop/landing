@@ -1030,6 +1030,20 @@ const tabs = [
 			min-height: 720px;
 		}
 
+		/* 4 tabs en grilla 2×2: siempre completas, sin scroll ni corte, en cualquier ancho */
+		.ai-tabs {
+			flex-wrap: wrap;
+			gap: 4px;
+			padding: 14px 12px 0;
+		}
+
+		.ai-tab {
+			flex: 1 0 40%;
+			justify-content: center;
+			min-height: 40px;
+			padding-bottom: 12px;
+		}
+
 		.ai-view {
 			padding: 22px 18px 92px;
 		}

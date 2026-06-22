@@ -760,6 +760,16 @@
 			border-bottom: 1px solid var(--cv-border);
 		}
 
+		/* Header del chat compacto: el teléfono y el archivar ya viven en el panel CRM */
+		.cv-chat-head .cv-person small,
+		.cv-chat-head .cv-ic[title='Archivar'] {
+			display: none;
+		}
+
+		.cv-agent-ia {
+			white-space: nowrap;
+		}
+
 		.cv-messages {
 			height: 360px;
 		}

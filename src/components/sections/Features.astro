@@ -78,7 +78,7 @@ const pipelineColumns: { title: string; count: number; cards: KanbanCard[] }[] =
 							<h4>Pipeline de ventas</h4>
 							<p>Gestioná tus oportunidades y el avance de clientes potenciales.</p>
 						</header>
-						<div class="kanban-cols">
+						<div class="kanban-cols" data-kanban-cols>
 							{pipelineColumns.map((column) => (
 								<section class="kanban-col">
 									<h5>{column.title} <span>{column.count}</span></h5>
@@ -107,6 +107,9 @@ const pipelineColumns: { title: string; count: number; cards: KanbanCard[] }[] =
 								</section>
 							))}
 						</div>
+						<div class="kanban-dots" aria-hidden="true">
+							{pipelineColumns.map((_, index) => <span class={index === 0 ? 'is-on' : ''} data-kanban-dot></span>)}
+						</div>
 					</div>
 				</div>
 			</article>
@@ -125,6 +128,32 @@ const pipelineColumns: { title: string; count: number; cards: KanbanCard[] }[] =
 		</div>
 	</div>
 </section>
+
+<script>
+	// Carrusel del pipeline en mobile: sincroniza los dots con la posición de scroll.
+	const cols = document.querySelector('[data-kanban-cols]');
+	const dots = Array.from(document.querySelectorAll('[data-kanban-dot]'));
+
+	if (cols && dots.length) {
+		let frame = 0;
+		const sync = () => {
+			frame = 0;
+			const col = cols.querySelector('.kanban-col');
+			if (!col) return;
+			const step = col.getBoundingClientRect().width + 12;
+			const index = Math.min(Math.round(cols.scrollLeft / step), dots.length - 1);
+			dots.forEach((dot, i) => dot.classList.toggle('is-on', i === index));
+		};
+		cols.addEventListener(
+			'scroll',
+			() => {
+				if (frame) return;
+				frame = requestAnimationFrame(sync);
+			},
+			{ passive: true },
+		);
+	}
+</script>
 
 <style>
 	.features {
@@ -446,13 +475,60 @@ const pipelineColumns: { title: string; count: number; cards: KanbanCard[] }[] =
 		}
 	}
 
-	@media (max-width: 560px) {
-		.kanban {
+	.kanban-dots {
+		display: none;
+	}
+
+	@media (max-width: 640px) {
+		/* Carrusel: las 4 etapas en fila, con scroll-snap y peek de la siguiente.
+		   align-items:start evita que las columnas cortas se estiren y dejen huecos. */
+		.kanban-cols {
+			display: flex;
+			grid-template-columns: none;
+			align-items: start;
+			gap: 12px;
+			margin: 0 -22px;
+			padding: 0 22px 2px;
 			overflow-x: auto;
+			scroll-snap-type: x mandatory;
+			scrollbar-width: none;
+			-webkit-overflow-scrolling: touch;
 		}
 
-		.kanban-cols {
-			min-width: 620px;
+		.kanban-cols::-webkit-scrollbar {
+			display: none;
+		}
+
+		.kanban-col {
+			flex: 0 0 80%;
+			scroll-snap-align: start;
+		}
+
+		/* La card "arrastrándose" descoloca el snap en mobile */
+		.kanban-card--drag {
+			animation: none;
+		}
+
+		.kanban-dots {
+			display: flex;
+			justify-content: center;
+			gap: 7px;
+			margin-top: 16px;
+		}
+
+		.kanban-dots span {
+			width: 6px;
+			height: 6px;
+			border-radius: 999px;
+			background: var(--color-border);
+			transition:
+				background 220ms ease,
+				transform 220ms ease;
+		}
+
+		.kanban-dots span.is-on {
+			background: var(--color-brand);
+			transform: scale(1.4);
 		}
 	}
 
