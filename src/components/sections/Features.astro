@@ -1,6 +1,7 @@
 ---
 import AgenteIa from '../mockups/AgenteIa.astro';
 import Conversaciones from '../mockups/Conversaciones.astro';
+import ConversacionesMobile from '../mockups/ConversacionesMobile.astro';
 
 type KanbanCard = {
 	name: string;
@@ -54,6 +55,7 @@ const pipelineColumns: { title: string; count: number; cards: KanbanCard[] }[] =
 
 		<article class="product-showcase" aria-label="Waichatt atendiendo una conversación y completando el CRM en vivo">
 			<Conversaciones />
+			<ConversacionesMobile />
 		</article>
 
 		<div class="product-stack">
@@ -470,8 +472,9 @@ const pipelineColumns: { title: string; count: number; cards: KanbanCard[] }[] =
 	}
 
 	@media (max-width: 720px) {
+		/* En mobile usamos el mockup interactivo (.cvm) en lugar del de escritorio */
 		.product-showcase :global(.cv) {
-			height: auto;
+			display: none;
 		}
 	}
 

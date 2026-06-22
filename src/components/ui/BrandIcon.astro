@@ -5,11 +5,14 @@ import type { HTMLAttributes } from 'astro/types';
 type Brand = 'whatsapp' | 'meta' | 'google-calendar';
 type Variant = 'color' | 'mono';
 
-interface Props extends HTMLAttributes<'svg'> {
+interface Props extends Omit<HTMLAttributes<'svg'>, 'width' | 'height'> {
 	brand: Brand;
 	variant?: Variant;
 	label?: string;
 	size?: number | string;
+	width?: number | string;
+	height?: number | string;
+	title?: string;
 	decorative?: boolean;
 }
 

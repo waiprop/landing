@@ -782,6 +782,29 @@
 </style>
 
 <script>
+	type PanelStateKey = 'initial' | 'depto' | 'capital';
+	type ConversationDirection = 'in' | 'out';
+
+	interface ConversationMessage {
+		type: ConversationDirection;
+		text: string;
+		time: string;
+		panel?: Exclude<PanelStateKey, 'initial'>;
+		typingMs?: number;
+	}
+
+	interface PanelState {
+		analyzing: boolean;
+		tags: string[];
+		qualification: string;
+		operation: string;
+		type: string;
+		maturity: string;
+		zone: string;
+		stage: string;
+		summary: string;
+	}
+
 	const root = document.querySelector('[data-cv]') as HTMLElement | null;
 
 	if (root) {
@@ -803,7 +826,7 @@
 		const checks =
 			'<svg class="cv-checks" viewBox="0 0 24 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 8l5 5L17 2"/><path d="M7 8l5 5L23 2"/></svg>';
 
-		const convo = [
+		const convo: ConversationMessage[] = [
 			{ type: 'in', text: 'Hola', time: '13:57', typingMs: 900 },
 			{ type: 'out', text: 'Hola, soy el asistente virtual de la inmobiliaria. ¿En qué puedo ayudarte?', time: '13:57' },
 			{ type: 'in', text: 'Estoy buscando alquilar un depto', time: '13:57', panel: 'depto', typingMs: 1500 },
@@ -814,7 +837,7 @@
 			{ type: 'out', text: 'Perfecto, Capital Federal tiene bastante stock. Antes de mostrarte opciones: ¿cuántos ambientes buscás y cuál es tu presupuesto aproximado para el alquiler?', time: '13:58' },
 		];
 
-		const panelStates: Record<string, any> = {
+		const panelStates: Record<PanelStateKey, PanelState> = {
 			initial: {
 				analyzing: true,
 				tags: ['Explorando'],
@@ -876,7 +899,7 @@
 			messages.scrollTop = messages.scrollHeight;
 		};
 
-		const addBubble = (m: any) => {
+		const addBubble = (m: ConversationMessage) => {
 			const row = document.createElement('div');
 			row.className = 'cv-msg cv-msg--' + m.type;
 			const meta = m.type === 'out' ? `${brain} ${m.time} ${checks}` : m.time;
@@ -885,7 +908,7 @@
 			scrollDown();
 		};
 
-		const addTyping = (type: string) => {
+		const addTyping = (type: ConversationDirection) => {
 			const row = document.createElement('div');
 			row.className = 'cv-msg cv-msg--' + type;
 			row.innerHTML = '<div class="cv-typing"><span></span><span></span><span></span></div>';
@@ -931,7 +954,7 @@
 			summaryTimer = window.setTimeout(step, 140);
 		};
 
-		const applyPanel = (state: any) => {
+		const applyPanel = (state: PanelState) => {
 			const animate = !state.analyzing;
 			panel.classList.toggle('is-analyzing', state.analyzing);
 			renderTags(state.tags);

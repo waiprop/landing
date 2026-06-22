@@ -218,7 +218,7 @@ const tabs = [
 </div>
 
 <script>
-	const clamp = (value, min, max) => Math.min(max, Math.max(min, value));
+	const clamp = (value: number, min: number, max: number) => Math.min(max, Math.max(min, value));
 
 	document.querySelectorAll('[data-agent-mock]').forEach((root) => {
 		const tabs = Array.from(root.querySelectorAll('[data-agent-tab]'));
@@ -229,7 +229,7 @@ const tabs = [
 		let current = -1;
 		let frame = 0;
 
-		const setActive = (index) => {
+		const setActive = (index: number) => {
 			if (index === current) return;
 			current = index;
 			tabs.forEach((tab, tabIndex) => tab.classList.toggle('is-active', tabIndex === index));

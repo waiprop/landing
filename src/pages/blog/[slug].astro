@@ -1,7 +1,11 @@
 ---
-import { getCollection, render } from 'astro:content';
+import { getCollection, render, type CollectionEntry } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
 import { blogPostingSchema, breadcrumbSchema } from '../../config/schema';
+
+interface Props {
+	post: CollectionEntry<'blog'>;
+}
 
 export async function getStaticPaths() {
 	const posts = (await getCollection('blog')).filter((post) => !post.data.draft);

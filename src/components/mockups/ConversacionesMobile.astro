@@ -1,0 +1,1006 @@
+---
+// Mockup mobile INTERACTIVO del producto (tema oscuro, fiel a la app real).
+// - El header (subtítulo "escribiendo…") y los mensajes entrantes se animan solos.
+// - El resto es interactivo: el usuario toca el ícono de contacto para abrir la
+//   ficha del lead (CRM) que se desliza desde la derecha, y puede ver el resumen.
+// Todo HTML/CSS/JS, sin imágenes.
+---
+
+<div class="cvm" data-cvm aria-label="Chat de WhatsApp con la ficha del lead que arma la IA">
+	<!-- HEADER del chat -->
+	<header class="cvm-head">
+		<span class="cvm-ic cvm-back" aria-hidden="true">
+			<svg viewBox="0 0 24 24"><path d="M19 12H5" /><path d="M12 19l-7-7 7-7" /></svg>
+		</span>
+		<span class="cvm-avatar">MG</span>
+		<span class="cvm-person">
+			<strong>Martín Gómez</strong>
+			<small data-cvm-status>+54 9 3815 224110</small>
+		</span>
+		<span class="cvm-head-actions">
+			<span class="cvm-ic" aria-hidden="true" title="Archivar">
+				<svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="4" rx="1" /><path d="M5 8v11a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V8" /><path d="M10 12h4" /></svg>
+			</span>
+			<span class="cvm-vdiv"></span>
+			<span class="cvm-ia">
+				<svg class="cvm-brain" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z" /><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z" /><path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4" /></svg>
+				<span class="cvm-toggle"></span>
+			</span>
+			<button class="cvm-ic cvm-contact" type="button" data-cvm-open aria-label="Ver ficha del lead">
+				<svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="4" /><path d="M4 21a8 8 0 0 1 16 0" /></svg>
+			</button>
+		</span>
+	</header>
+
+	<!-- MENSAJES (se animan al entrar en pantalla) -->
+	<div class="cvm-msgs" data-cvm-msgs>
+		<span class="cvm-day">Hoy</span>
+	</div>
+
+	<!-- COMPOSER (decorativo) -->
+	<footer class="cvm-composer" aria-hidden="true">
+		<span class="cvm-ic"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" /></svg></span>
+		<span class="cvm-ic"><svg viewBox="0 0 24 24"><path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48" /></svg></span>
+		<span class="cvm-ic"><svg viewBox="0 0 24 24"><path d="M6 22V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v18Z" /><path d="M6 12H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h2" /><path d="M18 9h2a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-2" /><path d="M10 6h4M10 10h4M10 14h4M10 18h4" /></svg></span>
+		<span class="cvm-field">Escribe un mensaje…</span>
+		<span class="cvm-mic"><svg viewBox="0 0 24 24"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3z" /><path d="M19 10v2a7 7 0 0 1-14 0v-2" /><line x1="12" x2="12" y1="19" y2="22" /></svg></span>
+	</footer>
+
+	<!-- FICHA DEL LEAD: panel que se desliza desde la derecha (interactivo) -->
+	<aside class="cvm-ficha" data-cvm-ficha aria-hidden="true">
+		<header class="cvm-ficha-head">
+			<button class="cvm-ic" type="button" data-cvm-close aria-label="Volver al chat">
+				<svg viewBox="0 0 24 24"><path d="M19 12H5" /><path d="M12 19l-7-7 7-7" /></svg>
+			</button>
+			<span class="cvm-avatar">MG</span>
+			<span class="cvm-person">
+				<strong>Martín Gómez</strong>
+				<small class="cvm-phone">
+					<svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92Z" /></svg>
+					+54 9 3815 224110
+				</small>
+			</span>
+			<span class="cvm-ic cvm-muted" aria-hidden="true">
+				<svg viewBox="0 0 24 24"><path d="M12 20h9" /><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z" /></svg>
+			</span>
+		</header>
+
+		<div class="cvm-ficha-body">
+			<div class="cvm-mail">
+				<svg viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2" /><path d="m2 7 10 6 10-6" /></svg>
+				Sin correo
+			</div>
+
+			<div class="cvm-tags" data-cvm-tags>
+				<span class="cvm-tag cvm-tag--add">+ Etiqueta</span>
+			</div>
+
+			<div class="cvm-hr"></div>
+
+			<div class="cvm-row">
+				<span class="cvm-label">Calificación</span>
+				<span class="cvm-badge is-ok" data-cvm-qual>Calificado</span>
+			</div>
+			<div class="cvm-row"><span>Intención</span><strong data-cvm-intent>Quiere alquilar</strong></div>
+
+			<button class="cvm-sum-toggle" type="button" data-cvm-summary-toggle>
+				<svg viewBox="0 0 24 24"><path d="M6 9l6 6 6-6" /></svg>
+				Ver resumen completo
+			</button>
+			<p class="cvm-summary" data-cvm-summary>
+				El cliente busca alquilar un departamento en Capital Federal. Todavía falta conocer
+				ambientes y presupuesto; conviene responderle hoy con opciones disponibles.
+			</p>
+
+			<div class="cvm-hr"></div>
+
+			<div class="cvm-row">
+				<span class="cvm-label">Lead CRM</span>
+				<span class="cvm-lead is-ok">
+					<span data-cvm-lead>Calificado</span>
+					<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12" /></svg>
+				</span>
+			</div>
+
+			<div class="cvm-hr"></div>
+
+			<div class="cvm-row">
+				<span class="cvm-label">Agente asignado</span>
+				<span class="cvm-agent"><span class="cvm-agent-av">MP</span> Matías Prieto</span>
+			</div>
+		</div>
+	</aside>
+
+	<span class="cvm-hint" data-cvm-hint aria-hidden="true">Tocá el contacto para ver la ficha del lead</span>
+</div>
+
+<style is:global>
+	.cvm {
+		/* Tema claro (igual que la web). Cambiar estas variables = cambiar el tema. */
+		--cvm-bg: #ffffff;
+		--cvm-chat: #f7f8fa;
+		--cvm-head: #ffffff;
+		--cvm-in: #ffffff;
+		--cvm-out: #1f9d6b;
+		--cvm-out-dark: #178a5c;
+		--cvm-text: #1f2937;
+		--cvm-muted: #6b7280;
+		--cvm-muted-2: #9aa1ab;
+		--cvm-border: #eceef1;
+		--cvm-green: #1f9d6b;
+
+		position: relative;
+		display: none;
+		flex-direction: column;
+		width: min(400px, 100%);
+		height: min(78vh, 640px);
+		min-height: 520px;
+		margin: 0 auto;
+		overflow: hidden;
+		border: 1px solid var(--cvm-border);
+		border-radius: 22px;
+		background: var(--cvm-bg);
+		box-shadow:
+			0 1px 2px rgba(20, 32, 27, 0.04),
+			0 28px 60px rgba(20, 32, 27, 0.14);
+		color: var(--cvm-text);
+		font-size: 14px;
+		line-height: 1.45;
+		text-align: left;
+	}
+
+	.cvm svg {
+		display: block;
+		fill: none;
+		stroke: currentColor;
+		stroke-width: 1.8;
+		stroke-linecap: round;
+		stroke-linejoin: round;
+	}
+
+	/* ---------- HEADER ---------- */
+	.cvm-head {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		flex: 0 0 auto;
+		padding: 12px 12px 12px 8px;
+		background: var(--cvm-head);
+		border-bottom: 1px solid var(--cvm-border);
+	}
+
+	.cvm-ic {
+		display: grid;
+		place-items: center;
+		flex: 0 0 auto;
+		padding: 0;
+		border: 0;
+		background: transparent;
+		color: var(--cvm-muted);
+		cursor: pointer;
+	}
+
+	.cvm-ic svg {
+		width: 21px;
+		height: 21px;
+	}
+
+	.cvm-back {
+		color: var(--cvm-text);
+	}
+
+	.cvm-avatar {
+		display: grid;
+		place-items: center;
+		flex: 0 0 auto;
+		width: 38px;
+		height: 38px;
+		border-radius: 50%;
+		background: #e3efe9;
+		color: var(--cvm-green);
+		font-size: 13px;
+		font-weight: 700;
+	}
+
+	.cvm-person {
+		display: flex;
+		flex-direction: column;
+		min-width: 0;
+		margin-right: auto;
+		line-height: 1.2;
+	}
+
+	.cvm-person strong {
+		font-size: 15px;
+		font-weight: 700;
+		white-space: nowrap;
+	}
+
+	.cvm-person small {
+		color: var(--cvm-muted);
+		font-size: 12px;
+		white-space: nowrap;
+	}
+
+	.cvm-person small.is-typing {
+		color: var(--cvm-green);
+	}
+
+	.cvm-head-actions {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		flex: 0 0 auto;
+	}
+
+	.cvm-vdiv {
+		width: 1px;
+		height: 22px;
+		background: var(--cvm-border);
+	}
+
+	.cvm-ia {
+		display: inline-flex;
+		align-items: center;
+		gap: 7px;
+	}
+
+	.cvm-brain {
+		width: 21px;
+		height: 21px;
+		color: var(--cvm-green);
+		stroke-width: 1.7;
+	}
+
+	.cvm-toggle {
+		position: relative;
+		width: 34px;
+		height: 19px;
+		border-radius: 999px;
+		background: var(--cvm-out);
+	}
+
+	.cvm-toggle::after {
+		content: '';
+		position: absolute;
+		top: 2px;
+		right: 2px;
+		width: 15px;
+		height: 15px;
+		border-radius: 50%;
+		background: #fff;
+	}
+
+	.cvm-contact {
+		position: relative;
+		color: var(--cvm-text);
+	}
+
+	/* Pista sutil de interacción sobre el ícono de contacto */
+	.cvm-contact::before {
+		content: '';
+		position: absolute;
+		inset: -6px;
+		border-radius: 50%;
+		border: 2px solid var(--cvm-green);
+		opacity: 0;
+		animation: cvm-pulse 2.6s ease-out infinite;
+	}
+
+	.cvm.is-seen .cvm-contact::before {
+		animation: none;
+	}
+
+	/* ---------- MENSAJES ---------- */
+	.cvm-msgs {
+		flex: 1;
+		min-height: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 10px;
+		padding: 16px 14px;
+		overflow-y: auto;
+		background: var(--cvm-chat);
+		scrollbar-width: thin;
+		scrollbar-color: rgba(20, 32, 27, 0.16) transparent;
+	}
+
+	.cvm-msgs::-webkit-scrollbar {
+		width: 6px;
+	}
+
+	.cvm-msgs::-webkit-scrollbar-thumb {
+		background: #d4d8de;
+		border-radius: 4px;
+	}
+
+	.cvm-day {
+		align-self: center;
+		padding: 3px 12px;
+		border-radius: 8px;
+		background: rgba(255, 255, 255, 0.92);
+		color: var(--cvm-muted);
+		font-size: 12px;
+		font-weight: 600;
+		box-shadow: 0 1px 2px rgba(20, 32, 27, 0.08);
+	}
+
+	.cvm-msg {
+		display: flex;
+		max-width: 100%;
+	}
+
+	.cvm-msg--out {
+		justify-content: flex-end;
+	}
+
+	.cvm-bubble {
+		max-width: 82%;
+		padding: 9px 12px 6px;
+		border-radius: 14px;
+		font-size: 14px;
+		line-height: 1.42;
+		box-shadow: 0 1px 1px rgba(20, 32, 27, 0.05);
+		animation: cvm-pop 0.28s ease;
+	}
+
+	.cvm-msg--in .cvm-bubble {
+		background: var(--cvm-in);
+		color: var(--cvm-text);
+		border-top-left-radius: 4px;
+	}
+
+	.cvm-msg--out .cvm-bubble {
+		background: var(--cvm-out);
+		color: #fff;
+		border-top-right-radius: 4px;
+	}
+
+	.cvm-time {
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+		gap: 4px;
+		margin-top: 3px;
+		font-size: 10.5px;
+	}
+
+	.cvm-msg--in .cvm-time {
+		justify-content: flex-start;
+		color: var(--cvm-muted-2);
+	}
+
+	.cvm-msg--out .cvm-time {
+		color: rgba(255, 255, 255, 0.85);
+	}
+
+	.cvm-time svg {
+		display: inline-block;
+	}
+
+	.cvm-time .cvm-mini {
+		width: 13px;
+		height: 13px;
+		stroke-width: 1.7;
+	}
+
+	.cvm-time .cvm-checks {
+		width: 15px;
+		height: 11px;
+		stroke-width: 2.2;
+	}
+
+	.cvm-typing {
+		display: inline-flex;
+		gap: 4px;
+		padding: 12px 14px;
+		border-radius: 14px;
+		background: var(--cvm-in);
+	}
+
+	.cvm-msg--out .cvm-typing {
+		background: var(--cvm-out);
+	}
+
+	.cvm-typing span {
+		width: 7px;
+		height: 7px;
+		border-radius: 50%;
+		background: #c4c9d0;
+		animation: cvm-blink 1.2s infinite;
+	}
+
+	.cvm-msg--out .cvm-typing span {
+		background: rgba(255, 255, 255, 0.75);
+	}
+
+	.cvm-typing span:nth-child(2) {
+		animation-delay: 0.2s;
+	}
+
+	.cvm-typing span:nth-child(3) {
+		animation-delay: 0.4s;
+	}
+
+	/* ---------- COMPOSER ---------- */
+	.cvm-composer {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		flex: 0 0 auto;
+		padding: 10px 12px;
+		background: var(--cvm-head);
+		border-top: 1px solid var(--cvm-border);
+	}
+
+	.cvm-composer .cvm-ic svg {
+		width: 19px;
+		height: 19px;
+	}
+
+	.cvm-field {
+		flex: 1;
+		min-width: 0;
+		padding: 9px 14px;
+		border: 1.5px solid var(--cvm-border);
+		border-radius: 999px;
+		background: var(--cvm-in);
+		color: var(--cvm-muted-2);
+		font-size: 13.5px;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	.cvm-mic {
+		display: grid;
+		place-items: center;
+		flex: 0 0 auto;
+		width: 40px;
+		height: 40px;
+		border-radius: 12px;
+		background: var(--cvm-out);
+		color: #fff;
+	}
+
+	.cvm-mic svg {
+		width: 18px;
+		height: 18px;
+	}
+
+	/* ---------- FICHA DEL LEAD (slide-over) ---------- */
+	.cvm-ficha {
+		position: absolute;
+		inset: 0;
+		z-index: 4;
+		display: flex;
+		flex-direction: column;
+		background: var(--cvm-bg);
+		transform: translateX(100%);
+		visibility: hidden;
+		transition:
+			transform 360ms cubic-bezier(0.22, 1, 0.36, 1),
+			visibility 0s linear 360ms;
+	}
+
+	.cvm-ficha.is-open {
+		transform: translateX(0);
+		visibility: visible;
+		transition:
+			transform 360ms cubic-bezier(0.22, 1, 0.36, 1),
+			visibility 0s;
+	}
+
+	.cvm-ficha-head {
+		display: flex;
+		align-items: center;
+		gap: 10px;
+		flex: 0 0 auto;
+		padding: 12px 14px 12px 8px;
+		background: var(--cvm-head);
+		border-bottom: 1px solid var(--cvm-border);
+	}
+
+	.cvm-ficha-head .cvm-person {
+		margin-right: auto;
+	}
+
+	.cvm-muted {
+		color: var(--cvm-muted);
+		cursor: default;
+	}
+
+	.cvm-phone {
+		display: flex !important;
+		align-items: center;
+		gap: 5px;
+	}
+
+	.cvm-phone svg {
+		width: 12px;
+		height: 12px;
+		stroke-width: 2;
+	}
+
+	.cvm-ficha-body {
+		flex: 1;
+		min-height: 0;
+		padding: 16px 16px 22px;
+		overflow-y: auto;
+		scrollbar-width: thin;
+	}
+
+	.cvm-mail {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		margin-bottom: 14px;
+		color: var(--cvm-muted);
+		font-size: 13px;
+	}
+
+	.cvm-mail svg {
+		width: 16px;
+		height: 16px;
+	}
+
+	.cvm-tags {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 8px;
+	}
+
+	.cvm-tag {
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+		padding: 5px 11px;
+		border-radius: 999px;
+		color: #fff;
+		font-size: 12.5px;
+		font-weight: 600;
+	}
+
+	.cvm-tag i {
+		font-style: normal;
+		font-size: 11px;
+		opacity: 0.85;
+	}
+
+	.cvm-tag--amber {
+		background: #e0a52a;
+	}
+
+	.cvm-tag--blue {
+		background: #3b82f6;
+	}
+
+	.cvm-tag--green {
+		background: var(--cvm-out);
+	}
+
+	.cvm-tag--add {
+		background: transparent;
+		border: 1px dashed rgba(20, 32, 27, 0.18);
+		color: var(--cvm-muted);
+		font-weight: 500;
+	}
+
+	.cvm-hr {
+		height: 1px;
+		margin: 16px 0;
+		background: var(--cvm-border);
+	}
+
+	.cvm-row {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 14px;
+		margin: 12px 0;
+		color: var(--cvm-muted);
+		font-size: 13.5px;
+	}
+
+	.cvm-row strong {
+		color: var(--cvm-text);
+		font-weight: 700;
+		text-align: right;
+	}
+
+	.cvm-label {
+		font-size: 11.5px;
+		font-weight: 700;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+	}
+
+	.cvm-badge {
+		padding: 4px 12px;
+		border-radius: 999px;
+		background: #eef0f3;
+		color: var(--cvm-muted);
+		font-size: 12.5px;
+		font-weight: 700;
+	}
+
+	.cvm-badge.is-ok {
+		background: rgba(31, 157, 107, 0.16);
+		color: #178a5c;
+	}
+
+	/* Flash al actualizarse un dato (la IA detecta algo nuevo) */
+	.cvm-changing {
+		animation: cvm-change 0.42s ease both;
+	}
+
+	.cvm-sum-toggle {
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+		margin-top: 4px;
+		padding: 0;
+		border: 0;
+		background: transparent;
+		color: var(--cvm-green);
+		font: inherit;
+		font-size: 13px;
+		font-weight: 700;
+		cursor: pointer;
+	}
+
+	.cvm-sum-toggle svg {
+		width: 16px;
+		height: 16px;
+		stroke-width: 2.4;
+		transition: transform 240ms ease;
+	}
+
+	.cvm-sum-toggle.is-open svg {
+		transform: rotate(180deg);
+	}
+
+	.cvm-summary {
+		overflow: hidden;
+		max-height: 0;
+		margin: 0;
+		color: var(--cvm-text);
+		font-size: 13px;
+		line-height: 1.55;
+		opacity: 0;
+		transition:
+			max-height 320ms ease,
+			opacity 320ms ease,
+			margin 320ms ease;
+	}
+
+	.cvm-summary.is-open {
+		max-height: 160px;
+		margin-top: 10px;
+		opacity: 1;
+	}
+
+	.cvm-lead {
+		display: inline-flex;
+		align-items: center;
+		gap: 6px;
+		color: var(--cvm-muted);
+		font-weight: 700;
+	}
+
+	.cvm-lead.is-ok {
+		color: var(--cvm-green);
+	}
+
+	.cvm-lead svg {
+		width: 15px;
+		height: 15px;
+		stroke-width: 2.4;
+		display: none;
+	}
+
+	.cvm-lead.is-ok svg {
+		display: block;
+	}
+
+	.cvm-agent {
+		display: inline-flex;
+		align-items: center;
+		gap: 8px;
+		color: var(--cvm-text);
+		font-weight: 600;
+	}
+
+	.cvm-agent-av {
+		display: grid;
+		place-items: center;
+		width: 24px;
+		height: 24px;
+		border-radius: 50%;
+		background: linear-gradient(135deg, var(--cvm-out), var(--cvm-out-dark));
+		color: #fff;
+		font-size: 9px;
+		font-weight: 800;
+	}
+
+	/* ---------- HINT ---------- */
+	.cvm-hint {
+		position: absolute;
+		left: 50%;
+		bottom: 70px;
+		z-index: 3;
+		padding: 7px 14px;
+		border-radius: 999px;
+		background: rgba(20, 32, 27, 0.92);
+		border: 1px solid transparent;
+		color: #ffffff;
+		font-size: 12px;
+		font-weight: 600;
+		white-space: nowrap;
+		transform: translate(-50%, 6px);
+		opacity: 0;
+		pointer-events: none;
+		transition:
+			opacity 280ms ease,
+			transform 280ms ease;
+	}
+
+	.cvm-hint.is-on {
+		opacity: 1;
+		transform: translate(-50%, 0);
+	}
+
+	@keyframes cvm-pop {
+		from {
+			opacity: 0;
+			transform: translateY(8px) scale(0.98);
+		}
+		to {
+			opacity: 1;
+			transform: none;
+		}
+	}
+
+	@keyframes cvm-change {
+		0% {
+			opacity: 0;
+			transform: translateY(4px);
+			filter: blur(2px);
+		}
+		100% {
+			opacity: 1;
+			transform: translateY(0);
+			filter: blur(0);
+		}
+	}
+
+	@keyframes cvm-blink {
+		0%,
+		60%,
+		100% {
+			opacity: 0.3;
+			transform: translateY(0);
+		}
+		30% {
+			opacity: 1;
+			transform: translateY(-3px);
+		}
+	}
+
+	@keyframes cvm-pulse {
+		0% {
+			opacity: 0.6;
+			transform: scale(0.7);
+		}
+		70% {
+			opacity: 0;
+			transform: scale(1.25);
+		}
+		100% {
+			opacity: 0;
+			transform: scale(1.25);
+		}
+	}
+
+	/* Solo se muestra en mobile; el mockup de escritorio (.cv) se oculta acá. */
+	@media (max-width: 720px) {
+		.cvm {
+			display: flex;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.cvm-bubble,
+		.cvm-contact::before {
+			animation: none;
+		}
+	}
+</style>
+
+<script>
+	const root = document.querySelector('[data-cvm]') as HTMLElement | null;
+
+	if (root) {
+		const msgs = root.querySelector('[data-cvm-msgs]') as HTMLElement;
+		const status = root.querySelector('[data-cvm-status]') as HTMLElement;
+		const ficha = root.querySelector('[data-cvm-ficha]') as HTMLElement;
+		const hint = root.querySelector('[data-cvm-hint]') as HTMLElement;
+		const phone = status?.textContent ?? '';
+
+		const mini =
+			'<svg class="cvm-mini" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/><path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/><path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"/></svg>';
+		const checks =
+			'<svg class="cvm-checks" viewBox="0 0 24 16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 8l5 5L17 2"/><path d="M7 8l5 5L23 2"/></svg>';
+
+		type Msg = { type: 'in' | 'out'; text: string; time: string; typing?: number; panel?: string };
+		const convo: Msg[] = [
+			{ type: 'in', text: 'Hola', time: '13:57', typing: 800 },
+			{ type: 'out', text: 'Hola, soy el asistente virtual de la inmobiliaria. ¿En qué puedo ayudarte?', time: '13:57' },
+			{ type: 'in', text: 'Estoy buscando alquilar un depto', time: '13:57', typing: 1400, panel: 'depto' },
+			{ type: 'out', text: 'Perfecto, te ayudo a encontrar el departamento ideal. ¿En qué zona o ciudad te gustaría?', time: '13:58' },
+			{ type: 'in', text: 'No estoy seguro, ¿me recomendás?', time: '13:58', typing: 1500 },
+			{ type: 'out', text: 'Claro. Trabajamos en Capital Federal, La Plata y Rosario. ¿Te muestro opciones en Capital?', time: '13:58' },
+			{ type: 'in', text: 'Dale, Capital federal', time: '13:59', typing: 1100, panel: 'capital' },
+			{ type: 'out', text: 'Genial, Capital tiene buen stock. ¿Cuántos ambientes buscás y qué presupuesto manejás?', time: '13:59' },
+		];
+
+		// La ficha del lead se va completando a medida que llegan los mensajes.
+		type Ficha = { tags: string[]; qual: string; qualOk: boolean; intent: string; lead: string; leadOk: boolean; summary: string };
+		const fichaStates: Record<string, Ficha> = {
+			initial: { tags: ['Explorando'], qual: 'Sin calificar', qualOk: false, intent: 'Analizando…', lead: 'Nuevo', leadOk: false, summary: 'La IA está leyendo la conversación para detectar la operación, la zona y la intención del lead.' },
+			depto: { tags: ['Explorando', 'Alquilar', 'Departamento'], qual: 'Interesado', qualOk: false, intent: 'Quiere alquilar', lead: 'En conversación', leadOk: false, summary: 'El cliente busca alquilar un departamento. Todavía falta definir la zona, los ambientes y el presupuesto.' },
+			capital: { tags: ['Explorando', 'Alquilar', 'Departamento'], qual: 'Calificado', qualOk: true, intent: 'Quiere alquilar', lead: 'Calificado', leadOk: true, summary: 'El cliente busca alquilar un departamento en Capital Federal. Todavía falta conocer ambientes y presupuesto; conviene responderle hoy con opciones disponibles.' },
+		};
+
+		const tagColors = ['cvm-tag--amber', 'cvm-tag--blue', 'cvm-tag--green'];
+		const fichaTags = root.querySelector('[data-cvm-tags]');
+		const addChip = fichaTags?.querySelector('.cvm-tag--add') ?? null;
+		const qualNode = root.querySelector('[data-cvm-qual]');
+		const intentNode = root.querySelector('[data-cvm-intent]');
+		const leadNode = root.querySelector('[data-cvm-lead]');
+		const leadWrap = leadNode?.closest('.cvm-lead');
+		const summaryNode = root.querySelector('[data-cvm-summary]');
+
+		const flash = (node: Element | null | undefined) => {
+			if (!node) return;
+			node.classList.remove('cvm-changing');
+			void (node as HTMLElement).offsetWidth;
+			node.classList.add('cvm-changing');
+		};
+
+		const applyFicha = (s: Ficha) => {
+			if (fichaTags) {
+				fichaTags.querySelectorAll('.cvm-tag:not(.cvm-tag--add)').forEach((n) => n.remove());
+				s.tags.forEach((t, i) => {
+					const span = document.createElement('span');
+					span.className = 'cvm-tag ' + tagColors[i % tagColors.length] + ' cvm-changing';
+					span.innerHTML = t + ' <i>✕</i>';
+					fichaTags.insertBefore(span, addChip);
+				});
+			}
+			if (qualNode) {
+				qualNode.textContent = s.qual;
+				qualNode.classList.toggle('is-ok', s.qualOk);
+				flash(qualNode);
+			}
+			if (intentNode) {
+				intentNode.textContent = s.intent;
+				flash(intentNode);
+			}
+			if (leadNode) {
+				leadNode.textContent = s.lead;
+				flash(leadNode);
+			}
+			leadWrap?.classList.toggle('is-ok', s.leadOk);
+			if (summaryNode) summaryNode.textContent = s.summary;
+		};
+
+		let started = false;
+		let waiters: { id: number; resolve: () => void }[] = [];
+		const sleep = (ms: number) =>
+			new Promise<void>((resolve) => {
+				const id = window.setTimeout(resolve, ms);
+				waiters.push({ id, resolve });
+			});
+
+		const scrollDown = () => {
+			msgs.scrollTop = msgs.scrollHeight;
+		};
+
+		const addBubble = (m: Msg) => {
+			const row = document.createElement('div');
+			row.className = 'cvm-msg cvm-msg--' + m.type;
+			const meta = m.type === 'out' ? `${mini} ${m.time} ${checks}` : m.time;
+			row.innerHTML = `<div class="cvm-bubble">${m.text}<span class="cvm-time">${meta}</span></div>`;
+			msgs.appendChild(row);
+			scrollDown();
+		};
+
+		const addTyping = (type: 'in' | 'out') => {
+			const row = document.createElement('div');
+			row.className = 'cvm-msg cvm-msg--' + type;
+			row.innerHTML = '<div class="cvm-typing"><span></span><span></span><span></span></div>';
+			msgs.appendChild(row);
+			scrollDown();
+			return row;
+		};
+
+		const setStatus = (typing: boolean) => {
+			if (!status) return;
+			status.textContent = typing ? 'escribiendo…' : phone;
+			status.classList.toggle('is-typing', typing);
+		};
+
+		const run = async () => {
+			applyFicha(fichaStates.initial);
+			for (const m of convo) {
+				if (m.type === 'in') {
+					const t = addTyping('in');
+					await sleep(m.typing ?? 1200);
+					t.remove();
+					addBubble(m);
+					if (m.panel) applyFicha(fichaStates[m.panel]);
+					await sleep(650);
+				} else {
+					setStatus(true);
+					const t = addTyping('out');
+					await sleep(950);
+					t.remove();
+					addBubble(m);
+					setStatus(false);
+					await sleep(950);
+				}
+			}
+			// Al terminar, una pista de que la ficha es interactiva.
+			hint?.classList.add('is-on');
+			window.setTimeout(() => hint?.classList.remove('is-on'), 3600);
+		};
+
+		const start = () => {
+			if (started) return;
+			started = true;
+			run();
+		};
+
+		if ('IntersectionObserver' in window) {
+			const io = new IntersectionObserver(
+				(entries) => {
+					entries.forEach((entry) => {
+						if (entry.isIntersecting) {
+							start();
+							io.disconnect();
+						}
+					});
+				},
+				{ threshold: 0.3 },
+			);
+			io.observe(root);
+		} else {
+			start();
+		}
+
+		// --- Interacciones ---
+		const openFicha = () => {
+			root.classList.add('is-seen');
+			hint?.classList.remove('is-on');
+			ficha?.classList.add('is-open');
+			ficha?.setAttribute('aria-hidden', 'false');
+		};
+		const closeFicha = () => {
+			ficha?.classList.remove('is-open');
+			ficha?.setAttribute('aria-hidden', 'true');
+		};
+
+		root.querySelector('[data-cvm-open]')?.addEventListener('click', openFicha);
+		root.querySelector('[data-cvm-close]')?.addEventListener('click', closeFicha);
+		document.addEventListener('keydown', (e) => {
+			if (e.key === 'Escape') closeFicha();
+		});
+
+		const sumToggle = root.querySelector('[data-cvm-summary-toggle]');
+		sumToggle?.addEventListener('click', () => {
+			sumToggle.classList.toggle('is-open');
+			summaryNode?.classList.toggle('is-open');
+		});
+	}
+</script>

@@ -106,10 +106,22 @@ import Button from '../ui/Button.astro';
 </section>
 
 <script>
-	const crmCard = document.querySelector('[data-hero-crm-card]');
+	interface HeroState {
+		tags: string[];
+		analyzing?: boolean;
+		qualification: string;
+		operation: string;
+		type: string;
+		maturity: string;
+		zone: string;
+		badge: string;
+		summary: string;
+	}
+
+	const crmCard = document.querySelector<HTMLElement>('[data-hero-crm-card]');
 
 	if (crmCard) {
-		const states = [
+		const states: HeroState[] = [
 			{
 				tags: ['Explorando'],
 				analyzing: true,
@@ -144,14 +156,14 @@ import Button from '../ui/Button.astro';
 		];
 
 		const tagNodes = [...crmCard.querySelectorAll('[data-crm-tag]')] as HTMLElement[];
-		const summaryNode = crmCard.querySelector('[data-crm-summary]');
+		const summaryNode = crmCard.querySelector<HTMLElement>('[data-crm-summary]');
 		const fieldNodes = {
-			qualification: crmCard.querySelector('[data-crm-field="qualification"]'),
-			operation: crmCard.querySelector('[data-crm-field="operation"]'),
-			type: crmCard.querySelector('[data-crm-field="type"]'),
-			maturity: crmCard.querySelector('[data-crm-field="maturity"]'),
-			zone: crmCard.querySelector('[data-crm-field="zone"]'),
-			badge: crmCard.querySelector('[data-crm-field="badge"]'),
+			qualification: crmCard.querySelector<HTMLElement>('[data-crm-field="qualification"]'),
+			operation: crmCard.querySelector<HTMLElement>('[data-crm-field="operation"]'),
+			type: crmCard.querySelector<HTMLElement>('[data-crm-field="type"]'),
+			maturity: crmCard.querySelector<HTMLElement>('[data-crm-field="maturity"]'),
+			zone: crmCard.querySelector<HTMLElement>('[data-crm-field="zone"]'),
+			badge: crmCard.querySelector<HTMLElement>('[data-crm-field="badge"]'),
 		};
 
 		let stateIndex = 0;
@@ -164,7 +176,7 @@ import Button from '../ui/Button.astro';
 			window.clearTimeout(typingTimer);
 		};
 
-		const flashValue = (node, value, animate = true) => {
+		const flashValue = (node: HTMLElement | null, value: string, animate = true) => {
 			if (!node) return;
 			node.textContent = value;
 			node.classList.remove('is-changing');
@@ -173,7 +185,7 @@ import Button from '../ui/Button.astro';
 			node.classList.add('is-changing');
 		};
 
-		const typeSummary = (text) => {
+		const typeSummary = (text: string) => {
 			if (!summaryNode) return;
 			window.clearTimeout(typingTimer);
 			summaryNode.textContent = '';
@@ -198,7 +210,7 @@ import Button from '../ui/Button.astro';
 
 		const applyState = () => {
 			const state = states[stateIndex];
-			const analyzing = Boolean((state as any).analyzing);
+			const analyzing = Boolean(state.analyzing);
 			const animate = !analyzing;
 
 			crmCard.classList.toggle('is-analyzing', analyzing);

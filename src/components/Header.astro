@@ -59,7 +59,7 @@ const logoSrc = typeof logo === 'string' ? logo : logo.src;
 		header?.toggleAttribute('data-floating', scrollY > floatingStart);
 	};
 
-	const setHeaderProgress = (progress) => {
+	const setHeaderProgress = (progress: number) => {
 		if (!(header instanceof HTMLElement)) return;
 		hiddenProgress = Math.max(0, Math.min(1, progress));
 		header.style.setProperty('--header-hide-progress', String(hiddenProgress));
