@@ -2,14 +2,14 @@
 // Mockup mobile del Pipeline (Kanban), fiel a la app real:
 // header + "Agregar lead" + tabs Kanban/Tabla + hints, y un carrusel de etapas
 // con scroll-snap. Interactivo: se desliza para ver columnas (dots sincronizados).
-type Card = { name: string; tag: string; date: string; time: string };
+type Card = { name: string; tag: string; date: string; time: string; drag?: boolean };
 type Column = { title: string; count: number; cards: Card[] };
 
 const columns: Column[] = [
 	{
 		title: 'Visita Agendada',
 		count: 1,
-		cards: [{ name: 'Raúl M', tag: 'Local en Chilavert', date: '13 jun', time: '14:30' }],
+		cards: [{ name: 'Raúl M', tag: 'Local en Chilavert', date: '13 jun', time: '14:30', drag: true }],
 	},
 	{
 		title: 'Post Visita',
@@ -44,11 +44,6 @@ const columns: Column[] = [
 			<svg viewBox="0 0 24 24"><path d="M7 4 3 8l4 4" /><path d="M3 8h13" /><path d="M17 20l4-4-4-4" /><path d="M21 16H8" /></svg>
 			Deslizá para ver columnas
 		</span>
-		<span class="pm-hint-sep">·</span>
-		<span>
-			<svg viewBox="0 0 24 24"><path d="M18 11V6a2 2 0 0 0-4 0v5" /><path d="M14 10V4a2 2 0 0 0-4 0v6" /><path d="M10 10.5V6a2 2 0 0 0-4 0v8" /><path d="M18 8a2 2 0 0 1 4 0v6a8 8 0 0 1-8 8h-2a8 8 0 0 1-7.4-5l-.9-2a2 2 0 0 1 3.5-2L8 14" /></svg>
-			Mantenés para arrastrar
-		</span>
 	</div>
 
 	<div class="pm-cols" data-pm-cols>
@@ -66,7 +61,7 @@ const columns: Column[] = [
 				</header>
 
 				{col.cards.map((card) => (
-					<article class="pm-card">
+					<article class:list={['pm-card', { 'pm-card--drag': card.drag }]}>
 						<span class="pm-grip" aria-hidden="true">
 							<svg viewBox="0 0 16 16"><circle cx="6" cy="4" r="1" /><circle cx="10" cy="4" r="1" /><circle cx="6" cy="8" r="1" /><circle cx="10" cy="8" r="1" /><circle cx="6" cy="12" r="1" /><circle cx="10" cy="12" r="1" /></svg>
 						</span>
@@ -148,10 +143,6 @@ const columns: Column[] = [
 		height: 15px;
 	}
 
-	.pm-hint-sep {
-		opacity: 0.6;
-	}
-
 	/* Carrusel de etapas */
 	.pm-cols {
 		display: flex;
@@ -172,11 +163,16 @@ const columns: Column[] = [
 		scroll-snap-align: start;
 	}
 
+	.pm-col:first-child {
+		box-sizing: border-box;
+		padding-left: 18px;
+	}
+
 	.pm-col-head {
 		display: flex;
 		align-items: center;
 		gap: 8px;
-		margin-bottom: 12px;
+		margin-bottom: 20px;
 	}
 
 	.pm-col-head h5 {
@@ -224,6 +220,37 @@ const columns: Column[] = [
 		border-radius: 14px;
 		background: #fff;
 		box-shadow: 0 1px 3px rgba(20, 32, 27, 0.06);
+	}
+
+	.pm-card--drag {
+		z-index: 2;
+		animation: pm-card-drag 4.5s ease-in-out infinite;
+		transform-origin: center;
+	}
+
+	@keyframes pm-card-drag {
+		0%,
+		12% {
+			transform: translate(0, 0) rotate(0);
+			box-shadow: 0 1px 3px rgba(20, 32, 27, 0.06);
+		}
+		22% {
+			transform: translate(6px, -6px) rotate(1.5deg) scale(1.02);
+			box-shadow: 0 14px 30px rgba(31, 157, 107, 0.18);
+		}
+		50% {
+			transform: translate(42px, -6px) rotate(1.5deg) scale(1.02);
+			box-shadow: 0 16px 34px rgba(31, 157, 107, 0.2);
+		}
+		68% {
+			transform: translate(6px, -6px) rotate(1.5deg) scale(1.02);
+			box-shadow: 0 14px 30px rgba(31, 157, 107, 0.18);
+		}
+		80%,
+		100% {
+			transform: translate(0, 0) rotate(0);
+			box-shadow: 0 1px 3px rgba(20, 32, 27, 0.06);
+		}
 	}
 
 	.pm-grip {
@@ -339,6 +366,12 @@ const columns: Column[] = [
 	@media (max-width: 720px) {
 		.pm {
 			display: block;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.pm-card--drag {
+			animation: none;
 		}
 	}
 </style>

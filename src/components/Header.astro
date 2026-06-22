@@ -44,6 +44,7 @@ const logoSrc = typeof logo === 'string' ? logo : logo.src;
 	let hiddenProgress = 0;
 	let frame = 0;
 	let motionTimer = 0;
+	let revealTimer = 0;
 
 	const pauseHeaderMotion = () => {
 		if (!(header instanceof HTMLElement)) return;
@@ -61,15 +62,21 @@ const logoSrc = typeof logo === 'string' ? logo : logo.src;
 
 	const setHeaderProgress = (progress: number) => {
 		if (!(header instanceof HTMLElement)) return;
-		hiddenProgress = Math.max(0, Math.min(1, progress));
+		const nextProgress = Math.max(0, Math.min(1, progress));
+		if (Math.abs(nextProgress - hiddenProgress) < 0.001) return;
+		hiddenProgress = nextProgress;
 		header.style.setProperty('--header-hide-progress', String(hiddenProgress));
 		header.toggleAttribute('data-hidden', hiddenProgress >= 1);
 	};
 
 	const revealHeader = () => {
-		header?.setAttribute('data-revealing', '');
+		if (!(header instanceof HTMLElement)) return;
+		if (!header.hasAttribute('data-revealing')) {
+			header.setAttribute('data-revealing', '');
+			window.clearTimeout(revealTimer);
+			revealTimer = window.setTimeout(() => header.removeAttribute('data-revealing'), 320);
+		}
 		setHeaderProgress(0);
-		window.setTimeout(() => header?.removeAttribute('data-revealing'), 320);
 	};
 
 	const syncVisibility = () => {
@@ -105,6 +112,7 @@ const logoSrc = typeof logo === 'string' ? logo : logo.src;
 	const syncMenuState = () => {
 		if (mobileMenu instanceof HTMLDetailsElement) {
 			mobileSummary?.setAttribute('aria-expanded', String(mobileMenu.open));
+			mobileSummary?.setAttribute('aria-label', mobileMenu.open ? 'Cerrar menú' : 'Abrir menú');
 			if (mobileMenu.open) revealHeader();
 		}
 	};
@@ -283,15 +291,20 @@ const logoSrc = typeof logo === 'string' ? logo : logo.src;
 	}
 
 	.mobile-menu summary {
-		display: grid;
-		place-items: center;
-		width: 42px;
-		height: 42px;
-		border: 1px solid var(--color-border);
-		border-radius: var(--radius-md);
-		background: var(--color-surface);
+		position: relative;
+		width: 44px;
+		height: 44px;
+		border: 1px solid rgba(20, 32, 27, 0.12);
+		border-radius: 12px;
+		background: rgba(255, 255, 255, 0.92);
+		box-shadow: 0 1px 2px rgba(20, 32, 27, 0.05);
 		cursor: pointer;
 		list-style: none;
+		-webkit-tap-highlight-color: transparent;
+		transition:
+			border-color 180ms ease,
+			background-color 180ms ease,
+			box-shadow 180ms ease;
 	}
 
 	.mobile-menu summary::-webkit-details-marker {
@@ -299,11 +312,51 @@ const logoSrc = typeof logo === 'string' ? logo : logo.src;
 	}
 
 	.mobile-menu summary span {
-		width: 18px;
+		position: absolute;
+		left: 50%;
+		width: 20px;
 		height: 2px;
-		margin: 2px 0;
 		border-radius: 999px;
 		background: var(--color-text);
+		transform: translateX(-50%);
+		transform-origin: center;
+		transition:
+			top 200ms cubic-bezier(0.22, 1, 0.36, 1),
+			opacity 140ms ease,
+			transform 200ms cubic-bezier(0.22, 1, 0.36, 1);
+	}
+
+	.mobile-menu summary span:nth-child(1) {
+		top: 14px;
+	}
+
+	.mobile-menu summary span:nth-child(2) {
+		top: 21px;
+	}
+
+	.mobile-menu summary span:nth-child(3) {
+		top: 28px;
+	}
+
+	.mobile-menu[open] summary {
+		border-color: rgba(37, 154, 114, 0.3);
+		background: var(--color-brand-soft);
+		box-shadow: 0 0 0 3px rgba(37, 154, 114, 0.08);
+	}
+
+	.mobile-menu[open] summary span:nth-child(1) {
+		top: 21px;
+		transform: translateX(-50%) rotate(45deg);
+	}
+
+	.mobile-menu[open] summary span:nth-child(2) {
+		opacity: 0;
+		transform: translateX(-50%) scaleX(0.35);
+	}
+
+	.mobile-menu[open] summary span:nth-child(3) {
+		top: 21px;
+		transform: translateX(-50%) rotate(-45deg);
 	}
 
 	.mobile-menu nav {
@@ -354,6 +407,16 @@ const logoSrc = typeof logo === 'string' ? logo : logo.src;
 			min-height: 68px;
 			padding-inline: 14px;
 			gap: 16px;
+			backdrop-filter: none;
+			transition:
+				opacity 180ms ease,
+				transform 240ms cubic-bezier(0.22, 1, 0.36, 1);
+		}
+
+		.site-header[data-revealing] {
+			transition:
+				opacity 180ms ease,
+				transform 240ms cubic-bezier(0.22, 1, 0.36, 1);
 		}
 
 		.site-header[data-floating] {

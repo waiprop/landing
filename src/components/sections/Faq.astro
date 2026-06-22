@@ -37,6 +37,7 @@ import { faqs } from '../../config/faqs';
 	const faqList = document.querySelector('[data-faq-list]');
 	const faqItems = document.querySelectorAll('[data-faq-list] details');
 	const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+	const useNativeToggle = window.matchMedia('(max-width: 760px), (hover: none) and (pointer: coarse)').matches;
 	const canAnimate = 'animate' in Element.prototype;
 	const openDuration = 340;
 	const closeDuration = 280;
@@ -48,7 +49,7 @@ import { faqs } from '../../config/faqs';
 
 	// Animación de entrada: las tarjetas aparecen recién cuando la sección entra
 	// en el viewport (en vez de dispararse al cargar la página, estando fuera de pantalla).
-	if (faqList && !prefersReducedMotion && 'IntersectionObserver' in window) {
+	if (faqList && !prefersReducedMotion && !useNativeToggle && 'IntersectionObserver' in window) {
 		faqList.dataset.reveal = '';
 		const revealObserver = new IntersectionObserver((entries, observer) => {
 			if (entries.some((entry) => entry.isIntersecting)) {
@@ -59,7 +60,7 @@ import { faqs } from '../../config/faqs';
 		revealObserver.observe(faqList);
 	}
 
-	if (prefersReducedMotion || !canAnimate) {
+	if (prefersReducedMotion || useNativeToggle || !canAnimate) {
 		faqItems.forEach((item) => {
 			item.querySelector('summary')?.addEventListener('click', () => {
 				requestAnimationFrame(() => {
@@ -89,6 +90,10 @@ import { faqs } from '../../config/faqs';
 				animation = null;
 				item.style.height = '';
 				item.style.overflow = '';
+				answer.style.height = '';
+				answer.style.overflow = '';
+				answer.style.opacity = '';
+				answer.style.transform = '';
 			};
 
 			// Abrir y cerrar comparten la misma mecánica (medir altura actual → animar
@@ -373,6 +378,31 @@ import { faqs } from '../../config/faqs';
 		.faq-copy {
 			position: static;
 			max-width: 720px;
+		}
+	}
+
+	@media (max-width: 760px) {
+		/* En mobile la apertura es nativa e inmediata: evitamos animar propiedades
+		   que disparan un relayout completo de la página en cada frame. */
+		.faq-item,
+		.faq-item[data-state='opening'],
+		.faq-item[data-state='open'],
+		.faq-item[open]:not([data-state='closing']) {
+			box-shadow:
+				0 1px 2px rgba(20, 32, 27, 0.04),
+				0 12px 32px rgba(20, 32, 27, 0.07);
+		}
+
+		.faq-item:hover,
+		.faq-item:focus-within {
+			transform: none;
+			box-shadow:
+				0 1px 2px rgba(20, 32, 27, 0.04),
+				0 12px 32px rgba(20, 32, 27, 0.07);
+		}
+
+		.faq-item[open] .faq-answer {
+			animation: none;
 		}
 	}
 
