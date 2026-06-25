@@ -58,7 +58,9 @@ test-results/
 Thumbs.db
 ehthumbs.db
 Desktop.ini
-docs/*.html
+
+# internal docs (local only — not tracked in the repo)
+docs/
 
 # editor folders
 .idea/
