@@ -1,17 +1,29 @@
 ---
-import { faqs } from '../../config/faqs';
+import { faqs, type Faq } from '../../config/faqs';
+
+interface Props {
+	items?: Faq[];
+	title?: string;
+	lead?: string;
+}
+
+const {
+	items = faqs,
+	title = 'Preguntas frecuentes',
+	lead = 'Respuestas directas para decidir si Waichatt encaja con tu equipo, tus propiedades y tu forma de atender leads.',
+} = Astro.props;
 ---
 
 <section class="faq section-band" id="faq" aria-labelledby="faq-title">
 	<div class="section-inner faq-inner">
 		<div class="section-head faq-copy">
 			<p class="eyebrow">FAQ</p>
-			<h2 id="faq-title">Preguntas frecuentes</h2>
-			<p class="faq-lead">Respuestas directas para decidir si Waichatt encaja con tu equipo, tus propiedades y tu forma de atender leads.</p>
+			<h2 id="faq-title">{title}</h2>
+			<p class="faq-lead">{lead}</p>
 		</div>
 
 		<div class="faq-list" data-faq-list>
-			{faqs.map((faq, index) => (
+			{items.map((faq, index) => (
 				<details class="faq-item" open={index === 0} style={`--item-index: ${index};`}>
 					<summary>
 						<span class="faq-question-block">

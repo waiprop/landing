@@ -1,0 +1,61 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Button from '../components/ui/Button.astro';
+import { site } from '../config/site';
+---
+
+<Layout
+	title="Página no encontrada (404) - Waichatt"
+	description="La página que buscas no existe o se movió."
+	noindex={true}
+>
+	<main class="notfound">
+		<p class="code">404</p>
+		<h1>Esta página no existe</h1>
+		<p class="lead">Puede que el enlace esté roto o que la página se haya movido.</p>
+		<div class="actions">
+			<Button href={site.links.home}>Ir al inicio</Button>
+			<Button href={site.links.pricing} variant="ghost">Ver precios</Button>
+		</div>
+	</main>
+</Layout>
+
+<style>
+	.notfound {
+		display: grid;
+		place-content: center;
+		gap: 10px;
+		min-height: calc(100vh - var(--header-height));
+		min-height: calc(100svh - var(--header-height));
+		padding: clamp(40px, 8vw, 96px) 20px;
+		text-align: center;
+	}
+
+	.code {
+		margin: 0;
+		color: var(--color-brand);
+		font-size: clamp(3.5rem, 12vw, 6rem);
+		font-weight: 900;
+		line-height: 1;
+	}
+
+	h1 {
+		margin: 8px 0 0;
+		color: var(--color-text);
+		font-size: clamp(1.6rem, 4vw, 2.4rem);
+	}
+
+	.lead {
+		margin: 6px auto 0;
+		max-width: 46ch;
+		color: var(--color-muted);
+	}
+
+	.actions {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 12px;
+		margin-top: 26px;
+	}
+</style>

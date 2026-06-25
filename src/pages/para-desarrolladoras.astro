@@ -4,23 +4,46 @@ import { site } from '../config/site';
 import Button from '../components/ui/Button.astro';
 import PageHeader from '../components/PageHeader.astro';
 import BenefitGrid from '../components/sections/BenefitGrid.astro';
+import Faq from '../components/sections/Faq.astro';
+import { serviceSchema, breadcrumbSchema, faqSchema } from '../config/schema';
+import { developersFaqs } from '../config/faqs';
 
 const benefits = [
 	{ title: 'Respuesta inmediata', text: 'Los interesados reciben una primera respuesta aunque entren cientos de mensajes juntos.' },
-	{ title: 'Calificación comercial', text: 'Registrá zona, presupuesto, unidad de interés y madurez de compra desde la conversación.' },
+	{ title: 'Calificación comercial', text: 'Registra zona, presupuesto, unidad de interés y madurez de compra desde la conversación.' },
 	{ title: 'Seguimiento de punta a punta', text: 'El interés en un emprendimiento puede tardar meses en cerrar. Cada consulta queda en el pipeline para hacer seguimiento durante todo el ciclo, sin que ninguna oportunidad se enfríe.' },
+];
+
+const jsonLd = [
+	serviceSchema({
+		name: 'Waichatt para desarrolladoras',
+		description:
+			'Plataforma de CRM con agente de IA que responde los picos de consultas de un lanzamiento inmobiliario, califica interesados y reparte leads entre el equipo comercial durante todo el ciclo de venta.',
+		audienceType: 'Desarrolladoras inmobiliarias',
+		path: site.links.developers,
+	}),
+	faqSchema(developersFaqs),
+	breadcrumbSchema([
+		{ name: 'Inicio', path: '/' },
+		{ name: 'Para desarrolladoras', path: site.links.developers },
+	]),
 ];
 ---
 
-<Layout title="Waichatt para desarrolladoras - Respondé lanzamientos con IA" description="Respondé picos de consultas, calificá interesados y repartí leads entre tu equipo comercial durante lanzamientos inmobiliarios." canonical="/para-desarrolladoras">
+<Layout title="Waichatt para desarrolladoras - Responde lanzamientos con IA" description="Responde picos de consultas, califica interesados y reparte leads entre tu equipo comercial durante lanzamientos inmobiliarios." canonical="/para-desarrolladoras" jsonLd={jsonLd}>
 	<main>
 		<PageHeader
 			eyebrow="Para desarrolladoras"
-			title="Respondé cada lanzamiento sin saturar a tu equipo"
+			title="Responde cada lanzamiento sin saturar a tu equipo"
 			subtitle="La IA contesta al instante, califica interesados y permite seguir cada oportunidad durante todo el ciclo de venta."
 		>
-			<Button href={site.links.register} track="Developers page register">Empezá gratis</Button>
+			<Button href={site.links.register} track="Developers page register">Empieza gratis</Button>
 		</PageHeader>
 		<BenefitGrid items={benefits} label="Beneficios para desarrolladoras" />
+		<Faq
+			items={developersFaqs}
+			title="Preguntas de desarrolladoras"
+			lead="Dudas frecuentes sobre cómo Waichatt responde lanzamientos, califica interesados y reparte leads."
+		/>
 	</main>
 </Layout>

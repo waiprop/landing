@@ -11,6 +11,24 @@ const blog = defineCollection({
 		updatedDate: z.coerce.date().optional(),
 		tags: z.array(z.string()).default([]),
 		draft: z.boolean().default(false),
+		// Autor del artículo. Si se omite, usa site.defaultAuthor.
+		author: z
+			.object({
+				name: z.string(),
+				role: z.string().optional(),
+				url: z.url().optional(),
+			})
+			.optional(),
+		// FAQ del artículo: se renderiza visible y emite schema FAQPage (citabilidad GEO).
+		faqs: z
+			.array(
+				z.object({
+					tag: z.string(),
+					question: z.string(),
+					answer: z.string(),
+				}),
+			)
+			.optional(),
 	}),
 });
 

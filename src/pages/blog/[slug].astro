@@ -1,7 +1,9 @@
 ---
 import { getCollection, render, type CollectionEntry } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
-import { blogPostingSchema, breadcrumbSchema } from '../../config/schema';
+import { blogPostingSchema, breadcrumbSchema, faqSchema } from '../../config/schema';
+import { site, type Author } from '../../config/site';
+import Faq from '../../components/sections/Faq.astro';
 
 interface Props {
 	post: CollectionEntry<'blog'>;
@@ -21,6 +23,7 @@ const { Content } = await render(post);
 const postPath = `/blog/${post.id}/`;
 const publishedTime = post.data.publishDate.toISOString();
 const modifiedTime = (post.data.updatedDate ?? post.data.publishDate).toISOString();
+const author: Author = post.data.author ?? site.defaultAuthor;
 const jsonLd = [
 	blogPostingSchema(post, postPath),
 	breadcrumbSchema([
@@ -28,6 +31,7 @@ const jsonLd = [
 		{ name: 'Blog', path: '/blog/' },
 		{ name: post.data.title, path: postPath },
 	]),
+	...(post.data.faqs?.length ? [faqSchema(post.data.faqs)] : []),
 ];
 ---
 
@@ -45,12 +49,23 @@ const jsonLd = [
 			<a class="back" href="/blog/">Blog</a>
 			<h1>{post.data.title}</h1>
 			<p class="description">{post.data.description}</p>
-			<time datetime={post.data.publishDate.toISOString()}>{post.data.publishDate.toLocaleDateString('es-AR')}</time>
+			<p class="meta">
+				<span class="author">{author.url ? <a href={author.url}>{author.name}</a> : author.name}</span>
+				{author.role && <span class="role"> · {author.role}</span>}
+				<time datetime={post.data.publishDate.toISOString()}>{post.data.publishDate.toLocaleDateString('es-ES')}</time>
+			</p>
 			<div class="content">
 				<Content />
 			</div>
 		</article>
 	</main>
+	{post.data.faqs?.length && (
+		<Faq
+			items={post.data.faqs}
+			title="Preguntas frecuentes"
+			lead="Respuestas rápidas sobre el tema de este artículo."
+		/>
+	)}
 </Layout>
 
 <style>
@@ -67,6 +82,25 @@ const jsonLd = [
 	time {
 		color: var(--color-brand);
 		font-weight: 900;
+	}
+
+	.meta {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: baseline;
+		gap: 6px 10px;
+		margin: 16px 0 0;
+		color: var(--color-muted);
+		font-size: 0.95rem;
+	}
+
+	.meta .author {
+		color: var(--color-text);
+		font-weight: 700;
+	}
+
+	.meta .author a {
+		color: inherit;
 	}
 
 	h1 {

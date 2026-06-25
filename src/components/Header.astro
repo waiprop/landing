@@ -17,7 +17,7 @@ const logoSrc = typeof logo === 'string' ? logo : logo.src;
 
 	<div class="header-actions">
 		<Button class="login-button" href={site.links.app} variant="ghost" size="sm" track="Header login">Ingresar</Button>
-		<Button href={site.links.register} size="sm" track="Header register">Empezá gratis</Button>
+		<Button href={site.links.register} size="sm" track="Header register">Empieza gratis</Button>
 	</div>
 
 	<details class="mobile-menu" data-mobile-menu>
@@ -29,7 +29,7 @@ const logoSrc = typeof logo === 'string' ? logo : logo.src;
 		<nav id="mobile-navigation" aria-label="Navegación móvil">
 			{mainNavItems.map((item) => <a href={item.href}>{item.label}</a>)}
 			<Button class="mobile-login" href={site.links.app} variant="ghost" size="sm" track="Mobile login">Ingresar</Button>
-			<Button class="mobile-cta" href={site.links.register} size="sm" track="Mobile register">Empezá gratis</Button>
+			<Button class="mobile-cta" href={site.links.register} size="sm" track="Mobile register">Empieza gratis</Button>
 		</nav>
 	</details>
 </header>

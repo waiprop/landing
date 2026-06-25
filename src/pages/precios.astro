@@ -2,24 +2,42 @@
 import Layout from '../layouts/Layout.astro';
 import { plans } from '../config/plans';
 import PlanCard from '../components/PlanCard.astro';
+import { site } from '../config/site';
+import { softwareApplicationSchema, breadcrumbSchema, faqSchema } from '../config/schema';
+import { pricingFaqs } from '../config/faqs';
+import Faq from '../components/sections/Faq.astro';
 
 const plan = plans[0];
+
+const jsonLd = [
+	softwareApplicationSchema,
+	faqSchema(pricingFaqs),
+	breadcrumbSchema([
+		{ name: 'Inicio', path: '/' },
+		{ name: 'Precios', path: site.links.pricing },
+	]),
+];
 ---
 
-<Layout title="Precios de Waichatt - Un plan simple para inmobiliarias" description="El plan de Waichatt con todo incluido: agente IA, CRM y propiedades ilimitadas. Probalo 5 días gratis, sin tarjeta." canonical="/precios">
+<Layout title="Precios de Waichatt - Un plan simple para inmobiliarias" description="El plan de Waichatt con todo incluido: agente IA, CRM y propiedades ilimitadas. Pruébalo 5 días gratis, sin tarjeta." canonical="/precios" jsonLd={jsonLd}>
 	<main class="pricing-page">
 		<div class="pricing-layout">
 			<div class="pricing-intro">
 				<p class="eyebrow">Precios</p>
 				<h1>Un plan simple, sin sorpresas</h1>
-				<p class="subtitle">Todo incluido en un solo plan. Probalo 5 días gratis, sin tarjeta.</p>
-				<p class="note">El plan incluye un límite mensual de uso de IA. Si necesitás ampliar, te lo informamos antes.</p>
+				<p class="subtitle">Todo incluido en un solo plan. Pruébalo 5 días gratis, sin tarjeta.</p>
+				<p class="note">El plan incluye un límite mensual de uso de IA. Si necesitas ampliar, te lo informamos antes.</p>
 			</div>
 			<div class="pricing-card-col">
 				<PlanCard plan={plan} track="Pricing page Plan Pro" />
 			</div>
 		</div>
 	</main>
+	<Faq
+		items={pricingFaqs}
+		title="Preguntas sobre el plan"
+		lead="Lo que conviene saber antes de empezar la prueba: qué incluye el plan, cómo es el precio y el uso de IA."
+	/>
 </Layout>
 
 <style>

@@ -1,0 +1,23 @@
+# Waichatt
+
+> Waichatt es un CRM con agente de inteligencia artificial para inmobiliarias y desarrolladoras que centraliza las consultas de WhatsApp, las responde con IA y las convierte en leads organizados.
+
+Waichatt unifica en una sola plataforma las conversaciones de WhatsApp, la gestión de propiedades, el pipeline de ventas, la agenda de visitas y un agente de IA configurable que califica leads (operación, zona, tipo de propiedad e intención). Pensado para equipos inmobiliarios de España y Latinoamérica. Prueba gratis sin tarjeta.
+
+## Páginas principales
+
+- [Inicio](https://waichatt.com/): Qué es Waichatt, sus funciones y cómo el agente de IA califica leads de WhatsApp.
+- [Precios](https://waichatt.com/precios/): Plan único con todo incluido, precio en USD y prueba gratis sin tarjeta.
+- [Para inmobiliarias](https://waichatt.com/para-inmobiliarias/): Cómo centralizar consultas, organizar vendedores y vincular conversaciones con propiedades.
+- [Para desarrolladoras](https://waichatt.com/para-desarrolladoras/): Cómo responder picos de consultas en lanzamientos y repartir leads con IA.
+- [Blog](https://waichatt.com/blog/): Guías sobre WhatsApp, IA y ventas inmobiliarias.
+
+## Legal
+
+- [Política de privacidad](https://waichatt.com/politica-de-privacidad/)
+- [Términos y condiciones](https://waichatt.com/terminos-y-condiciones/)
+
+## Contacto
+
+- Email: equipo@waichatt.com
+- WhatsApp: https://wa.me/+5493816814079

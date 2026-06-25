@@ -3,7 +3,7 @@ export const site = {
 	url: 'https://waichatt.com',
 	defaultTitle: 'Waichatt - Tu WhatsApp inmobiliario atiende solo con IA',
 	defaultDescription:
-		'Centralizá las consultas de WhatsApp, respondelas con IA y convertilas en leads organizados. CRM para inmobiliarias y desarrolladoras. Empezá gratis.',
+		'Centraliza las consultas de WhatsApp, respóndelas con IA y conviértelas en leads organizados. CRM para inmobiliarias y desarrolladoras. Empieza gratis.',
 	themeColor: '#259A72',
 	ogImage: '/og-waichatt.png',
 	contact: {
@@ -21,8 +21,34 @@ export const site = {
 		developers: '/para-desarrolladoras/',
 		privacy: '/politica-de-privacidad/',
 		terms: '/terminos-y-condiciones/',
+		about: '/nosotros/',
+	},
+	// Perfiles oficiales: se exponen como `sameAs` en el schema para que los
+	// buscadores y la IA reconozcan a Waichatt como una entidad real.
+	social: [
+		'https://www.linkedin.com/company/waichatt',
+		'https://www.instagram.com/waichatt/',
+		'https://www.facebook.com/profile.php?id=61575818510400',
+		'https://www.youtube.com/@Waichatt',
+	],
+	// Sede (señal de entidad local para buscadores e IA).
+	location: {
+		street: 'Corrientes 983',
+		locality: 'San Miguel de Tucumán',
+		region: 'Tucumán',
+		country: 'AR',
+	},
+	// Autor por defecto de los artículos (E-E-A-T: la IA pondera autores con nombre).
+	// ponytail: contenido comercial → autor del equipo comercial; cada post puede
+	// sobrescribirlo con `author` en su frontmatter.
+	defaultAuthor: {
+		name: 'Raúl Morales',
+		role: 'CEO de Waichatt',
+		url: 'https://www.linkedin.com/in/raul-morales-1ba27b1b4/',
 	},
 } as const;
+
+export type Author = { name: string; role?: string; url?: string };
 
 export const mainNavItems = [
 	{ label: 'Funciones', href: '/#funciones' },

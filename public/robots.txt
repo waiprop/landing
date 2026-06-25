@@ -1,4 +1,35 @@
+# Buscadores tradicionales: acceso total.
 User-agent: *
+Allow: /
+
+# Bots de IA (búsqueda, citación y entrenamiento): acceso permitido a propósito.
+# Declarados uno por uno para poder ajustar el permiso por bot en el futuro
+# (p. ej. bloquear solo entrenamiento sin perder visibilidad en respuestas de IA).
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: CCBot
 Allow: /
 
 Sitemap: https://waichatt.com/sitemap-index.xml

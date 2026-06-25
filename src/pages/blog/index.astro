@@ -23,7 +23,7 @@ const jsonLd = breadcrumbSchema([
 		<section class="hero-lite">
 			<p>Recursos</p>
 			<h1>Blog de Waichatt</h1>
-			<span>Aprendé sobre WhatsApp, IA y ventas para tu negocio inmobiliario.</span>
+			<span>Aprende sobre WhatsApp, IA y ventas para tu negocio inmobiliario.</span>
 		</section>
 		<section class="post-list" aria-label="Artículos del blog">
 			{posts.map((post) => (
@@ -31,15 +31,15 @@ const jsonLd = breadcrumbSchema([
 					<a href={`/blog/${post.id}/`}>
 						<h2>{post.data.title}</h2>
 						<p>{post.data.description}</p>
-						<time datetime={post.data.publishDate.toISOString()}>{post.data.publishDate.toLocaleDateString('es-AR')}</time>
+						<time datetime={post.data.publishDate.toISOString()}>{post.data.publishDate.toLocaleDateString('es-ES')}</time>
 					</a>
 				</article>
 			))}
 			{posts.length === 0 && <p>No hay artículos publicados todavía.</p>}
 		</section>
 		<section class="cta">
-			<h2>Ordená tus consultas desde hoy</h2>
-			<a href={site.links.register} data-track="Blog register" data-preserve-utm="true">Empezá gratis</a>
+			<h2>Ordena tus consultas desde hoy</h2>
+			<a href={site.links.register} data-track="Blog register" data-preserve-utm="true">Empieza gratis</a>
 		</section>
 	</main>
 </Layout>

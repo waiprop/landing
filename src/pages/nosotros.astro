@@ -1,0 +1,160 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { site } from '../config/site';
+import { team } from '../config/team';
+import { organizationSchema, breadcrumbSchema } from '../config/schema';
+
+const initials = (name: string) =>
+	name
+		.split(' ')
+		.slice(0, 2)
+		.map((part) => part[0])
+		.join('');
+
+const jsonLd = [
+	organizationSchema,
+	breadcrumbSchema([
+		{ name: 'Inicio', path: '/' },
+		{ name: 'Nosotros', path: site.links.about },
+	]),
+];
+---
+
+<Layout
+	title="Nosotros - Quiénes somos | Waichatt"
+	description="Waichatt es una plataforma de CRM con IA para inmobiliarias, creada por un equipo de cinco fundadores en Tucumán, Argentina."
+	canonical={site.links.about}
+	jsonLd={jsonLd}
+>
+	<main class="about">
+		<header class="about-head">
+			<p class="eyebrow">Nosotros</p>
+			<h1>Quiénes somos</h1>
+			<p class="lead">
+				Waichatt es una plataforma de CRM con inteligencia artificial para inmobiliarias y
+				desarrolladoras. La creamos en {site.location.locality}, Argentina, un equipo de cinco
+				fundadores que combina experiencia comercial inmobiliaria y desarrollo de software.
+			</p>
+			<p class="lead">
+				Construimos Waichatt para resolver un problema concreto: las inmobiliarias pierden ventas
+				cuando las consultas de WhatsApp se dispersan entre celulares, sin contexto ni seguimiento.
+				Centralizamos esas conversaciones, las respondemos con IA y las convertimos en leads
+				organizados, para que ningún interesado quede sin atender.
+			</p>
+		</header>
+
+		<section class="team" aria-labelledby="team-title">
+			<h2 id="team-title">El equipo fundador</h2>
+			<ul class="team-grid">
+				{team.map((member) => (
+					<li class="member">
+						<span class="member-avatar" aria-hidden="true">{initials(member.name)}</span>
+						<div class="member-body">
+							<strong class="member-name">{member.name}</strong>
+							<span class="member-role">{member.role}</span>
+							<a class="member-link" href={member.linkedin} target="_blank" rel="noopener">
+								LinkedIn
+							</a>
+						</div>
+					</li>
+				))}
+			</ul>
+			<p class="team-note">Desde {site.location.locality}, {site.location.region} — para inmobiliarias de España y Latinoamérica.</p>
+		</section>
+	</main>
+</Layout>
+
+<style>
+	.about {
+		width: min(var(--container), 100%);
+		margin-inline: auto;
+		padding: clamp(56px, 8vw, 104px) 20px;
+	}
+
+	.about-head {
+		max-width: 720px;
+	}
+
+	h1 {
+		margin: 14px 0 0;
+		color: var(--color-text);
+		font-size: clamp(2.2rem, 5vw, 3.6rem);
+		line-height: 1.06;
+	}
+
+	.lead {
+		margin: 22px 0 0;
+		color: var(--color-muted);
+		font-size: 1.12rem;
+		line-height: 1.7;
+	}
+
+	.team {
+		margin-top: clamp(48px, 7vw, 80px);
+	}
+
+	.team h2 {
+		margin: 0 0 26px;
+		color: var(--color-text);
+		font-size: clamp(1.5rem, 3vw, 2rem);
+	}
+
+	.team-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+		gap: 16px;
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.member {
+		display: flex;
+		align-items: center;
+		gap: 14px;
+		padding: 18px;
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius-lg);
+		background: var(--color-surface);
+	}
+
+	.member-avatar {
+		display: grid;
+		place-items: center;
+		flex: 0 0 auto;
+		width: 48px;
+		height: 48px;
+		border-radius: 50%;
+		background: linear-gradient(135deg, var(--color-brand), var(--color-brand-strong));
+		color: #fff;
+		font-weight: 800;
+		font-size: 0.95rem;
+	}
+
+	.member-body {
+		display: grid;
+		gap: 3px;
+		min-width: 0;
+	}
+
+	.member-name {
+		color: var(--color-text);
+		font-weight: 800;
+	}
+
+	.member-role {
+		color: var(--color-muted);
+		font-size: 0.9rem;
+	}
+
+	.member-link {
+		color: var(--color-brand);
+		font-weight: 700;
+		font-size: 0.9rem;
+	}
+
+	.team-note {
+		margin: 26px 0 0;
+		color: var(--color-muted);
+	}
+</style>
