@@ -28,6 +28,7 @@ export const organizationSchema = {
 	},
 	description: site.defaultDescription,
 	slogan: 'Tu WhatsApp inmobiliario atiende solo con IA',
+	foundingDate: '2025-04-03',
 	email: site.contact.email,
 	// Mercados servidos y temas de la entidad: ayudan a la IA a asociar Waichatt
 	// con consultas de su categoría en España y LATAM.
