@@ -6,6 +6,19 @@ tags:
   - IA
   - Agente IA
   - Leads
+howTo:
+  name: "Cómo califica un lead un agente de IA inmobiliario"
+  steps:
+    - title: "Lee la conversación"
+      desc: "Detecta de qué se trata la consulta sin obligar a la persona a elegir opciones de un menú."
+    - title: "Extrae los datos clave"
+      desc: "Identifica operación, zona, tipo de propiedad y rango de presupuesto dentro del mensaje."
+    - title: "Pregunta lo que falta"
+      desc: "Si falta presupuesto, zona o intención, lo consulta de forma natural para completar la ficha."
+    - title: "Evalúa la intención"
+      desc: "Distingue a quien explora de quien está listo para avanzar o coordinar una visita."
+    - title: "Arma la ficha y deriva"
+      desc: "Deja el lead organizado y decide si continúa la IA o si debe intervenir un vendedor."
 faqs:
   - tag: Definición
     question: "¿Qué es un agente de IA inmobiliario?"

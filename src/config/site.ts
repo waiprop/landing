@@ -45,10 +45,11 @@ export const site = {
 		name: 'Raúl Morales',
 		role: 'CEO de Waichatt',
 		url: 'https://www.linkedin.com/in/raul-morales-1ba27b1b4/',
+		bio: 'Cofundador y CEO de Waichatt, plataforma de CRM con IA para inmobiliarias y desarrolladoras. Escribe sobre WhatsApp, inteligencia artificial y ventas inmobiliarias.',
 	},
 } as const;
 
-export type Author = { name: string; role?: string; url?: string };
+export type Author = { name: string; role?: string; url?: string; bio?: string };
 
 export const mainNavItems = [
 	{ label: 'Funciones', href: '/#funciones' },

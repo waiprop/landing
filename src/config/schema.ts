@@ -12,7 +12,7 @@ const publisherOrg = {
 	url: site.url,
 	logo: {
 		'@type': 'ImageObject',
-		url: absoluteUrl('/favicon.svg'),
+		url: absoluteUrl('/icon_512.png'),
 	},
 	sameAs: site.social,
 };
@@ -24,7 +24,7 @@ export const organizationSchema = {
 	url: site.url,
 	logo: {
 		'@type': 'ImageObject',
-		url: absoluteUrl('/favicon.svg'),
+		url: absoluteUrl('/icon_512.png'),
 	},
 	description: site.defaultDescription,
 	slogan: 'Tu WhatsApp inmobiliario atiende solo con IA',
@@ -98,6 +98,8 @@ export const softwareApplicationSchema = {
 		name: plan.name,
 		price: String(plan.priceUsd),
 		priceCurrency: 'USD',
+		url: absoluteUrl(site.links.pricing),
+		availability: 'https://schema.org/InStock',
 	})),
 	provider: {
 		'@type': 'Organization',
@@ -135,6 +137,10 @@ export const blogPostingSchema = (post: CollectionEntry<'blog'>, path: string) =
 		name: writer.name,
 		...(writer.role ? { jobTitle: writer.role } : {}),
 		...(writer.url ? { url: writer.url } : {}),
+		...(writer.url ? { sameAs: [writer.url] } : {}),
+		...(writer.bio ? { description: writer.bio } : {}),
+		worksFor: { '@type': 'Organization', name: site.name, url: site.url },
+		knowsAbout: ['CRM inmobiliario', 'WhatsApp para inmobiliarias', 'Inteligencia artificial aplicada a ventas'],
 	};
 
 	return {
@@ -149,6 +155,10 @@ export const blogPostingSchema = (post: CollectionEntry<'blog'>, path: string) =
 		url,
 		mainEntityOfPage: { '@type': 'WebPage', '@id': url },
 		inLanguage: 'es',
+		speakable: {
+			'@type': 'SpeakableSpecification',
+			cssSelector: ['.description', '.content p:first-of-type'],
+		},
 		author,
 		publisher: publisherOrg,
 	};
@@ -172,6 +182,21 @@ export const serviceSchema = (input: {
 	provider: { '@type': 'Organization', name: site.name, url: site.url },
 	areaServed: ['ES', 'AR', 'MX', 'CO', 'CL'],
 	audience: { '@type': 'Audience', audienceType: input.audienceType },
+});
+
+// Guía paso a paso (rich results: HowTo). Reutiliza los pasos visibles en la home
+// para que el schema coincida con el contenido. La IA y las AI Overviews citan
+// mucho este tipo de contenido procedimental.
+export const howToSchema = (input: { name: string; steps: ReadonlyArray<{ title: string; desc: string }> }) => ({
+	'@context': 'https://schema.org',
+	'@type': 'HowTo',
+	name: input.name,
+	step: input.steps.map((step, index) => ({
+		'@type': 'HowToStep',
+		position: index + 1,
+		name: step.title,
+		text: step.desc,
+	})),
 });
 
 // Migas de pan (breadcrumbs) para que Google muestre la jerarquía del sitio.

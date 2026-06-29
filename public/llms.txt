@@ -12,6 +12,16 @@ Waichatt unifica en una sola plataforma las conversaciones de WhatsApp, la gesti
 - [Para desarrolladoras](https://waichatt.com/para-desarrolladoras/): Cómo responder picos de consultas en lanzamientos y repartir leads con IA.
 - [Blog](https://waichatt.com/blog/): Guías sobre WhatsApp, IA y ventas inmobiliarias.
 
+## Artículos del blog
+
+- [Qué es un CRM inmobiliario con IA](https://waichatt.com/blog/que-es-un-crm-inmobiliario-con-ia/): Qué es, qué problemas resuelve y cómo elegir el adecuado.
+- [WhatsApp para inmobiliarias: guía completa](https://waichatt.com/blog/whatsapp-para-inmobiliarias-guia/): WhatsApp Business vs API, buenas prácticas y automatización sin perder el trato humano.
+- [Cómo funciona un agente de IA inmobiliario](https://waichatt.com/blog/como-funciona-agente-ia-inmobiliario/): Cómo califica un lead paso a paso, en qué se diferencia de un chatbot y sus límites.
+- [Cómo captar y gestionar leads inmobiliarios](https://waichatt.com/blog/captar-gestionar-leads-inmobiliarios/): Qué es un lead, cómo calificarlo, etapas del pipeline y seguimiento.
+- [Cómo organizar el equipo comercial de una inmobiliaria](https://waichatt.com/blog/organizar-equipo-comercial-inmobiliario/): Asignar leads, bandeja compartida, medición y coordinación de visitas.
+- [Cómo responder un lanzamiento inmobiliario sin saturar al equipo](https://waichatt.com/blog/responder-lanzamiento-inmobiliario-sin-saturar-equipo/): Manejar picos de consultas y sostener el seguimiento en preventa.
+- [Cómo organizar las consultas de WhatsApp de una inmobiliaria](https://waichatt.com/blog/organizar-consultas-whatsapp-inmobiliaria/): Centralizar mensajes y convertir consultas en oportunidades.
+
 ## Legal
 
 - [Política de privacidad](https://waichatt.com/politica-de-privacidad/)
