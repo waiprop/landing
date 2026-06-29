@@ -1,25 +1,26 @@
 ---
 title: "Cómo organizar el equipo comercial de una inmobiliaria"
 description: "Cómo asignar leads entre vendedores, trabajar con una bandeja compartida, medir el desempeño y coordinar visitas para que el equipo no pierda oportunidades."
-publishDate: 2026-06-12
+publishDate: "2026-06-12"
 tags:
-  - Equipo comercial
-  - Productividad
-  - CRM inmobiliario
+  - "Equipo comercial"
+  - "Productividad"
+  - "CRM inmobiliario"
+draft: false
 faqs:
-  - tag: Asignación
+  - tag: "Asignación"
     question: "¿Cómo conviene asignar los leads entre vendedores?"
     answer: "Con una regla clara y visible: por zona, por tipo de operación, por turno o por reparto equitativo. Lo importante es que cada lead tenga un responsable definido y nadie quede sin atender."
-  - tag: Bandeja
+  - tag: "Bandeja"
     question: "¿Es mejor una bandeja compartida o que cada vendedor use su celular?"
     answer: "Una bandeja compartida. Con celulares individuales se pierden mensajes, no hay visión del equipo y la información se va con el vendedor. La bandeja común mantiene historial y contexto en la agencia."
-  - tag: Medición
+  - tag: "Medición"
     question: "¿Qué se debería medir en un equipo comercial inmobiliario?"
     answer: "Tiempo de primera respuesta, cantidad de leads por etapa, visitas agendadas y conversión a cierre. Son indicadores que muestran dónde se traba la operación."
-  - tag: Visitas
+  - tag: "Visitas"
     question: "¿Cómo se coordinan mejor las visitas?"
     answer: "Con la agenda conectada al seguimiento, para que cada visita quede asociada a un lead y a un responsable, y se pueda sincronizar con el calendario del equipo."
-  - tag: Crecimiento
+  - tag: "Crecimiento"
     question: "¿Cuándo un equipo necesita un CRM para organizarse?"
     answer: "Cuando hay varias personas atendiendo y empiezan a aparecer consultas sin responder, leads duplicados o falta de claridad sobre quién sigue qué. Ahí el orden manual deja de alcanzar."
 ---

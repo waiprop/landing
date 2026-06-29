@@ -151,7 +151,7 @@ export const blogPostingSchema = (post: CollectionEntry<'blog'>, path: string) =
 		datePublished: published,
 		dateModified: modified,
 		...(post.data.tags.length > 0 ? { keywords: post.data.tags.join(', ') } : {}),
-		image: absoluteUrl(site.ogImage),
+		image: post.data.image || absoluteUrl(site.ogImage),
 		url,
 		mainEntityOfPage: { '@type': 'WebPage', '@id': url },
 		inLanguage: 'es',

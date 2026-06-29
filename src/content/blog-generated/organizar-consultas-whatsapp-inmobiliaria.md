@@ -1,11 +1,12 @@
 ---
 title: "Cómo organizar las consultas de WhatsApp de una inmobiliaria"
 description: "Una guía práctica para centralizar mensajes, responder más rápido y convertir consultas de WhatsApp en oportunidades comerciales."
-publishDate: 2026-06-15
+publishDate: "2026-06-15"
 tags:
-  - WhatsApp
-  - CRM inmobiliario
-  - Leads
+  - "WhatsApp"
+  - "CRM inmobiliario"
+  - "Leads"
+draft: false
 howTo:
   name: "Cómo organizar las consultas de WhatsApp de una inmobiliaria"
   steps:
@@ -18,19 +19,19 @@ howTo:
     - title: "Automatiza lo repetitivo con IA"
       desc: "Usa IA para responder rápido, pedir datos faltantes y recomendar propiedades, dejando intervención humana para negociaciones o casos complejos."
 faqs:
-  - tag: Organización
+  - tag: "Organización"
     question: "¿Cuál es el primer paso para ordenar WhatsApp en una inmobiliaria?"
     answer: "Centralizar las consultas en una bandeja compartida. Así el equipo ve cada mensaje con historial, propiedad consultada, responsable y próximo paso."
-  - tag: Leads
+  - tag: "Leads"
     question: "¿Qué datos conviene pedir en una consulta inmobiliaria?"
     answer: "Operación, zona, presupuesto, tipo de propiedad, plazo e intención. Con esos datos se puede calificar el lead y priorizar el seguimiento."
-  - tag: Equipo
+  - tag: "Equipo"
     question: "¿Cómo evitar que dos vendedores respondan la misma consulta?"
     answer: "Asignando un responsable por lead y dejando visible el estado de la conversación. Una bandeja compartida evita duplicaciones y mensajes contradictorios."
-  - tag: IA
+  - tag: "IA"
     question: "¿La IA puede ayudar a organizar las consultas?"
     answer: "Sí. Puede responder el primer mensaje, pedir datos faltantes, recomendar propiedades y derivar a una persona cuando la conversación requiere criterio humano."
-  - tag: Seguimiento
+  - tag: "Seguimiento"
     question: "¿Cómo saber qué consulta seguir primero?"
     answer: "Priorizando por intención, presupuesto, zona definida y urgencia. Un lead listo para visitar debe aparecer antes que alguien que sólo está explorando."
 ---

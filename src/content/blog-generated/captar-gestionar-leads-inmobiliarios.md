@@ -1,25 +1,26 @@
 ---
 title: "Cómo captar y gestionar leads inmobiliarios sin perder oportunidades"
 description: "Qué es un lead inmobiliario, cómo calificarlo, cuáles son las etapas del pipeline y cómo hacer seguimiento para que ninguna consulta se enfríe."
-publishDate: 2026-06-05
+publishDate: "2026-06-05"
 tags:
-  - Leads
-  - CRM inmobiliario
-  - Pipeline
+  - "Leads"
+  - "CRM inmobiliario"
+  - "Pipeline"
+draft: false
 faqs:
-  - tag: Definición
+  - tag: "Definición"
     question: "¿Qué es un lead inmobiliario?"
     answer: "Es una persona que mostró interés en comprar, alquilar o invertir y dejó un dato de contacto. Gestionar leads es ordenar esas oportunidades y darles seguimiento hasta que avanzan o se descartan."
-  - tag: Calificación
+  - tag: "Calificación"
     question: "¿Cómo se califica un lead inmobiliario?"
     answer: "Mirando cuatro cosas: qué operación busca, en qué zona, con qué presupuesto y qué tan listo está para avanzar. Con eso se prioriza a quién atender primero."
-  - tag: Pipeline
+  - tag: "Pipeline"
     question: "¿Qué es el pipeline de ventas en una inmobiliaria?"
     answer: "Es la representación de las etapas por las que pasa una oportunidad: del primer contacto a la visita, la negociación y el cierre. Permite ver en qué punto está cada lead."
-  - tag: Seguimiento
+  - tag: "Seguimiento"
     question: "¿Por qué se pierden leads inmobiliarios?"
     answer: "Casi siempre por responder tarde o por falta de seguimiento. Una consulta sin próximo paso definido tiende a enfriarse y la persona termina avanzando con otra inmobiliaria."
-  - tag: Herramientas
+  - tag: "Herramientas"
     question: "¿Hace falta un CRM para gestionar leads?"
     answer: "Con pocos leads se puede manejar a mano, pero a medida que crece el volumen un CRM evita olvidos: centraliza las consultas, asigna responsables y recuerda el seguimiento."
 ---

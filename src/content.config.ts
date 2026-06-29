@@ -3,7 +3,7 @@ import { defineCollection } from 'astro:content';
 import { z } from 'astro/zod';
 
 const blog = defineCollection({
-	loader: glob({ pattern: '**/*.md', base: './src/content/blog' }),
+	loader: glob({ pattern: '**/*.md', base: './src/content/blog-generated' }),
 	schema: z.object({
 		title: z.string(),
 		description: z.string(),
@@ -11,6 +11,10 @@ const blog = defineCollection({
 		updatedDate: z.coerce.date().optional(),
 		tags: z.array(z.string()).default([]),
 		draft: z.boolean().default(false),
+		// Imagen de portada (URL absoluta). Se muestra en el artículo y se usa como
+		// og:image y BlogPosting.image. z.string() laxo a propósito: una URL inválida
+		// no debe romper el build de toda la colección; el CMS ya valida que sea http(s).
+		image: z.string().optional(),
 		// Autor del artículo. Si se omite, usa site.defaultAuthor.
 		author: z
 			.object({

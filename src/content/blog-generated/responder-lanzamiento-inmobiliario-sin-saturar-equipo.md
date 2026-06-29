@@ -1,25 +1,26 @@
 ---
 title: "Cómo responder un lanzamiento inmobiliario sin saturar al equipo"
 description: "Cómo manejar los picos de consultas de un lanzamiento o preventa: responder al instante con IA, calificar interesados y sostener el seguimiento durante un ciclo largo."
-publishDate: 2026-06-20
+publishDate: "2026-06-20"
 tags:
-  - Desarrolladoras
-  - Lanzamientos
-  - IA
+  - "Desarrolladoras"
+  - "Lanzamientos"
+  - "IA"
+draft: false
 faqs:
-  - tag: Picos
+  - tag: "Picos"
     question: "¿Por qué un lanzamiento satura al equipo comercial?"
     answer: "Porque concentra muchas consultas en pocos días. El equipo no da abasto para responder a tiempo, y los interesados que no reciben respuesta rápida se enfrían o se van a otra opción."
-  - tag: Respuesta
+  - tag: "Respuesta"
     question: "¿Cómo se responden los picos de consultas de un lanzamiento?"
     answer: "Con un agente de IA que contesta al instante a cada interesado, aunque entren cientos de mensajes juntos, reúne los datos y deriva a una persona cuando la conversación lo necesita."
-  - tag: Calificación
+  - tag: "Calificación"
     question: "¿Cómo se califica a los interesados durante un lanzamiento?"
     answer: "Registrando desde la conversación la zona, el presupuesto, la unidad de interés y la madurez de compra, para distinguir a quién priorizar entre todo el volumen."
-  - tag: Preventa
+  - tag: "Preventa"
     question: "¿Sirve para seguimientos largos de preventa?"
     answer: "Sí. El interés en un emprendimiento puede tardar meses en cerrar. Cada consulta queda en el pipeline para hacer seguimiento durante todo el ciclo, sin que la oportunidad se enfríe."
-  - tag: Equipo
+  - tag: "Equipo"
     question: "¿Cómo se reparten los leads de un lanzamiento entre el equipo?"
     answer: "Asignando leads por vendedor de forma automática, para distribuir la demanda del pico y que cada interesado tenga un responsable claro desde el primer contacto."
 ---
