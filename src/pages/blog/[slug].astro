@@ -46,6 +46,7 @@ const jsonLd = [
 	description={post.data.description}
 	canonical={postPath}
 	ogType="article"
+	ogImage={post.data.image}
 	publishedTime={publishedTime}
 	modifiedTime={modifiedTime}
 	jsonLd={jsonLd}
@@ -60,6 +61,9 @@ const jsonLd = [
 				{author.role && <span class="role"> · {author.role}</span>}
 				<time datetime={post.data.publishDate.toISOString()}>{post.data.publishDate.toLocaleDateString('es-ES')}</time>
 			</p>
+			{post.data.image && (
+				<img class="cover" src={post.data.image} alt={post.data.title} width="1200" height="630" loading="eager" />
+			)}
 			<div class="content">
 				<Content />
 			</div>
@@ -134,6 +138,17 @@ const jsonLd = [
 
 	.description {
 		font-size: 1.16rem;
+	}
+
+	.cover {
+		display: block;
+		width: 100%;
+		height: auto;
+		margin-top: 32px;
+		border-radius: var(--radius-lg);
+		border: 1px solid var(--color-border);
+		aspect-ratio: 1200 / 630;
+		object-fit: cover;
 	}
 
 	.content {

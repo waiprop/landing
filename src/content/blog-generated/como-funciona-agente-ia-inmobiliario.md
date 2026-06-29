@@ -1,11 +1,12 @@
 ---
 title: "Cómo funciona un agente de IA inmobiliario (y qué puede hacer por tu equipo)"
 description: "Qué es un agente de IA inmobiliario, cómo califica un lead paso a paso, en qué se diferencia de un chatbot y cuáles son sus límites reales."
-publishDate: 2026-05-29
+publishDate: "2026-05-29"
 tags:
-  - IA
-  - Agente IA
-  - Leads
+  - "IA"
+  - "Agente IA"
+  - "Leads"
+draft: false
 howTo:
   name: "Cómo califica un lead un agente de IA inmobiliario"
   steps:
@@ -20,19 +21,19 @@ howTo:
     - title: "Arma la ficha y deriva"
       desc: "Deja el lead organizado y decide si continúa la IA o si debe intervenir un vendedor."
 faqs:
-  - tag: Definición
+  - tag: "Definición"
     question: "¿Qué es un agente de IA inmobiliario?"
     answer: "Es un asistente con inteligencia artificial que atiende las consultas de una inmobiliaria, interpreta lo que pide cada interesado y arma la ficha del lead con la operación, la zona, el presupuesto y la intención."
-  - tag: Diferencia
+  - tag: "Diferencia"
     question: "¿Es lo mismo que un chatbot?"
     answer: "No. Un chatbot sigue un guion fijo de botones y respuestas. Un agente de IA entiende lenguaje natural, extrae datos de la conversación y se adapta, en lugar de obligar a la persona a elegir opciones predefinidas."
-  - tag: Propiedades
+  - tag: "Propiedades"
     question: "¿Puede recomendar propiedades?"
     answer: "Sí. A partir de la zona, el presupuesto y el tipo de operación, puede sugerir propiedades de tu cartera que encajen con lo que busca el interesado."
-  - tag: Control
+  - tag: "Control"
     question: "¿Se puede desactivar en una conversación?"
     answer: "Sí. En cada chat el agente se puede activar o pausar para que un vendedor tome el control cuando la conversación lo necesita."
-  - tag: Límites
+  - tag: "Límites"
     question: "¿Qué cosas no debería hacer un agente de IA?"
     answer: "Cerrar una negociación, dar información que no tiene o tomar decisiones que requieren criterio humano. Para esos casos lo correcto es que derive a una persona."
 ---

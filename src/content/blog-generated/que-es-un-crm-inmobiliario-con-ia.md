@@ -1,25 +1,26 @@
 ---
 title: "Qué es un CRM inmobiliario con IA y cómo elegir el adecuado"
 description: "Guía clara sobre qué es un CRM inmobiliario con inteligencia artificial, qué problemas resuelve y qué criterios mirar para elegir el correcto para tu agencia."
-publishDate: 2026-06-25
+publishDate: "2026-06-25"
 tags:
-  - CRM inmobiliario
-  - IA
-  - WhatsApp
+  - "CRM inmobiliario"
+  - "IA"
+  - "WhatsApp"
+draft: false
 faqs:
-  - tag: Definición
+  - tag: "Definición"
     question: "¿Qué es un CRM inmobiliario con IA?"
     answer: "Es un software que centraliza los contactos, propiedades y oportunidades de una inmobiliaria y suma inteligencia artificial para responder consultas, calificar leads y ordenar el seguimiento de forma automática."
-  - tag: Diferencia
+  - tag: "Diferencia"
     question: "¿En qué se diferencia de un CRM tradicional?"
     answer: "Un CRM tradicional guarda los datos, pero alguien tiene que cargarlos y atender cada consulta. Un CRM con IA responde el primer mensaje, extrae la información de la conversación y arma la ficha del lead sin trabajo manual."
-  - tag: WhatsApp
+  - tag: "WhatsApp"
     question: "¿Por qué conviene que esté integrado con WhatsApp?"
     answer: "Porque gran parte de las consultas inmobiliarias empieza en WhatsApp. Si el CRM está conectado, cada conversación queda asociada a un lead y una propiedad, en lugar de perderse en el celular de un vendedor."
-  - tag: IA
+  - tag: "IA"
     question: "¿La IA reemplaza al equipo comercial?"
     answer: "No. La IA responde rápido, califica y ordena, pero deriva a una persona cuando la conversación lo necesita. El objetivo es que el equipo dedique su tiempo a las oportunidades reales."
-  - tag: Elección
+  - tag: "Elección"
     question: "¿Qué es lo más importante al elegir uno?"
     answer: "Que se integre con WhatsApp, que la IA se pueda configurar y pausar, que conecte propiedades con conversaciones y que el precio sea claro. Probar una versión gratis antes de decidir ayuda a confirmarlo."
 ---

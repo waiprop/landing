@@ -40,6 +40,11 @@ const canonicalUrl = canonical ? toCanonical(canonical) : undefined;
 const pageUrl = toCanonical(Astro.url.pathname);
 const ogImageUrl = new URL(ogImage, site.url).toString();
 const schemas = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
+
+// JSON.stringify no escapa `<`, así que un `</script>` en datos del post (vienen de
+// Mongo) rompería el tag y ejecutaría: escapamos antes de inyectar con set:html.
+const serializeLd = (schema: Record<string, unknown>) =>
+	JSON.stringify(schema).replace(/</g, '\\u003c').replace(/>/g, '\\u003e').replace(/&/g, '\\u0026');
 ---
 
 <meta charset="UTF-8" />
@@ -79,6 +84,6 @@ const schemas = Array.isArray(jsonLd) ? jsonLd : jsonLd ? [jsonLd] : [];
 <title>{title}</title>
 {
 	schemas.map((schema) => (
-		<script type="application/ld+json" set:html={JSON.stringify(schema)} />
+		<script type="application/ld+json" set:html={serializeLd(schema)} />
 	))
 }

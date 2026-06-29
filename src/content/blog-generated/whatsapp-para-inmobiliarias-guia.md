@@ -1,25 +1,26 @@
 ---
 title: "WhatsApp para inmobiliarias: guía completa para atender y vender mejor"
 description: "Cómo usar WhatsApp en una inmobiliaria: diferencias entre WhatsApp Business y la API, buenas prácticas de atención y cómo automatizar sin perder el trato humano."
-publishDate: 2026-05-21
+publishDate: "2026-05-21"
 tags:
-  - WhatsApp
-  - Inmobiliaria
-  - Atención al cliente
+  - "WhatsApp"
+  - "Inmobiliaria"
+  - "Atención al cliente"
+draft: false
 faqs:
-  - tag: Versiones
+  - tag: "Versiones"
     question: "¿Qué diferencia hay entre WhatsApp Business y la API de WhatsApp?"
     answer: "La app WhatsApp Business sirve para un negocio chico atendido desde un teléfono. La API permite que varias personas y un sistema (como un CRM con IA) atiendan el mismo número a la vez, con automatizaciones y reportes."
-  - tag: Equipo
+  - tag: "Equipo"
     question: "¿Pueden varios vendedores atender el mismo número de WhatsApp?"
     answer: "Con la app no de forma ordenada, pero con la API de WhatsApp conectada a un CRM sí: todos trabajan sobre una bandeja compartida, con historial y asignación por vendedor."
-  - tag: Automatización
+  - tag: "Automatización"
     question: "¿Automatizar WhatsApp hace que la atención se sienta fría?"
     answer: "No si se hace bien. La IA responde al instante y reúne datos, pero deriva a una persona cuando la conversación lo necesita. El resultado es responder más rápido sin perder el trato humano."
-  - tag: Buenas prácticas
+  - tag: "Buenas prácticas"
     question: "¿Cuál es el error más común al atender por WhatsApp?"
     answer: "Responder tarde. Un interesado que pregunta por una propiedad y no recibe respuesta rápida suele escribir a otra inmobiliaria. La velocidad de la primera respuesta es decisiva."
-  - tag: Datos
+  - tag: "Datos"
     question: "¿Conviene separar el WhatsApp personal del de la inmobiliaria?"
     answer: "Sí. Mezclar conversaciones personales con consultas de clientes hace perder mensajes y contexto. Un número de negocio conectado a un CRM mantiene todo ordenado y queda en la agencia."
 ---
