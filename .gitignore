@@ -1,3 +1,7 @@
+# generated blog content: lo regenera `sync:blog` desde Mongo en cada build.
+# No se versiona; para preview local correr `pnpm sync:blog`.
+src/content/blog-generated/
+
 # build output
 dist/
 build/

@@ -1,0 +1,3 @@
+{
+	"buildCommand": "pnpm sync:blog && pnpm build"
+}
