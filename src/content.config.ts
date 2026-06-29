@@ -17,6 +17,19 @@ const blog = defineCollection({
 				name: z.string(),
 				role: z.string().optional(),
 				url: z.url().optional(),
+				bio: z.string().optional(),
+			})
+			.optional(),
+		// Pasos visibles del artículo que también pueden emitirse como HowTo.
+		howTo: z
+			.object({
+				name: z.string(),
+				steps: z.array(
+					z.object({
+						title: z.string(),
+						desc: z.string(),
+					}),
+				),
 			})
 			.optional(),
 		// FAQ del artículo: se renderiza visible y emite schema FAQPage (citabilidad GEO).

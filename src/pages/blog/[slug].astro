@@ -1,7 +1,7 @@
 ---
 import { getCollection, render, type CollectionEntry } from 'astro:content';
 import Layout from '../../layouts/Layout.astro';
-import { blogPostingSchema, breadcrumbSchema, faqSchema } from '../../config/schema';
+import { blogPostingSchema, breadcrumbSchema, faqSchema, howToSchema } from '../../config/schema';
 import { site, type Author } from '../../config/site';
 import Faq from '../../components/sections/Faq.astro';
 
@@ -24,6 +24,11 @@ const postPath = `/blog/${post.id}/`;
 const publishedTime = post.data.publishDate.toISOString();
 const modifiedTime = (post.data.updatedDate ?? post.data.publishDate).toISOString();
 const author: Author = post.data.author ?? site.defaultAuthor;
+const authorInitials = author.name
+	.split(' ')
+	.slice(0, 2)
+	.map((part) => part[0])
+	.join('');
 const jsonLd = [
 	blogPostingSchema(post, postPath),
 	breadcrumbSchema([
@@ -31,6 +36,7 @@ const jsonLd = [
 		{ name: 'Blog', path: '/blog/' },
 		{ name: post.data.title, path: postPath },
 	]),
+	...(post.data.howTo ? [howToSchema(post.data.howTo)] : []),
 	...(post.data.faqs?.length ? [faqSchema(post.data.faqs)] : []),
 ];
 ---
@@ -57,6 +63,16 @@ const jsonLd = [
 			<div class="content">
 				<Content />
 			</div>
+			<footer class="author-card">
+				<span class="author-avatar" aria-hidden="true">{authorInitials}</span>
+				<div class="author-info">
+					<strong class="author-name">
+						{author.url ? <a href={author.url} target="_blank" rel="noopener">{author.name}</a> : author.name}
+					</strong>
+					{author.role && <span class="author-role">{author.role}</span>}
+					{author.bio && <p class="author-bio">{author.bio}</p>}
+				</div>
+			</footer>
 		</article>
 	</main>
 	{post.data.faqs?.length && (
@@ -126,5 +142,56 @@ const jsonLd = [
 
 	.content :global(p) {
 		font-size: 1.06rem;
+	}
+
+	.author-card {
+		display: flex;
+		align-items: flex-start;
+		gap: 16px;
+		margin-top: clamp(40px, 6vw, 64px);
+		padding: 22px;
+		border: 1px solid var(--color-border);
+		border-radius: var(--radius-lg);
+		background: var(--color-surface);
+	}
+
+	.author-avatar {
+		flex: none;
+		display: grid;
+		place-items: center;
+		width: 52px;
+		height: 52px;
+		border-radius: 50%;
+		background: linear-gradient(135deg, var(--color-brand), var(--color-brand-hover));
+		color: #fff;
+		font-weight: 800;
+	}
+
+	.author-info {
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+	}
+
+	.author-name {
+		color: var(--color-text);
+		font-size: 1.05rem;
+	}
+
+	.author-name a {
+		color: inherit;
+	}
+
+	.author-role {
+		color: var(--color-brand);
+		font-weight: 700;
+		font-size: 0.92rem;
+	}
+
+	.author-bio {
+		margin: 6px 0 0;
+		color: var(--color-muted);
+		line-height: 1.6;
+		font-size: 0.98rem;
 	}
 </style>

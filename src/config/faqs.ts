@@ -29,6 +29,11 @@ export const faqs: Faq[] = [
 		answer: 'Sí. Gestionas propiedades en venta, alquiler o temporal, y sigues cada oportunidad desde el primer contacto hasta la negociación.',
 	},
 	{
+		tag: 'Captación',
+		question: '¿Waichatt sirve también para captar propiedades?',
+		answer: 'Sí. Además del embudo de ventas, tiene un pipeline de captación propio: cada propietario queda con los datos de su propiedad, su intención y la calidad del lead, para que ninguna oportunidad de captación se pierda.',
+	},
+	{
 		tag: 'Integraciones',
 		question: '¿Se puede importar desde Tokko Broker?',
 		answer: 'Sí. Importación y sincronización de propiedades vía API.',
@@ -90,6 +95,11 @@ export const realEstateFaqs: Faq[] = [
 		tag: 'Operación',
 		question: '¿Sirve para ventas y alquileres?',
 		answer: 'Sí. Gestionas propiedades en venta, alquiler o temporal, y sigues cada oportunidad desde el primer contacto hasta la negociación.',
+	},
+	{
+		tag: 'Captación',
+		question: '¿Puedo gestionar la captación de propiedades, no solo la venta?',
+		answer: 'Sí. Waichatt tiene un pipeline de captación separado del de ventas: registra los datos de la propiedad del propietario, su intención y la calidad del lead, y sigues cada captación hasta sumarla a tu cartera.',
 	},
 	{
 		tag: 'Agente IA',
