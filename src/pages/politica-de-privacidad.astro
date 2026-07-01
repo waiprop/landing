@@ -8,7 +8,7 @@ import { site } from '../config/site';
 	description="Política de privacidad de Waichatt."
 	canonical={site.links.privacy}
 	heading="Política de Privacidad"
-	lastUpdated="19 de junio de 2026"
+	lastUpdated="1 de julio de 2026"
 >
 	<section>
 		<h2>1. Introducción</h2>
@@ -52,9 +52,9 @@ import { site } from '../config/site';
 				información de interacción con la página y métodos utilizados para navegar fuera de la página.
 			</li>
 			<li>
-				<strong>Datos de integraciones de Google:</strong> si usted decide conectar su cuenta de Google,
-				tratamos los datos básicos de su cuenta (nombre, dirección de correo electrónico y foto de perfil) y los
-				datos de Google Calendar necesarios para sincronizar su agenda de visitas. El detalle de esta integración
+				<strong>Datos de integraciones de Google:</strong> si usted decide conectar su cuenta de Google Calendar,
+				tratamos los datos de los eventos de calendario necesarios para sincronizar su agenda de visitas.
+				No solicitamos ni accedemos a otros datos de su cuenta de Google. El detalle de esta integración
 				se describe en la sección 6.
 			</li>
 		</ul>
@@ -151,18 +151,18 @@ import { site } from '../config/site';
 		<p>
 			Waichatt ofrece una integración opcional con <strong>Google Calendar</strong> para que usted pueda
 			sincronizar la agenda de visitas de su negocio con su calendario de Google. Esta integración solo se activa
-			si usted la autoriza expresamente al iniciar sesión con su cuenta de Google y otorgar los permisos
+			si usted la autoriza expresamente al conectar su cuenta de Google Calendar y otorgar los permisos
 			solicitados; nunca accedemos a sus datos de Google sin esa autorización previa.
 		</p>
 		<p><strong>6.1. Datos de Google que tratamos</strong></p>
 		<ul>
 			<li>
-				<strong>Datos básicos de su cuenta de Google:</strong> nombre, dirección de correo electrónico y foto de
-				perfil, utilizados únicamente para identificar la cuenta que autoriza la conexión.
+				<strong>Datos de Google Calendar:</strong> creación, lectura, actualización y eliminación de los eventos del
+				calendario que usted elija conectar, para mantener sincronizadas las visitas y citas de su negocio.
 			</li>
 			<li>
-				<strong>Datos de Google Calendar:</strong> creación, lectura y actualización de los eventos del calendario
-				que usted elija conectar, con el único fin de mantener sincronizadas las visitas y citas que gestiona desde
+				<strong>Dónde se almacenan:</strong> los datos de calendario sincronizados se guardan en la infraestructura
+				en la nube gestionada por los proveedores de alojamiento de terceros que utiliza
 				Waichatt.
 			</li>
 		</ul>
@@ -207,7 +207,7 @@ import { site } from '../config/site';
 	</section>
 
 	<section>
-		<h2>7. Derechos del usuario</h2>
+		<h2 id="eliminacion-de-datos">7. Derechos del usuario y eliminación de datos</h2>
 		<p>Bajo ciertas circunstancias, usted tiene los siguientes derechos en relación con sus datos personales:</p>
 		<ul>
 			<li><strong>Derecho de acceso:</strong> derecho a obtener confirmación de si estamos procesando sus datos personales y, en tal caso, acceder a dichos datos.</li>
@@ -222,6 +222,10 @@ import { site } from '../config/site';
 			Si desea ejercer alguno de estos derechos, póngase en contacto con nosotros a través de
 			<a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>. No cobraremos ninguna tarifa por responder a
 			cualquier solicitud para ejercer sus derechos, y responderemos a todas las solicitudes legítimas dentro de un mes.
+			Para eliminar por completo su cuenta y todos sus datos —incluidos los eventos de Google Calendar
+			sincronizados— puede hacerlo desde la configuración de su cuenta en la aplicación o solicitándolo a
+			<a href={`mailto:${site.contact.email}`}>{site.contact.email}</a>; procesamos las solicitudes de eliminación
+			en un plazo máximo de 30 días, salvo la información que la ley nos obligue a conservar.
 		</p>
 	</section>
 
@@ -289,6 +293,6 @@ import { site } from '../config/site';
 		</p>
 	</section>
 
-	<p class="legal-meta">Fecha de última actualización: 19 de junio de 2026</p>
+	<p class="legal-meta">Fecha de última actualización: 1 de julio de 2026</p>
 	<p class="legal-return"><a href={site.links.home}>Volver a la página principal</a></p>
 </LegalLayout>

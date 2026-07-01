@@ -22,6 +22,7 @@ export const site = {
 		privacy: '/politica-de-privacidad/',
 		terms: '/terminos-y-condiciones/',
 		about: '/nosotros/',
+		dataDeletion: '/politica-de-privacidad/#eliminacion-de-datos',
 	},
 	// Perfiles oficiales: se exponen como `sameAs` en el schema para que los
 	// buscadores y la IA reconozcan a Waichatt como una entidad real.
