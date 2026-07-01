@@ -1,25 +1,29 @@
 ---
 const gaId = import.meta.env.PUBLIC_GA_MEASUREMENT_ID;
+const googleAdsId = import.meta.env.PUBLIC_GOOGLE_ADS_ID;
 const defaultMetaPixelId = '4186385764838413';
 const metaPixelId = import.meta.env.PUBLIC_META_PIXEL_ID || defaultMetaPixelId;
 const metaPixelEnabled = import.meta.env.PUBLIC_META_PIXEL_ENABLED !== 'false';
 const hasGa = Boolean(gaId);
+const hasGoogleAds = Boolean(googleAdsId);
+const hasGtag = hasGa || hasGoogleAds;
 const hasMeta = metaPixelEnabled && Boolean(metaPixelId);
 ---
 
 {/* Warm up TLS/DNS to third-party tracking origins without blocking render. */}
-{hasGa && <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />}
+{hasGtag && <link rel="preconnect" href="https://www.googletagmanager.com" crossorigin />}
 {hasMeta && <link rel="preconnect" href="https://connect.facebook.net" crossorigin />}
 
-{hasGa && (
-	<script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}></script>
+{hasGtag && (
+	<script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${gaId || googleAdsId}`}></script>
 )}
-{hasGa && (
-	<script is:inline define:vars={{ gaId }}>
+{hasGtag && (
+	<script is:inline define:vars={{ gaId, googleAdsId }}>
 		window.dataLayer = window.dataLayer || [];
 		window.gtag = function () { dataLayer.push(arguments); };
 		gtag('js', new Date());
-		gtag('config', gaId);
+		if (gaId) gtag('config', gaId);
+		if (googleAdsId) gtag('config', googleAdsId);
 	</script>
 )}
 {hasMeta && (
@@ -120,6 +124,11 @@ const hasMeta = metaPixelEnabled && Boolean(metaPixelId);
 					callFbq('track', 'Lead', {
 						content_name: 'Registro',
 						ubicacion: label,
+					});
+					window.gtag?.('event', 'conversion', {
+						send_to: 'AW-18269117563/PiuOCKGjrsgcEPu4sodE',
+						value: 1.0,
+						currency: 'ARS',
 					});
 					return;
 				}
