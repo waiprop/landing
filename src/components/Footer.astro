@@ -1,5 +1,6 @@
 ---
-import logo from '../assets/logo_waichatt.svg';
+import { Image as Img } from 'astro:assets';
+import logoMark from '../assets/logo-mark.svg';
 import { site } from '../config/site';
 ---
 
@@ -7,11 +8,8 @@ import { site } from '../config/site';
 	<div class="footer-inner">
 		<div class="footer-brand">
 			<a class="footer-logo" href={site.links.home} aria-label={`${site.name} inicio`}>
-				<span
-					class="footer-logo-mark"
-					aria-hidden="true"
-					style={`--footer-logo-url: url("${logo.src}")`}
-				></span>
+				<Img class="footer-logo-mark" src={logoMark} alt="" width="28" height="46" />
+				<span class="footer-logo-text">Waichatt</span>
 			</a>
 			<p>Waichatt integra WhatsApp, IA y CRM para inmobiliarias y desarrolladoras.</p>
 		</div>
@@ -67,14 +65,27 @@ import { site } from '../config/site';
 	.footer-logo {
 		display: inline-flex;
 		align-items: center;
+		gap: 10px;
+		color: #ffffff;
+		text-decoration: none;
+		white-space: nowrap;
 	}
 
 	.footer-logo-mark {
 		display: block;
-		width: 132px;
-		height: 40px;
-		background: var(--footer-logo-url) center / contain no-repeat;
-		filter: brightness(0) invert(1);
+		width: 28px;
+		height: auto;
+		flex: 0 0 auto;
+	}
+
+	.footer-logo-text {
+		color: #ffffff;
+		font-size: 2rem;
+		font-weight: 850;
+		font-kerning: normal;
+		letter-spacing: 0;
+		line-height: 1;
+		transform: translateY(1px);
 	}
 
 	.footer-brand p,
@@ -86,7 +97,7 @@ import { site } from '../config/site';
 
 	.footer-brand p {
 		max-width: 28ch;
-		margin: 12px 0 0;
+		margin: 14px 0 0;
 	}
 
 	h2 {

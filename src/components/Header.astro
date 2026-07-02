@@ -1,14 +1,13 @@
 ---
+import { Image as Img } from 'astro:assets';
 import logo from '../assets/logo_waichatt.svg';
 import { mainNavItems, site } from '../config/site';
 import Button from './ui/Button.astro';
-
-const logoSrc = typeof logo === 'string' ? logo : logo.src;
 ---
 
 <header class="site-header" data-header data-no-motion>
 	<a class="brand" href={site.links.home} aria-label={`${site.name} inicio`}>
-		<img src={logoSrc} alt={site.name} width="299" height="90" />
+		<Img src={logo} alt={site.name} width="299" height="90" />
 	</a>
 
 	<nav class="desktop-nav" aria-label="Navegación principal">
